@@ -1,0 +1,5028 @@
+{
+  "E": [],
+  "F": [
+    {
+      "code": "SA1000",
+      "name": "sa1000",
+      "description": "Invalid regular expression",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1001",
+      "name": "sa1001",
+      "description": "Invalid template",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1002",
+      "name": "sa1002",
+      "description": "Invalid format in time.Parse",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1003",
+      "name": "sa1003",
+      "description": "Unsupported argument to functions in encoding/binary",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1004",
+      "name": "sa1004",
+      "description": "Suspiciously small untyped constant in time.Sleep",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1005",
+      "name": "sa1005",
+      "description": "Invalid first argument to exec.Command",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1006",
+      "name": "sa1006",
+      "description": "Printf with dynamic first argument and no further arguments",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1007",
+      "name": "sa1007",
+      "description": "Invalid URL in net/url.Parse",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1008",
+      "name": "sa1008",
+      "description": "Non-canonical key in http.Header map",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1010",
+      "name": "sa1010",
+      "description": "(*regexp.Regexp).FindAll called with n == 0, which returns no results",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1011",
+      "name": "sa1011",
+      "description": "Various methods in the 'strings' package with invalid arguments",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1012",
+      "name": "sa1012",
+      "description": "A nil context is being passed to a function",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1013",
+      "name": "sa1013",
+      "description": "io.Seeker.Seek is being called with the wrong constants",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1014",
+      "name": "sa1014",
+      "description": "Non-pointer value passed to Unmarshal or Decode",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1015",
+      "name": "sa1015",
+      "description": "Using time.Tick in a way that leaks memory",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1016",
+      "name": "sa1016",
+      "description": "Trapping a signal that cannot be trapped",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1017",
+      "name": "sa1017",
+      "description": "Channels used with os/signal.Notify should be buffered",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1018",
+      "name": "sa1018",
+      "description": "strings.Replace called with n == 0, which does nothing",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1019",
+      "name": "sa1019",
+      "description": "Using a deprecated function, variable, constant or field",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1020",
+      "name": "sa1020",
+      "description": "Using an invalid host:port pair with a net.Listen-related function",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1021",
+      "name": "sa1021",
+      "description": "Using bytes.Equal to compare two net.IP",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1023",
+      "name": "sa1023",
+      "description": "Modifying the buffer in an io.Writer implementation",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1024",
+      "name": "sa1024",
+      "description": "A string cutset contains duplicate characters",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1025",
+      "name": "sa1025",
+      "description": "Modifying by ranging over a map",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1026",
+      "name": "sa1026",
+      "description": "Cannot marshal non-nil func, chan, or complex into JSON",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1027",
+      "name": "sa1027",
+      "description": "Atomic access to 64-bit variable must be 64-bit aligned",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1028",
+      "name": "sa1028",
+      "description": "sort.Slice can only be used on slices",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1029",
+      "name": "sa1029",
+      "description": "Inappropriate key in call to context.WithValue",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1030",
+      "name": "sa1030",
+      "description": "Invalid argument passed to *exec.Cmd",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5000",
+      "name": "sa5000",
+      "description": "Assignment to nil map",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5001",
+      "name": "sa5001",
+      "description": "Deferring Close before checking for a possible error",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5002",
+      "name": "sa5002",
+      "description": "The empty for loop (for {}) spins and can block the scheduler",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5003",
+      "name": "sa5003",
+      "description": "Defers in infinite loops will never execute",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5004",
+      "name": "sa5004",
+      "description": "for { select { ... }} with an empty default branch spins",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5005",
+      "name": "sa5005",
+      "description": "The finalizer references the finalized object, preventing garbage collection",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5007",
+      "name": "sa5007",
+      "description": "Infinite recursive call",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5008",
+      "name": "sa5008",
+      "description": "Invalid struct tag",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5009",
+      "name": "sa5009",
+      "description": "Invalid Printf call",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5010",
+      "name": "sa5010",
+      "description": "Impossible type assertion",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5011",
+      "name": "sa5011",
+      "description": "Possible nil pointer dereference",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5012",
+      "name": "sa5012",
+      "description": "Passing odd-sized slice to function expecting even size",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1000_1",
+      "name": "sa1000",
+      "description": "Invalid regular expression",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1001_1",
+      "name": "sa1001",
+      "description": "Invalid template",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1002_1",
+      "name": "sa1002",
+      "description": "Invalid format in time.Parse",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1003_1",
+      "name": "sa1003",
+      "description": "Unsupported argument to functions in encoding/binary",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1004_1",
+      "name": "sa1004",
+      "description": "Suspiciously small untyped constant in time.Sleep",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1005_1",
+      "name": "sa1005",
+      "description": "Invalid first argument to exec.Command",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1006_1",
+      "name": "sa1006",
+      "description": "Printf with dynamic first argument and no further arguments",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1007_1",
+      "name": "sa1007",
+      "description": "Invalid URL in net/url.Parse",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1008_1",
+      "name": "sa1008",
+      "description": "Non-canonical key in http.Header map",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1010_1",
+      "name": "sa1010",
+      "description": "(*regexp.Regexp).FindAll called with n == 0, which returns no results",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1011_1",
+      "name": "sa1011",
+      "description": "Various methods in the 'strings' package with invalid arguments",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1012_1",
+      "name": "sa1012",
+      "description": "A nil context is being passed to a function",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1013_1",
+      "name": "sa1013",
+      "description": "io.Seeker.Seek is being called with the wrong constants",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1014_1",
+      "name": "sa1014",
+      "description": "Non-pointer value passed to Unmarshal or Decode",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1015_1",
+      "name": "sa1015",
+      "description": "Using time.Tick in a way that leaks memory",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1016_1",
+      "name": "sa1016",
+      "description": "Trapping a signal that cannot be trapped",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1017_1",
+      "name": "sa1017",
+      "description": "Channels used with os/signal.Notify should be buffered",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1018_1",
+      "name": "sa1018",
+      "description": "strings.Replace called with n == 0, which does nothing",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1019_1",
+      "name": "sa1019",
+      "description": "Using a deprecated function, variable, constant or field",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1020_1",
+      "name": "sa1020",
+      "description": "Using an invalid host:port pair with a net.Listen-related function",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1021_1",
+      "name": "sa1021",
+      "description": "Using bytes.Equal to compare two net.IP",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1023_1",
+      "name": "sa1023",
+      "description": "Modifying the buffer in an io.Writer implementation",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1024_1",
+      "name": "sa1024",
+      "description": "A string cutset contains duplicate characters",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1025_1",
+      "name": "sa1025",
+      "description": "Modifying by ranging over a map",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1026_1",
+      "name": "sa1026",
+      "description": "Cannot marshal non-nil func, chan, or complex into JSON",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1027_1",
+      "name": "sa1027",
+      "description": "Atomic access to 64-bit variable must be 64-bit aligned",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1028_1",
+      "name": "sa1028",
+      "description": "sort.Slice can only be used on slices",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1029_1",
+      "name": "sa1029",
+      "description": "Inappropriate key in call to context.WithValue",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA1030_1",
+      "name": "sa1030",
+      "description": "Invalid argument passed to *exec.Cmd",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5000_1",
+      "name": "sa5000",
+      "description": "Assignment to nil map",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5001_1",
+      "name": "sa5001",
+      "description": "Deferring Close before checking for a possible error",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5002_1",
+      "name": "sa5002",
+      "description": "The empty for loop (for {}) spins and can block the scheduler",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5003_1",
+      "name": "sa5003",
+      "description": "Defers in infinite loops will never execute",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5004_1",
+      "name": "sa5004",
+      "description": "for { select { ... }} with an empty default branch spins",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5005_1",
+      "name": "sa5005",
+      "description": "The finalizer references the finalized object, preventing garbage collection",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5007_1",
+      "name": "sa5007",
+      "description": "Infinite recursive call",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5008_1",
+      "name": "sa5008",
+      "description": "Invalid struct tag",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5009_1",
+      "name": "sa5009",
+      "description": "Invalid Printf call",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5010_1",
+      "name": "sa5010",
+      "description": "Impossible type assertion",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5011_1",
+      "name": "sa5011",
+      "description": "Possible nil pointer dereference",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "SA5012_1",
+      "name": "sa5012",
+      "description": "Passing odd-sized slice to function expecting even size",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADCALL",
+      "name": "badCall",
+      "description": "Detect common function call mistakes",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADCOND",
+      "name": "badCond",
+      "description": "Detect suspicious condition expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADREGEXP",
+      "name": "badRegexp",
+      "description": "Detect suspicious regexp patterns",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADSORTING",
+      "name": "badSorting",
+      "description": "Detect suspicious sort function calls",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADSYNCONCEFUNC",
+      "name": "badSyncOnceFunc",
+      "description": "Detect bad usage of sync.OnceFunc",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BUILTINSHADOW",
+      "name": "builtinShadow",
+      "description": "Detects when predeclared identifiers shadowed",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BUILTINSHADOWDECL",
+      "name": "builtinShadowDecl",
+      "description": "Detects when predeclared identifiers shadowed in var declarations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_CASEORDER",
+      "name": "caseOrder",
+      "description": "Detects erroneous case order inside switch statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DEFERINLOOP",
+      "name": "deferInLoop",
+      "description": "Detects defer in loops",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DUPARG",
+      "name": "dupArg",
+      "description": "Detects suspicious duplicated arguments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DUPCASE",
+      "name": "dupCase",
+      "description": "Detects duplicated case clauses inside switch statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DUPSUBEXPR",
+      "name": "dupSubExpr",
+      "description": "Detects suspicious duplicated sub-expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DYNAMICFMTSTRING",
+      "name": "dynamicFmtString",
+      "description": "Detects non-constant format strings",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_EVALORDER",
+      "name": "evalOrder",
+      "description": "Detects dependencies on evaluation order",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_EXITAFTERDEFER",
+      "name": "exitAfterDefer",
+      "description": "Detects os.Exit calls that cancel deferred functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_EXPOSEDSYNCMUTEX",
+      "name": "exposedSyncMutex",
+      "description": "Detects exposed sync.Mutex in structs",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_FILEPATHJOIN",
+      "name": "filepathJoin",
+      "description": "Detects problems in filepath.Join calls",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_FLAGDEREF",
+      "name": "flagDeref",
+      "description": "Detects immediate dereferencing of flag pointers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_HTTPNOBODY",
+      "name": "httpNoBody",
+      "description": "Detects HTTP requests without request body",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_IMPORTSHADOW",
+      "name": "importShadow",
+      "description": "Detects when imports shadow package-level identifiers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_MAPKEY",
+      "name": "mapKey",
+      "description": "Detects suspicious map key assignments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_NILVALRETURN",
+      "name": "nilValReturn",
+      "description": "Detects return of a nil value after check",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_OCTALLITERAL",
+      "name": "octalLiteral",
+      "description": "Detects octal literals passed to functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_OFFBY1",
+      "name": "offBy1",
+      "description": "Detects off-by-one errors",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_PTRTOREFPARAM",
+      "name": "ptrToRefParam",
+      "description": "Detects pointer to reference parameter",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_RECVNIL",
+      "name": "recvNil",
+      "description": "Detects immediate conversion of received pointer to value",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_RETURNAFTERHTTPERROR",
+      "name": "returnAfterHttpError",
+      "description": "Detects return after http.Error",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_SLOPPYREASSIGN",
+      "name": "sloppyReassign",
+      "description": "Detects sloppy reassignments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_SLOPPYTYPEASSERT",
+      "name": "sloppyTypeAssert",
+      "description": "Detects sloppy type assertions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_SORTSLICE",
+      "name": "sortSlice",
+      "description": "Detects sort.Slice calls that can be optimized",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_TRUNCATECMP",
+      "name": "truncateCmp",
+      "description": "Detects truncation in comparisons",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_WEAKCOND",
+      "name": "weakCond",
+      "description": "Detects weak condition expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADCALL_1",
+      "name": "badCall",
+      "description": "Detect common function call mistakes",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADCOND_1",
+      "name": "badCond",
+      "description": "Detect suspicious condition expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADREGEXP_1",
+      "name": "badRegexp",
+      "description": "Detect suspicious regexp patterns",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADSORTING_1",
+      "name": "badSorting",
+      "description": "Detect suspicious sort function calls",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BADSYNCONCEFUNC_1",
+      "name": "badSyncOnceFunc",
+      "description": "Detect bad usage of sync.OnceFunc",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BUILTINSHADOW_1",
+      "name": "builtinShadow",
+      "description": "Detects when predeclared identifiers shadowed",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_BUILTINSHADOWDECL_1",
+      "name": "builtinShadowDecl",
+      "description": "Detects when predeclared identifiers shadowed in var declarations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_CASEORDER_1",
+      "name": "caseOrder",
+      "description": "Detects erroneous case order inside switch statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DEFERINLOOP_1",
+      "name": "deferInLoop",
+      "description": "Detects defer in loops",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DUPARG_1",
+      "name": "dupArg",
+      "description": "Detects suspicious duplicated arguments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DUPCASE_1",
+      "name": "dupCase",
+      "description": "Detects duplicated case clauses inside switch statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DUPSUBEXPR_1",
+      "name": "dupSubExpr",
+      "description": "Detects suspicious duplicated sub-expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_DYNAMICFMTSTRING_1",
+      "name": "dynamicFmtString",
+      "description": "Detects non-constant format strings",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_EVALORDER_1",
+      "name": "evalOrder",
+      "description": "Detects dependencies on evaluation order",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_EXITAFTERDEFER_1",
+      "name": "exitAfterDefer",
+      "description": "Detects os.Exit calls that cancel deferred functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_EXPOSEDSYNCMUTEX_1",
+      "name": "exposedSyncMutex",
+      "description": "Detects exposed sync.Mutex in structs",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_FILEPATHJOIN_1",
+      "name": "filepathJoin",
+      "description": "Detects problems in filepath.Join calls",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_FLAGDEREF_1",
+      "name": "flagDeref",
+      "description": "Detects immediate dereferencing of flag pointers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_HTTPNOBODY_1",
+      "name": "httpNoBody",
+      "description": "Detects HTTP requests without request body",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_IMPORTSHADOW_1",
+      "name": "importShadow",
+      "description": "Detects when imports shadow package-level identifiers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_MAPKEY_1",
+      "name": "mapKey",
+      "description": "Detects suspicious map key assignments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_NILVALRETURN_1",
+      "name": "nilValReturn",
+      "description": "Detects return of a nil value after check",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_OCTALLITERAL_1",
+      "name": "octalLiteral",
+      "description": "Detects octal literals passed to functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_OFFBY1_1",
+      "name": "offBy1",
+      "description": "Detects off-by-one errors",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_PTRTOREFPARAM_1",
+      "name": "ptrToRefParam",
+      "description": "Detects pointer to reference parameter",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_RECVNIL_1",
+      "name": "recvNil",
+      "description": "Detects immediate conversion of received pointer to value",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_RETURNAFTERHTTPERROR_1",
+      "name": "returnAfterHttpError",
+      "description": "Detects return after http.Error",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_SLOPPYREASSIGN_1",
+      "name": "sloppyReassign",
+      "description": "Detects sloppy reassignments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_SLOPPYTYPEASSERT_1",
+      "name": "sloppyTypeAssert",
+      "description": "Detects sloppy type assertions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_SORTSLICE_1",
+      "name": "sortSlice",
+      "description": "Detects sort.Slice calls that can be optimized",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_TRUNCATECMP_1",
+      "name": "truncateCmp",
+      "description": "Detects truncation in comparisons",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "CRITIC_WEAKCOND_1",
+      "name": "weakCond",
+      "description": "Detects weak condition expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_ATOMIC",
+      "name": "atomic",
+      "description": "Checks for atomic operations on non-atomic types",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONFUSING_NAMING",
+      "name": "confusing-naming",
+      "description": "Checks for confusing naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONFUSING_RESULTS",
+      "name": "confusing-results",
+      "description": "Checks for confusing function results",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONSTANT_LOGICAL_EXPR",
+      "name": "constant-logical-expr",
+      "description": "Checks for constant logical expressions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONTEXT_KEYS_TYPE",
+      "name": "context-keys-type",
+      "description": "Checks context key types",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_DEFER",
+      "name": "defer",
+      "description": "Checks defer statements",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_IDENTICAL_BRANCHES",
+      "name": "identical-branches",
+      "description": "Checks for identical branches",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_IMPORT_SHADOWING",
+      "name": "import-shadowing",
+      "description": "Checks for import shadowing",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_MODIFIES_PARAMETER",
+      "name": "modifies-parameter",
+      "description": "Checks for parameter modifications",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_MODIFIES_VALUE_RECEIVER",
+      "name": "modifies-value-receiver",
+      "description": "Checks for value receiver modifications",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_RANGE_VAL_ADDRESS",
+      "name": "range-val-address",
+      "description": "Checks range value addresses",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_RANGE_VAL_IN_CLOSURE",
+      "name": "range-val-in-closure",
+      "description": "Checks range values in closures",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_REDEFINES_BUILTIN_ID",
+      "name": "redefines-builtin-id",
+      "description": "Checks for builtin redefinitions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_STRING_FORMAT",
+      "name": "string-format",
+      "description": "Checks string format",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_STRING_OF_INT",
+      "name": "string-of-int",
+      "description": "Checks for string(int) conversions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_STRUCT_TAG",
+      "name": "struct-tag",
+      "description": "Checks struct tags",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_TIME_EQUAL",
+      "name": "time-equal",
+      "description": "Checks time comparisons",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNCHECKED_TYPE_ASSERTION",
+      "name": "unchecked-type-assertion",
+      "description": "Checks for unchecked type assertions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNCONDITIONAL_RECURSION",
+      "name": "unconditional-recursion",
+      "description": "Checks for unconditional recursion",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNEXPORTED_RETURN",
+      "name": "unexported-return",
+      "description": "Checks for unexported returns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNHANDLED_ERROR",
+      "name": "unhandled-error",
+      "description": "Checks for unhandled errors",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_WAITGROUP_BY_VALUE",
+      "name": "waitgroup-by-value",
+      "description": "Checks for WaitGroup passed by value",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_ATOMIC_1",
+      "name": "atomic",
+      "description": "Checks for atomic operations on non-atomic types",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONFUSING_NAMING_1",
+      "name": "confusing-naming",
+      "description": "Checks for confusing naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONFUSING_RESULTS_1",
+      "name": "confusing-results",
+      "description": "Checks for confusing function results",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONSTANT_LOGICAL_EXPR_1",
+      "name": "constant-logical-expr",
+      "description": "Checks for constant logical expressions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_CONTEXT_KEYS_TYPE_1",
+      "name": "context-keys-type",
+      "description": "Checks context key types",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_DEFER_1",
+      "name": "defer",
+      "description": "Checks defer statements",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_IDENTICAL_BRANCHES_1",
+      "name": "identical-branches",
+      "description": "Checks for identical branches",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_IMPORT_SHADOWING_1",
+      "name": "import-shadowing",
+      "description": "Checks for import shadowing",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_MODIFIES_PARAMETER_1",
+      "name": "modifies-parameter",
+      "description": "Checks for parameter modifications",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_MODIFIES_VALUE_RECEIVER_1",
+      "name": "modifies-value-receiver",
+      "description": "Checks for value receiver modifications",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_RANGE_VAL_ADDRESS_1",
+      "name": "range-val-address",
+      "description": "Checks range value addresses",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_RANGE_VAL_IN_CLOSURE_1",
+      "name": "range-val-in-closure",
+      "description": "Checks range values in closures",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_REDEFINES_BUILTIN_ID_1",
+      "name": "redefines-builtin-id",
+      "description": "Checks for builtin redefinitions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_STRING_FORMAT_1",
+      "name": "string-format",
+      "description": "Checks string format",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_STRING_OF_INT_1",
+      "name": "string-of-int",
+      "description": "Checks for string(int) conversions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_STRUCT_TAG_1",
+      "name": "struct-tag",
+      "description": "Checks struct tags",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_TIME_EQUAL_1",
+      "name": "time-equal",
+      "description": "Checks time comparisons",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNCHECKED_TYPE_ASSERTION_1",
+      "name": "unchecked-type-assertion",
+      "description": "Checks for unchecked type assertions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNCONDITIONAL_RECURSION_1",
+      "name": "unconditional-recursion",
+      "description": "Checks for unconditional recursion",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNEXPORTED_RETURN_1",
+      "name": "unexported-return",
+      "description": "Checks for unexported returns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_UNHANDLED_ERROR_1",
+      "name": "unhandled-error",
+      "description": "Checks for unhandled errors",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    },
+    {
+      "code": "REVIVE_WAITGROUP_BY_VALUE_1",
+      "name": "waitgroup-by-value",
+      "description": "Checks for WaitGroup passed by value",
+      "source": "revive",
+      "severity": "warning",
+      "category": "F"
+    }
+  ],
+  "B": [
+    {
+      "code": "REVIVE_ARGUMENT_LIMIT",
+      "name": "argument-limit",
+      "description": "Limits the number of arguments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_COGNITIVE_COMPLEXITY",
+      "name": "cognitive-complexity",
+      "description": "Checks cognitive complexity of functions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_CYCLOMATIC",
+      "name": "cyclomatic",
+      "description": "Checks cyclomatic complexity",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_FUNCTION_LENGTH",
+      "name": "function-length",
+      "description": "Checks function length",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_FUNCTION_RESULT_LIMIT",
+      "name": "function-result-limit",
+      "description": "Limits function results",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_MAX_CONTROL_NESTING",
+      "name": "max-control-nesting",
+      "description": "Limits control nesting",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_MAX_PUBLIC_STRUCTS",
+      "name": "max-public-structs",
+      "description": "Limits public structs",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_NESTED_STRUCTS",
+      "name": "nested-structs",
+      "description": "Checks for nested structs",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_ARGUMENT_LIMIT_1",
+      "name": "argument-limit",
+      "description": "Limits the number of arguments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_COGNITIVE_COMPLEXITY_1",
+      "name": "cognitive-complexity",
+      "description": "Checks cognitive complexity of functions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_CYCLOMATIC_1",
+      "name": "cyclomatic",
+      "description": "Checks cyclomatic complexity",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_FUNCTION_LENGTH_1",
+      "name": "function-length",
+      "description": "Checks function length",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_FUNCTION_RESULT_LIMIT_1",
+      "name": "function-result-limit",
+      "description": "Limits function results",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_MAX_CONTROL_NESTING_1",
+      "name": "max-control-nesting",
+      "description": "Limits control nesting",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_MAX_PUBLIC_STRUCTS_1",
+      "name": "max-public-structs",
+      "description": "Limits public structs",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    },
+    {
+      "code": "REVIVE_NESTED_STRUCTS_1",
+      "name": "nested-structs",
+      "description": "Checks for nested structs",
+      "source": "revive",
+      "severity": "warning",
+      "category": "B"
+    }
+  ],
+  "I": [],
+  "UP": [],
+  "SIM": [
+    {
+      "code": "SA4000",
+      "name": "sa4000",
+      "description": "Binary operator has identical expressions on both sides",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4001",
+      "name": "sa4001",
+      "description": "&*x gets simplified to x, it does not copy x",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4003",
+      "name": "sa4003",
+      "description": "Comparing unsigned values against negative values is always true",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4004",
+      "name": "sa4004",
+      "description": "The loop exits unconditionally after one iteration",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4005",
+      "name": "sa4005",
+      "description": "Field assignment that will never be observed",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4006",
+      "name": "sa4006",
+      "description": "A value assigned to a variable is never read before being overwritten",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4008",
+      "name": "sa4008",
+      "description": "The variable in the loop condition never changes",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4009",
+      "name": "sa4009",
+      "description": "A function argument is overwritten before its first use",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4010",
+      "name": "sa4010",
+      "description": "The result of append will never be observed",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4011",
+      "name": "sa4011",
+      "description": "Break statement with no effect",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4012",
+      "name": "sa4012",
+      "description": "Comparing a value against NaN even though no value is equal to NaN",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4013",
+      "name": "sa4013",
+      "description": "Negating a boolean twice (!!b) is the same as writing b",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4014",
+      "name": "sa4014",
+      "description": "An if/else if chain has repeated conditions and no side-effects",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4015",
+      "name": "sa4015",
+      "description": "Calling functions like math.Ceil on floats converted from integers",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4016",
+      "name": "sa4016",
+      "description": "Certain bitwise operations, such as x ^ 0, do not do anything useful",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4017",
+      "name": "sa4017",
+      "description": "Discarding the return values of a function without side effects",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4018",
+      "name": "sa4018",
+      "description": "Self-assignment of variables",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4019",
+      "name": "sa4019",
+      "description": "Multiple, identical build constraints in the same file",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4020",
+      "name": "sa4020",
+      "description": "Unreachable case clause in a type switch",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4021",
+      "name": "sa4021",
+      "description": "x = append(y) is equivalent to x = y",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4022",
+      "name": "sa4022",
+      "description": "Comparing the address of a variable against nil",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4023",
+      "name": "sa4023",
+      "description": "Impossible comparison of interface value with untyped nil",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4024",
+      "name": "sa4024",
+      "description": "Checking for impossible return value from a builtin function",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4025",
+      "name": "sa4025",
+      "description": "Integer division of literals that results in zero",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4026",
+      "name": "sa4026",
+      "description": "Go constants cannot express negative zero",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4027",
+      "name": "sa4027",
+      "description": "(*net/url.URL).Query returns a copy, modifying it doesn't change the URL",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4028",
+      "name": "sa4028",
+      "description": "x % 1 is always zero",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4029",
+      "name": "sa4029",
+      "description": "Ineffective attempt at sorting slice",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4030",
+      "name": "sa4030",
+      "description": "Ineffective attempt at generating random number",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4031",
+      "name": "sa4031",
+      "description": "Checking never-nil value against nil",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "S1000",
+      "name": "s1000",
+      "description": "Use plain channel send or receive instead of single-case select",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1001",
+      "name": "s1001",
+      "description": "Replace for loop with call to copy",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1002",
+      "name": "s1002",
+      "description": "Omit comparison with boolean constant",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1003",
+      "name": "s1003",
+      "description": "Replace call to strings.Index with strings.Contains",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1004",
+      "name": "s1004",
+      "description": "Replace call to bytes.Compare with bytes.Equal",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1005",
+      "name": "s1005",
+      "description": "Unnecessary assignment to the blank identifier",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1006",
+      "name": "s1006",
+      "description": "Use for { ... } for infinite loops",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1007",
+      "name": "s1007",
+      "description": "Simplifying a conditional return boolean expression",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1008",
+      "name": "s1008",
+      "description": "Simplify returning boolean expression",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1009",
+      "name": "s1009",
+      "description": "Omit redundant nil check on slices",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1010",
+      "name": "s1010",
+      "description": "Omit default slice index",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1011",
+      "name": "s1011",
+      "description": "Use a single append to concatenate two slices",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1012",
+      "name": "s1012",
+      "description": "Replace time.Now().Sub(x) with time.Since(x)",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1016",
+      "name": "s1016",
+      "description": "Use a type conversion instead of manually copying struct fields",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1017",
+      "name": "s1017",
+      "description": "Replace manual trimming with strings.TrimPrefix",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1018",
+      "name": "s1018",
+      "description": "Use copy for deleting elements in a slice",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1019",
+      "name": "s1019",
+      "description": "Simplify make call by omitting redundant arguments",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1020",
+      "name": "s1020",
+      "description": "Omit redundant nil check in type assertion",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1021",
+      "name": "s1021",
+      "description": "Merge variable declaration and assignment",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1023",
+      "name": "s1023",
+      "description": "Omit redundant control flow",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1024",
+      "name": "s1024",
+      "description": "Replace x.Sub(time.Now()) with time.Until(x)",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1025",
+      "name": "s1025",
+      "description": "Don't use fmt.Sprintf('%s', x) unnecessarily",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1028",
+      "name": "s1028",
+      "description": "Simplify error construction with fmt.Errorf",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1029",
+      "name": "s1029",
+      "description": "Range over the string directly",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1030",
+      "name": "s1030",
+      "description": "Use bytes.Buffer.String or bytes.Buffer.Bytes",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1031",
+      "name": "s1031",
+      "description": "Omit redundant nil check around loop",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1032",
+      "name": "s1032",
+      "description": "Use sort.Ints(x), sort.Float64s(x), sort.Strings(x)",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1033",
+      "name": "s1033",
+      "description": "Unnecessary guard around call to delete",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1034",
+      "name": "s1034",
+      "description": "Use result of type assertion to simplify cases",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1035",
+      "name": "s1035",
+      "description": "Redundant call to net/http.CanonicalHeaderKey in method values",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1036",
+      "name": "s1036",
+      "description": "Unnecessary guard around map access",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1037",
+      "name": "s1037",
+      "description": "Elaborate way of sleeping",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1038",
+      "name": "s1038",
+      "description": "Unnecessarily complex way of printing formatted string",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1039",
+      "name": "s1039",
+      "description": "Unnecessary use of fmt.Sprint",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1040",
+      "name": "s1040",
+      "description": "Type assertion to current type",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4000_1",
+      "name": "sa4000",
+      "description": "Binary operator has identical expressions on both sides",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4001_1",
+      "name": "sa4001",
+      "description": "&*x gets simplified to x, it does not copy x",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4003_1",
+      "name": "sa4003",
+      "description": "Comparing unsigned values against negative values is always true",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4004_1",
+      "name": "sa4004",
+      "description": "The loop exits unconditionally after one iteration",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4005_1",
+      "name": "sa4005",
+      "description": "Field assignment that will never be observed",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4006_1",
+      "name": "sa4006",
+      "description": "A value assigned to a variable is never read before being overwritten",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4008_1",
+      "name": "sa4008",
+      "description": "The variable in the loop condition never changes",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4009_1",
+      "name": "sa4009",
+      "description": "A function argument is overwritten before its first use",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4010_1",
+      "name": "sa4010",
+      "description": "The result of append will never be observed",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4011_1",
+      "name": "sa4011",
+      "description": "Break statement with no effect",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4012_1",
+      "name": "sa4012",
+      "description": "Comparing a value against NaN even though no value is equal to NaN",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4013_1",
+      "name": "sa4013",
+      "description": "Negating a boolean twice (!!b) is the same as writing b",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4014_1",
+      "name": "sa4014",
+      "description": "An if/else if chain has repeated conditions and no side-effects",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4015_1",
+      "name": "sa4015",
+      "description": "Calling functions like math.Ceil on floats converted from integers",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4016_1",
+      "name": "sa4016",
+      "description": "Certain bitwise operations, such as x ^ 0, do not do anything useful",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4017_1",
+      "name": "sa4017",
+      "description": "Discarding the return values of a function without side effects",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4018_1",
+      "name": "sa4018",
+      "description": "Self-assignment of variables",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4019_1",
+      "name": "sa4019",
+      "description": "Multiple, identical build constraints in the same file",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4020_1",
+      "name": "sa4020",
+      "description": "Unreachable case clause in a type switch",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4021_1",
+      "name": "sa4021",
+      "description": "x = append(y) is equivalent to x = y",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4022_1",
+      "name": "sa4022",
+      "description": "Comparing the address of a variable against nil",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4023_1",
+      "name": "sa4023",
+      "description": "Impossible comparison of interface value with untyped nil",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4024_1",
+      "name": "sa4024",
+      "description": "Checking for impossible return value from a builtin function",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4025_1",
+      "name": "sa4025",
+      "description": "Integer division of literals that results in zero",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4026_1",
+      "name": "sa4026",
+      "description": "Go constants cannot express negative zero",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4027_1",
+      "name": "sa4027",
+      "description": "(*net/url.URL).Query returns a copy, modifying it doesn't change the URL",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4028_1",
+      "name": "sa4028",
+      "description": "x % 1 is always zero",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4029_1",
+      "name": "sa4029",
+      "description": "Ineffective attempt at sorting slice",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4030_1",
+      "name": "sa4030",
+      "description": "Ineffective attempt at generating random number",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "SA4031_1",
+      "name": "sa4031",
+      "description": "Checking never-nil value against nil",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "SIM"
+    },
+    {
+      "code": "S1000_1",
+      "name": "s1000",
+      "description": "Use plain channel send or receive instead of single-case select",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1001_1",
+      "name": "s1001",
+      "description": "Replace for loop with call to copy",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1002_1",
+      "name": "s1002",
+      "description": "Omit comparison with boolean constant",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1003_1",
+      "name": "s1003",
+      "description": "Replace call to strings.Index with strings.Contains",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1004_1",
+      "name": "s1004",
+      "description": "Replace call to bytes.Compare with bytes.Equal",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1005_1",
+      "name": "s1005",
+      "description": "Unnecessary assignment to the blank identifier",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1006_1",
+      "name": "s1006",
+      "description": "Use for { ... } for infinite loops",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1007_1",
+      "name": "s1007",
+      "description": "Simplifying a conditional return boolean expression",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1008_1",
+      "name": "s1008",
+      "description": "Simplify returning boolean expression",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1009_1",
+      "name": "s1009",
+      "description": "Omit redundant nil check on slices",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1010_1",
+      "name": "s1010",
+      "description": "Omit default slice index",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1011_1",
+      "name": "s1011",
+      "description": "Use a single append to concatenate two slices",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1012_1",
+      "name": "s1012",
+      "description": "Replace time.Now().Sub(x) with time.Since(x)",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1016_1",
+      "name": "s1016",
+      "description": "Use a type conversion instead of manually copying struct fields",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1017_1",
+      "name": "s1017",
+      "description": "Replace manual trimming with strings.TrimPrefix",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1018_1",
+      "name": "s1018",
+      "description": "Use copy for deleting elements in a slice",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1019_1",
+      "name": "s1019",
+      "description": "Simplify make call by omitting redundant arguments",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1020_1",
+      "name": "s1020",
+      "description": "Omit redundant nil check in type assertion",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1021_1",
+      "name": "s1021",
+      "description": "Merge variable declaration and assignment",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1023_1",
+      "name": "s1023",
+      "description": "Omit redundant control flow",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1024_1",
+      "name": "s1024",
+      "description": "Replace x.Sub(time.Now()) with time.Until(x)",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1025_1",
+      "name": "s1025",
+      "description": "Don't use fmt.Sprintf('%s', x) unnecessarily",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1028_1",
+      "name": "s1028",
+      "description": "Simplify error construction with fmt.Errorf",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1029_1",
+      "name": "s1029",
+      "description": "Range over the string directly",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1030_1",
+      "name": "s1030",
+      "description": "Use bytes.Buffer.String or bytes.Buffer.Bytes",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1031_1",
+      "name": "s1031",
+      "description": "Omit redundant nil check around loop",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1032_1",
+      "name": "s1032",
+      "description": "Use sort.Ints(x), sort.Float64s(x), sort.Strings(x)",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1033_1",
+      "name": "s1033",
+      "description": "Unnecessary guard around call to delete",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1034_1",
+      "name": "s1034",
+      "description": "Use result of type assertion to simplify cases",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1035_1",
+      "name": "s1035",
+      "description": "Redundant call to net/http.CanonicalHeaderKey in method values",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1036_1",
+      "name": "s1036",
+      "description": "Unnecessary guard around map access",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1037_1",
+      "name": "s1037",
+      "description": "Elaborate way of sleeping",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1038_1",
+      "name": "s1038",
+      "description": "Unnecessarily complex way of printing formatted string",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1039_1",
+      "name": "s1039",
+      "description": "Unnecessary use of fmt.Sprint",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    },
+    {
+      "code": "S1040_1",
+      "name": "s1040",
+      "description": "Type assertion to current type",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "SIM"
+    }
+  ],
+  "S": [
+    {
+      "code": "ST1000",
+      "name": "st1000",
+      "description": "Incorrectly or inconsistently package comment",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1003",
+      "name": "st1003",
+      "description": "Poorly chosen identifier",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1005",
+      "name": "st1005",
+      "description": "Incorrectly formatted error string",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1006",
+      "name": "st1006",
+      "description": "Poorly chosen receiver name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1008",
+      "name": "st1008",
+      "description": "A function's error value should be its last return value",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1011",
+      "name": "st1011",
+      "description": "Manually assigning to individual struct fields",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1012",
+      "name": "st1012",
+      "description": "Poorly chosen variable name for error value",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1013",
+      "name": "st1013",
+      "description": "Should use constants for HTTP status code",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1015",
+      "name": "st1015",
+      "description": "A switch's default case should be first or last",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1016",
+      "name": "st1016",
+      "description": "Use consistent method receiver names",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1017",
+      "name": "st1017",
+      "description": "Don't use Yoda conditions",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1018",
+      "name": "st1018",
+      "description": "Avoid zero-width and control characters in string literals",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1019",
+      "name": "st1019",
+      "description": "Importing the same package multiple times",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1020",
+      "name": "st1020",
+      "description": "Documentation of an exported function should start with the function's name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1021",
+      "name": "st1021",
+      "description": "Documentation of an exported type should start with type's name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1022",
+      "name": "st1022",
+      "description": "Documentation of an exported variable or constant should start with the identifier's name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1023",
+      "name": "st1023",
+      "description": "Redundant type in variable declaration",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1000_1",
+      "name": "st1000",
+      "description": "Incorrectly or inconsistently package comment",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1003_1",
+      "name": "st1003",
+      "description": "Poorly chosen identifier",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1005_1",
+      "name": "st1005",
+      "description": "Incorrectly formatted error string",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1006_1",
+      "name": "st1006",
+      "description": "Poorly chosen receiver name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1008_1",
+      "name": "st1008",
+      "description": "A function's error value should be its last return value",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1011_1",
+      "name": "st1011",
+      "description": "Manually assigning to individual struct fields",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1012_1",
+      "name": "st1012",
+      "description": "Poorly chosen variable name for error value",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1013_1",
+      "name": "st1013",
+      "description": "Should use constants for HTTP status code",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1015_1",
+      "name": "st1015",
+      "description": "A switch's default case should be first or last",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1016_1",
+      "name": "st1016",
+      "description": "Use consistent method receiver names",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1017_1",
+      "name": "st1017",
+      "description": "Don't use Yoda conditions",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1018_1",
+      "name": "st1018",
+      "description": "Avoid zero-width and control characters in string literals",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1019_1",
+      "name": "st1019",
+      "description": "Importing the same package multiple times",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1020_1",
+      "name": "st1020",
+      "description": "Documentation of an exported function should start with the function's name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1021_1",
+      "name": "st1021",
+      "description": "Documentation of an exported type should start with type's name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1022_1",
+      "name": "st1022",
+      "description": "Documentation of an exported variable or constant should start with the identifier's name",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "ST1023_1",
+      "name": "st1023",
+      "description": "Redundant type in variable declaration",
+      "source": "staticcheck",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_ASSIGNOP",
+      "name": "assignOp",
+      "description": "Detect assignments that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_BOOLEXPRSIMPLIFY",
+      "name": "boolExprSimplify",
+      "description": "Suggests simplifying bool expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_CAPTLOCAL",
+      "name": "captLocal",
+      "description": "Detects capitalized names for local variables",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_CODEGENCOMMENT",
+      "name": "codegenComment",
+      "description": "Detects malformed 'code generated' file comments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_COMMENTFORMATTING",
+      "name": "commentFormatting",
+      "description": "Detects comments with non-standard formatting",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_COMMENTEDOUTCODE",
+      "name": "commentedOutCode",
+      "description": "Detects commented-out code inside function bodies",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_COMMENTEDOUTIMPORT",
+      "name": "commentedOutImport",
+      "description": "Detects commented-out imports",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DEFAULTCASEORDER",
+      "name": "defaultCaseOrder",
+      "description": "Detects when default case in switch isn't on 1st or last position",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DEFERUNLAMBDA",
+      "name": "deferUnlambda",
+      "description": "Detects defer calls that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DEPRECATEDCOMMENT",
+      "name": "deprecatedComment",
+      "description": "Detects malformed 'Deprecated' doc comments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DOCSTUB",
+      "name": "docStub",
+      "description": "Detects comments that are stubs",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DUPBRANCHBODY",
+      "name": "dupBranchBody",
+      "description": "Detects duplicated branch bodies inside conditional statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DUPIMPORT",
+      "name": "dupImport",
+      "description": "Detects re-imports of the same package",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_ELSEIF",
+      "name": "elseif",
+      "description": "Detects else with nested if that can be replaced else-if",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_EMPTYDECL",
+      "name": "emptyDecl",
+      "description": "Detects empty declarations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_EMPTYFALLTHROUGH",
+      "name": "emptyFallthrough",
+      "description": "Detects empty fallthrough statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_EMPTYSTRINGTEST",
+      "name": "emptyStringTest",
+      "description": "Detects empty string checks that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_FLAGNAME",
+      "name": "flagName",
+      "description": "Detects suspicious flag names",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_HEXLITERAL",
+      "name": "hexLiteral",
+      "description": "Suggests using hex literals for big integers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_IFELSECHAIN",
+      "name": "ifElseChain",
+      "description": "Detects repeated if-else chains",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_INITCLAUSE",
+      "name": "initClause",
+      "description": "Detects non-assignment statements inside if/switch init clauses",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_METHODEXPRCALL",
+      "name": "methodExprCall",
+      "description": "Detects method expression call that can be replaced with method call",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_NESTINGREDUCE",
+      "name": "nestingReduce",
+      "description": "Finds where nesting level can be reduced",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_NEWDEREF",
+      "name": "newDeref",
+      "description": "Detects immediate dereferencing of new()",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PARAMTYPECOMBINE",
+      "name": "paramTypeCombine",
+      "description": "Detects function parameters that can be combined",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERDECODERUNE",
+      "name": "preferDecodeRune",
+      "description": "Suggests using utf8.DecodeRuneInString",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERFILEPATHJOIN",
+      "name": "preferFilepathJoin",
+      "description": "Suggests using filepath.Join",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERFPRINT",
+      "name": "preferFprint",
+      "description": "Suggests using fmt.Fprint functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERSTRINGWRITER",
+      "name": "preferStringWriter",
+      "description": "Suggests using io.StringWriter",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_REDUNDANTSPRINT",
+      "name": "redundantSprint",
+      "description": "Detects redundant Sprint calls",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_REGEXPMUST",
+      "name": "regexpMust",
+      "description": "Suggests using regexp.MustCompile",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_RULEGUARD",
+      "name": "ruleguard",
+      "description": "Runs ruleguard rules",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SINGLECASESWITCH",
+      "name": "singleCaseSwitch",
+      "description": "Detects switch statements with single case",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SLICECLEAR",
+      "name": "sliceClear",
+      "description": "Detects slice clearing that can be optimized",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SLOPPYLEN",
+      "name": "sloppyLen",
+      "description": "Detects len() comparisons that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SLOPPYTESTFUNCNAME",
+      "name": "sloppyTestFuncName",
+      "description": "Detects test function names with wrong format",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SPRINTFQUOTEDSTRING",
+      "name": "sprintfQuotedString",
+      "description": "Detects sprintf formatting verbs for quoted strings",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_STRINGCONCATSIMPLIFY",
+      "name": "stringConcatSimplify",
+      "description": "Simplifies string concatenations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_STRINGXBYTES",
+      "name": "stringXbytes",
+      "description": "Detects redundant string(byteSlice) conversions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SUGGESTFUNCSINTESTING",
+      "name": "suggestFuncsInTesting",
+      "description": "Suggests using testing functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SWITCHTRUE",
+      "name": "switchTrue",
+      "description": "Detects switch true that can be rewritten as if-else",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SYNCMAPLOADANDDELETE",
+      "name": "syncMapLoadAndDelete",
+      "description": "Suggests using sync.Map LoadAndDelete",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TIMEEXPRSIMPLIFY",
+      "name": "timeExprSimplify",
+      "description": "Simplifies time expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TODOCOMMENTWITHOUTDETAIL",
+      "name": "todoCommentWithoutDetail",
+      "description": "Detects TODO comments without detail",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TOOMANYRESULTSCHECKER",
+      "name": "tooManyResultsChecker",
+      "description": "Detects functions with too many results",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPEASSERTCHAIN",
+      "name": "typeAssertChain",
+      "description": "Detects type assertion chains",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPEDEFFIRST",
+      "name": "typeDefFirst",
+      "description": "Detects type definitions before package doc",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPESWITCHVAR",
+      "name": "typeSwitchVar",
+      "description": "Suggests using type switch variable",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPEUNPAREN",
+      "name": "typeUnparen",
+      "description": "Suggests removing parentheses around types",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNDEREF",
+      "name": "underef",
+      "description": "Suggests simplification of dereferencing",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNLABELSTMT",
+      "name": "unlabelStmt",
+      "description": "Detects redundant labeled statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNLAMBDA",
+      "name": "unlambda",
+      "description": "Suggests simplification of lambda expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNNAMEDRESULT",
+      "name": "unnamedResult",
+      "description": "Suggests naming result parameters",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNNECESSARYBLOCK",
+      "name": "unnecessaryBlock",
+      "description": "Detects unnecessary braced blocks",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNNECESSARYDEFER",
+      "name": "unnecessaryDefer",
+      "description": "Detects unnecessary defer statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNUSEDPARAM",
+      "name": "unusedParam",
+      "description": "Detects unused function parameters",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNUSEDRECEIVER",
+      "name": "unusedReceiver",
+      "description": "Detects unused method receivers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_WHYNOLINT",
+      "name": "whyNoLint",
+      "description": "Ensures nolint directives have explanations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_WRAPPERFUNC",
+      "name": "wrapperFunc",
+      "description": "Detects function wrappers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_YODASTYLEEXPR",
+      "name": "yodaStyleExpr",
+      "description": "Detects Yoda style conditions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_ASSIGNOP_1",
+      "name": "assignOp",
+      "description": "Detect assignments that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_BOOLEXPRSIMPLIFY_1",
+      "name": "boolExprSimplify",
+      "description": "Suggests simplifying bool expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_CAPTLOCAL_1",
+      "name": "captLocal",
+      "description": "Detects capitalized names for local variables",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_CODEGENCOMMENT_1",
+      "name": "codegenComment",
+      "description": "Detects malformed 'code generated' file comments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_COMMENTFORMATTING_1",
+      "name": "commentFormatting",
+      "description": "Detects comments with non-standard formatting",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_COMMENTEDOUTCODE_1",
+      "name": "commentedOutCode",
+      "description": "Detects commented-out code inside function bodies",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_COMMENTEDOUTIMPORT_1",
+      "name": "commentedOutImport",
+      "description": "Detects commented-out imports",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DEFAULTCASEORDER_1",
+      "name": "defaultCaseOrder",
+      "description": "Detects when default case in switch isn't on 1st or last position",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DEFERUNLAMBDA_1",
+      "name": "deferUnlambda",
+      "description": "Detects defer calls that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DEPRECATEDCOMMENT_1",
+      "name": "deprecatedComment",
+      "description": "Detects malformed 'Deprecated' doc comments",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DOCSTUB_1",
+      "name": "docStub",
+      "description": "Detects comments that are stubs",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DUPBRANCHBODY_1",
+      "name": "dupBranchBody",
+      "description": "Detects duplicated branch bodies inside conditional statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_DUPIMPORT_1",
+      "name": "dupImport",
+      "description": "Detects re-imports of the same package",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_ELSEIF_1",
+      "name": "elseif",
+      "description": "Detects else with nested if that can be replaced else-if",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_EMPTYDECL_1",
+      "name": "emptyDecl",
+      "description": "Detects empty declarations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_EMPTYFALLTHROUGH_1",
+      "name": "emptyFallthrough",
+      "description": "Detects empty fallthrough statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_EMPTYSTRINGTEST_1",
+      "name": "emptyStringTest",
+      "description": "Detects empty string checks that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_FLAGNAME_1",
+      "name": "flagName",
+      "description": "Detects suspicious flag names",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_HEXLITERAL_1",
+      "name": "hexLiteral",
+      "description": "Suggests using hex literals for big integers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_IFELSECHAIN_1",
+      "name": "ifElseChain",
+      "description": "Detects repeated if-else chains",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_INITCLAUSE_1",
+      "name": "initClause",
+      "description": "Detects non-assignment statements inside if/switch init clauses",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_METHODEXPRCALL_1",
+      "name": "methodExprCall",
+      "description": "Detects method expression call that can be replaced with method call",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_NESTINGREDUCE_1",
+      "name": "nestingReduce",
+      "description": "Finds where nesting level can be reduced",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_NEWDEREF_1",
+      "name": "newDeref",
+      "description": "Detects immediate dereferencing of new()",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PARAMTYPECOMBINE_1",
+      "name": "paramTypeCombine",
+      "description": "Detects function parameters that can be combined",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERDECODERUNE_1",
+      "name": "preferDecodeRune",
+      "description": "Suggests using utf8.DecodeRuneInString",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERFILEPATHJOIN_1",
+      "name": "preferFilepathJoin",
+      "description": "Suggests using filepath.Join",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERFPRINT_1",
+      "name": "preferFprint",
+      "description": "Suggests using fmt.Fprint functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_PREFERSTRINGWRITER_1",
+      "name": "preferStringWriter",
+      "description": "Suggests using io.StringWriter",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_REDUNDANTSPRINT_1",
+      "name": "redundantSprint",
+      "description": "Detects redundant Sprint calls",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_REGEXPMUST_1",
+      "name": "regexpMust",
+      "description": "Suggests using regexp.MustCompile",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_RULEGUARD_1",
+      "name": "ruleguard",
+      "description": "Runs ruleguard rules",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SINGLECASESWITCH_1",
+      "name": "singleCaseSwitch",
+      "description": "Detects switch statements with single case",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SLICECLEAR_1",
+      "name": "sliceClear",
+      "description": "Detects slice clearing that can be optimized",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SLOPPYLEN_1",
+      "name": "sloppyLen",
+      "description": "Detects len() comparisons that can be simplified",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SLOPPYTESTFUNCNAME_1",
+      "name": "sloppyTestFuncName",
+      "description": "Detects test function names with wrong format",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SPRINTFQUOTEDSTRING_1",
+      "name": "sprintfQuotedString",
+      "description": "Detects sprintf formatting verbs for quoted strings",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_STRINGCONCATSIMPLIFY_1",
+      "name": "stringConcatSimplify",
+      "description": "Simplifies string concatenations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_STRINGXBYTES_1",
+      "name": "stringXbytes",
+      "description": "Detects redundant string(byteSlice) conversions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SUGGESTFUNCSINTESTING_1",
+      "name": "suggestFuncsInTesting",
+      "description": "Suggests using testing functions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SWITCHTRUE_1",
+      "name": "switchTrue",
+      "description": "Detects switch true that can be rewritten as if-else",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_SYNCMAPLOADANDDELETE_1",
+      "name": "syncMapLoadAndDelete",
+      "description": "Suggests using sync.Map LoadAndDelete",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TIMEEXPRSIMPLIFY_1",
+      "name": "timeExprSimplify",
+      "description": "Simplifies time expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TODOCOMMENTWITHOUTDETAIL_1",
+      "name": "todoCommentWithoutDetail",
+      "description": "Detects TODO comments without detail",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TOOMANYRESULTSCHECKER_1",
+      "name": "tooManyResultsChecker",
+      "description": "Detects functions with too many results",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPEASSERTCHAIN_1",
+      "name": "typeAssertChain",
+      "description": "Detects type assertion chains",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPEDEFFIRST_1",
+      "name": "typeDefFirst",
+      "description": "Detects type definitions before package doc",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPESWITCHVAR_1",
+      "name": "typeSwitchVar",
+      "description": "Suggests using type switch variable",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_TYPEUNPAREN_1",
+      "name": "typeUnparen",
+      "description": "Suggests removing parentheses around types",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNDEREF_1",
+      "name": "underef",
+      "description": "Suggests simplification of dereferencing",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNLABELSTMT_1",
+      "name": "unlabelStmt",
+      "description": "Detects redundant labeled statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNLAMBDA_1",
+      "name": "unlambda",
+      "description": "Suggests simplification of lambda expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNNAMEDRESULT_1",
+      "name": "unnamedResult",
+      "description": "Suggests naming result parameters",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNNECESSARYBLOCK_1",
+      "name": "unnecessaryBlock",
+      "description": "Detects unnecessary braced blocks",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNNECESSARYDEFER_1",
+      "name": "unnecessaryDefer",
+      "description": "Detects unnecessary defer statements",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNUSEDPARAM_1",
+      "name": "unusedParam",
+      "description": "Detects unused function parameters",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_UNUSEDRECEIVER_1",
+      "name": "unusedReceiver",
+      "description": "Detects unused method receivers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_WHYNOLINT_1",
+      "name": "whyNoLint",
+      "description": "Ensures nolint directives have explanations",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_WRAPPERFUNC_1",
+      "name": "wrapperFunc",
+      "description": "Detects function wrappers",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "CRITIC_YODASTYLEEXPR_1",
+      "name": "yodaStyleExpr",
+      "description": "Detects Yoda style conditions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ADD_CONSTANT",
+      "name": "add-constant",
+      "description": "Suggests using constant for magic numbers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BANNED_CHARACTERS",
+      "name": "banned-characters",
+      "description": "Checks for banned characters in identifiers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BARE_RETURN",
+      "name": "bare-return",
+      "description": "Checks for bare returns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BLANK_IMPORTS",
+      "name": "blank-imports",
+      "description": "Checks for blank imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BOOL_LITERAL_IN_EXPR",
+      "name": "bool-literal-in-expr",
+      "description": "Suggests removing bool literals from expressions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_COMMENT_SPACINGS",
+      "name": "comment-spacings",
+      "description": "Checks comment formatting",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_COMMENTS_DENSITY",
+      "name": "comments-density",
+      "description": "Checks density of comments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_CONTEXT_AS_ARGUMENT",
+      "name": "context-as-argument",
+      "description": "Checks context placement in arguments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_DEEP_EXIT",
+      "name": "deep-exit",
+      "description": "Checks for exit calls in library code",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_DOT_IMPORTS",
+      "name": "dot-imports",
+      "description": "Checks for dot imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_DUPLICATED_IMPORTS",
+      "name": "duplicated-imports",
+      "description": "Checks for duplicated imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EARLY_RETURN",
+      "name": "early-return",
+      "description": "Suggests early returns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EMPTY_BLOCK",
+      "name": "empty-block",
+      "description": "Checks for empty blocks",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EMPTY_LINES",
+      "name": "empty-lines",
+      "description": "Checks for empty lines",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ENFORCE_MAP_STYLE",
+      "name": "enforce-map-style",
+      "description": "Enforces map initialization style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ENFORCE_REPEATED_ARG_TYPE_STYLE",
+      "name": "enforce-repeated-arg-type-style",
+      "description": "Enforces repeated argument type style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ENFORCE_SLICE_STYLE",
+      "name": "enforce-slice-style",
+      "description": "Enforces slice initialization style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ERROR_NAMING",
+      "name": "error-naming",
+      "description": "Checks error variable naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ERROR_RETURN",
+      "name": "error-return",
+      "description": "Checks error return placement",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ERROR_STRING",
+      "name": "error-string",
+      "description": "Checks error string formatting",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EXPORTED",
+      "name": "exported",
+      "description": "Checks exported identifiers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_FILE_HEADER",
+      "name": "file-header",
+      "description": "Checks file header",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_FLAG_PARAMETER",
+      "name": "flag-parameter",
+      "description": "Checks for flag parameters",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_GET_RETURN",
+      "name": "get-return",
+      "description": "Checks getter return values",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_IF_RETURN",
+      "name": "if-return",
+      "description": "Checks if-return patterns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_IMPORT_ALIAS_NAMING",
+      "name": "import-alias-naming",
+      "description": "Checks import alias naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_IMPORTS_BLOCKLIST",
+      "name": "imports-blocklist",
+      "description": "Checks for blocked imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_INCREMENT_DECREMENT",
+      "name": "increment-decrement",
+      "description": "Checks increment/decrement style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_INDENT_ERROR_FLOW",
+      "name": "indent-error-flow",
+      "description": "Checks error flow indentation",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_LINE_LENGTH_LIMIT",
+      "name": "line-length-limit",
+      "description": "Limits line length",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_PACKAGE_COMMENTS",
+      "name": "package-comments",
+      "description": "Checks package comments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_RANGE",
+      "name": "range",
+      "description": "Checks range statements",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_RECEIVER_NAMING",
+      "name": "receiver-naming",
+      "description": "Checks receiver naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_REDUNDANT_IMPORT_ALIAS",
+      "name": "redundant-import-alias",
+      "description": "Checks for redundant import aliases",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_SUPERFLUOUS_ELSE",
+      "name": "superfluous-else",
+      "description": "Checks for superfluous else",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_TIME_NAMING",
+      "name": "time-naming",
+      "description": "Checks time variable naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNEXPORTED_NAMING",
+      "name": "unexported-naming",
+      "description": "Checks unexported naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNNECESSARY_STMT",
+      "name": "unnecessary-stmt",
+      "description": "Checks for unnecessary statements",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNUSED_PARAMETER",
+      "name": "unused-parameter",
+      "description": "Checks for unused parameters",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNUSED_RECEIVER",
+      "name": "unused-receiver",
+      "description": "Checks for unused receivers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_USE_ANY",
+      "name": "use-any",
+      "description": "Suggests using any instead of interface{}",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_USE_ERRORS_NEW",
+      "name": "use-errors-new",
+      "description": "Suggests using errors.New",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_VAR_DECLARATION",
+      "name": "var-declaration",
+      "description": "Checks variable declarations",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_VAR_NAMING",
+      "name": "var-naming",
+      "description": "Checks variable naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ADD_CONSTANT_1",
+      "name": "add-constant",
+      "description": "Suggests using constant for magic numbers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BANNED_CHARACTERS_1",
+      "name": "banned-characters",
+      "description": "Checks for banned characters in identifiers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BARE_RETURN_1",
+      "name": "bare-return",
+      "description": "Checks for bare returns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BLANK_IMPORTS_1",
+      "name": "blank-imports",
+      "description": "Checks for blank imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_BOOL_LITERAL_IN_EXPR_1",
+      "name": "bool-literal-in-expr",
+      "description": "Suggests removing bool literals from expressions",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_COMMENT_SPACINGS_1",
+      "name": "comment-spacings",
+      "description": "Checks comment formatting",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_COMMENTS_DENSITY_1",
+      "name": "comments-density",
+      "description": "Checks density of comments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_CONTEXT_AS_ARGUMENT_1",
+      "name": "context-as-argument",
+      "description": "Checks context placement in arguments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_DEEP_EXIT_1",
+      "name": "deep-exit",
+      "description": "Checks for exit calls in library code",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_DOT_IMPORTS_1",
+      "name": "dot-imports",
+      "description": "Checks for dot imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_DUPLICATED_IMPORTS_1",
+      "name": "duplicated-imports",
+      "description": "Checks for duplicated imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EARLY_RETURN_1",
+      "name": "early-return",
+      "description": "Suggests early returns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EMPTY_BLOCK_1",
+      "name": "empty-block",
+      "description": "Checks for empty blocks",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EMPTY_LINES_1",
+      "name": "empty-lines",
+      "description": "Checks for empty lines",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ENFORCE_MAP_STYLE_1",
+      "name": "enforce-map-style",
+      "description": "Enforces map initialization style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ENFORCE_REPEATED_ARG_TYPE_STYLE_1",
+      "name": "enforce-repeated-arg-type-style",
+      "description": "Enforces repeated argument type style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ENFORCE_SLICE_STYLE_1",
+      "name": "enforce-slice-style",
+      "description": "Enforces slice initialization style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ERROR_NAMING_1",
+      "name": "error-naming",
+      "description": "Checks error variable naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ERROR_RETURN_1",
+      "name": "error-return",
+      "description": "Checks error return placement",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_ERROR_STRING_1",
+      "name": "error-string",
+      "description": "Checks error string formatting",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_EXPORTED_1",
+      "name": "exported",
+      "description": "Checks exported identifiers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_FILE_HEADER_1",
+      "name": "file-header",
+      "description": "Checks file header",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_FLAG_PARAMETER_1",
+      "name": "flag-parameter",
+      "description": "Checks for flag parameters",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_GET_RETURN_1",
+      "name": "get-return",
+      "description": "Checks getter return values",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_IF_RETURN_1",
+      "name": "if-return",
+      "description": "Checks if-return patterns",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_IMPORT_ALIAS_NAMING_1",
+      "name": "import-alias-naming",
+      "description": "Checks import alias naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_IMPORTS_BLOCKLIST_1",
+      "name": "imports-blocklist",
+      "description": "Checks for blocked imports",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_INCREMENT_DECREMENT_1",
+      "name": "increment-decrement",
+      "description": "Checks increment/decrement style",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_INDENT_ERROR_FLOW_1",
+      "name": "indent-error-flow",
+      "description": "Checks error flow indentation",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_LINE_LENGTH_LIMIT_1",
+      "name": "line-length-limit",
+      "description": "Limits line length",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_PACKAGE_COMMENTS_1",
+      "name": "package-comments",
+      "description": "Checks package comments",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_RANGE_1",
+      "name": "range",
+      "description": "Checks range statements",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_RECEIVER_NAMING_1",
+      "name": "receiver-naming",
+      "description": "Checks receiver naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_REDUNDANT_IMPORT_ALIAS_1",
+      "name": "redundant-import-alias",
+      "description": "Checks for redundant import aliases",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_SUPERFLUOUS_ELSE_1",
+      "name": "superfluous-else",
+      "description": "Checks for superfluous else",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_TIME_NAMING_1",
+      "name": "time-naming",
+      "description": "Checks time variable naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNEXPORTED_NAMING_1",
+      "name": "unexported-naming",
+      "description": "Checks unexported naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNNECESSARY_STMT_1",
+      "name": "unnecessary-stmt",
+      "description": "Checks for unnecessary statements",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNUSED_PARAMETER_1",
+      "name": "unused-parameter",
+      "description": "Checks for unused parameters",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_UNUSED_RECEIVER_1",
+      "name": "unused-receiver",
+      "description": "Checks for unused receivers",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_USE_ANY_1",
+      "name": "use-any",
+      "description": "Suggests using any instead of interface{}",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_USE_ERRORS_NEW_1",
+      "name": "use-errors-new",
+      "description": "Suggests using errors.New",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_VAR_DECLARATION_1",
+      "name": "var-declaration",
+      "description": "Checks variable declarations",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    },
+    {
+      "code": "REVIVE_VAR_NAMING_1",
+      "name": "var-naming",
+      "description": "Checks variable naming",
+      "source": "revive",
+      "severity": "warning",
+      "category": "S"
+    }
+  ],
+  "D": [
+    {
+      "code": "SA3000",
+      "name": "sa3000",
+      "description": "TestMain doesn't call os.Exit, hiding test failures",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "D"
+    },
+    {
+      "code": "SA3001",
+      "name": "sa3001",
+      "description": "Assigning to b.N in benchmarks distorts the results",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "D"
+    },
+    {
+      "code": "SA3000_1",
+      "name": "sa3000",
+      "description": "TestMain doesn't call os.Exit, hiding test failures",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "D"
+    },
+    {
+      "code": "SA3001_1",
+      "name": "sa3001",
+      "description": "Assigning to b.N in benchmarks distorts the results",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "D"
+    }
+  ],
+  "P": [
+    {
+      "code": "SA6000",
+      "name": "sa6000",
+      "description": "Using regexp.Match or related in a loop, should use regexp.Compile",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6001",
+      "name": "sa6001",
+      "description": "Missing an optimization opportunity when indexing maps by byte slices",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6002",
+      "name": "sa6002",
+      "description": "Storing non-pointer values in sync.Pool allocates memory",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6003",
+      "name": "sa6003",
+      "description": "Converting a string to a slice of runes before ranging over it",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6005",
+      "name": "sa6005",
+      "description": "Inefficient string comparison with strings.ToLower or strings.ToUpper",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6006",
+      "name": "sa6006",
+      "description": "Using io.WriteString to write a byte slice",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6000_1",
+      "name": "sa6000",
+      "description": "Using regexp.Match or related in a loop, should use regexp.Compile",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6001_1",
+      "name": "sa6001",
+      "description": "Missing an optimization opportunity when indexing maps by byte slices",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6002_1",
+      "name": "sa6002",
+      "description": "Storing non-pointer values in sync.Pool allocates memory",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6003_1",
+      "name": "sa6003",
+      "description": "Converting a string to a slice of runes before ranging over it",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6005_1",
+      "name": "sa6005",
+      "description": "Inefficient string comparison with strings.ToLower or strings.ToUpper",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "SA6006_1",
+      "name": "sa6006",
+      "description": "Using io.WriteString to write a byte slice",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_APPENDCOMBINE",
+      "name": "appendCombine",
+      "description": "Detect append chains that can be combined",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_EQUALFOLD",
+      "name": "equalFold",
+      "description": "Detects string equality checks that can be replaced with strings.EqualFold",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_HUGEPARAM",
+      "name": "hugeParam",
+      "description": "Detects params that are too large",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_INDEXALLOC",
+      "name": "indexAlloc",
+      "description": "Detects strings.Index calls that may cause allocation",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_PREFERWRITEBYTE",
+      "name": "preferWriteByte",
+      "description": "Suggests using WriteByte",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_RANGEEXPRCOPY",
+      "name": "rangeExprCopy",
+      "description": "Detects expensive copies in range expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_RANGEVALCOPY",
+      "name": "rangeValCopy",
+      "description": "Detects expensive copies in range loops",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_SQLQUERY",
+      "name": "sqlQuery",
+      "description": "Detects issues with sql queries",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_APPENDCOMBINE_1",
+      "name": "appendCombine",
+      "description": "Detect append chains that can be combined",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_EQUALFOLD_1",
+      "name": "equalFold",
+      "description": "Detects string equality checks that can be replaced with strings.EqualFold",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_HUGEPARAM_1",
+      "name": "hugeParam",
+      "description": "Detects params that are too large",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_INDEXALLOC_1",
+      "name": "indexAlloc",
+      "description": "Detects strings.Index calls that may cause allocation",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_PREFERWRITEBYTE_1",
+      "name": "preferWriteByte",
+      "description": "Suggests using WriteByte",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_RANGEEXPRCOPY_1",
+      "name": "rangeExprCopy",
+      "description": "Detects expensive copies in range expressions",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_RANGEVALCOPY_1",
+      "name": "rangeValCopy",
+      "description": "Detects expensive copies in range loops",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "CRITIC_SQLQUERY_1",
+      "name": "sqlQuery",
+      "description": "Detects issues with sql queries",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "REVIVE_CALL_TO_GC",
+      "name": "call-to-gc",
+      "description": "Checks for explicit runtime.GC calls",
+      "source": "revive",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "REVIVE_OPTIMIZE_OPERANDS_ORDER",
+      "name": "optimize-operands-order",
+      "description": "Suggests optimizing operand order",
+      "source": "revive",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "REVIVE_CALL_TO_GC_1",
+      "name": "call-to-gc",
+      "description": "Checks for explicit runtime.GC calls",
+      "source": "revive",
+      "severity": "warning",
+      "category": "P"
+    },
+    {
+      "code": "REVIVE_OPTIMIZE_OPERANDS_ORDER_1",
+      "name": "optimize-operands-order",
+      "description": "Suggests optimizing operand order",
+      "source": "revive",
+      "severity": "warning",
+      "category": "P"
+    }
+  ],
+  "C": [
+    {
+      "code": "SA2000",
+      "name": "sa2000",
+      "description": "sync.WaitGroup.Add called inside the goroutine, leading to a race condition",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2001",
+      "name": "sa2001",
+      "description": "Empty critical section, did you mean to defer the unlock?",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2002",
+      "name": "sa2002",
+      "description": "Called testing.T.FailNow or SkipNow in a goroutine, which isn't allowed",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2003",
+      "name": "sa2003",
+      "description": "Deferred Lock right after locking, likely meant to defer Unlock instead",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2000_1",
+      "name": "sa2000",
+      "description": "sync.WaitGroup.Add called inside the goroutine, leading to a race condition",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2001_1",
+      "name": "sa2001",
+      "description": "Empty critical section, did you mean to defer the unlock?",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2002_1",
+      "name": "sa2002",
+      "description": "Called testing.T.FailNow or SkipNow in a goroutine, which isn't allowed",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "SA2003_1",
+      "name": "sa2003",
+      "description": "Deferred Lock right after locking, likely meant to defer Unlock instead",
+      "source": "staticcheck",
+      "severity": "error",
+      "category": "C"
+    },
+    {
+      "code": "CRITIC_BADLOCK",
+      "name": "badLock",
+      "description": "Detect common mistakes with locks",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "C"
+    },
+    {
+      "code": "CRITIC_BADLOCK_1",
+      "name": "badLock",
+      "description": "Detect common mistakes with locks",
+      "source": "go-critic",
+      "severity": "warning",
+      "category": "C"
+    },
+    {
+      "code": "REVIVE_DATARACE",
+      "name": "datarace",
+      "description": "Checks for potential data races",
+      "source": "revive",
+      "severity": "warning",
+      "category": "C"
+    },
+    {
+      "code": "REVIVE_DATARACE_1",
+      "name": "datarace",
+      "description": "Checks for potential data races",
+      "source": "revive",
+      "severity": "warning",
+      "category": "C"
+    }
+  ],
+  "SEC": []
+}

@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/02_unused_variable.go:2:1: info [D001] Exported 'UnusedVariableScenario' should have documentation comment

@@ -1,0 +1,2 @@
+/home/mey/woof/benchmark/scenarios/07_ignored_error.go:4:1: info [D001] Exported 'IgnoredErrorScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/07_ignored_error.go:6:10: warning [S002] Error return value of 'os.Open' is not checked

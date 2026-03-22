@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/01_unused_import.go:8:1: info [D001] Exported 'UnusedImportScenario' should have documentation comment

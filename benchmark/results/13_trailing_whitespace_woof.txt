@@ -1,0 +1,5 @@
+/home/mey/woof/benchmark/scenarios/13_trailing_whitespace.go:2:1: info [D001] Exported 'TrailingWhitespaceScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/13_trailing_whitespace.go:3:36: info [E201] Trailing whitespace
+  --> Suggested fix: Remove trailing whitespace
+/home/mey/woof/benchmark/scenarios/13_trailing_whitespace.go:5:7: info [E201] Trailing whitespace
+  --> Suggested fix: Remove trailing whitespace

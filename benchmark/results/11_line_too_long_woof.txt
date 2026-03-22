@@ -1,0 +1,2 @@
+/home/mey/woof/benchmark/scenarios/11_line_too_long.go:3:121: warning [E101] Line too long (127 > 120 characters)
+/home/mey/woof/benchmark/scenarios/11_line_too_long.go:4:28: warning [E301] Empty block

@@ -1,0 +1,641 @@
+[
+  {
+    "code": "GEN001",
+    "name": "unused-type-parameter",
+    "description": "未使用的类型参数",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN002",
+    "name": "type-parameter-shadow",
+    "description": "类型参数遮蔽外部类型",
+    "category": "UP",
+    "severity": "error",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN003",
+    "name": "any-constraint",
+    "description": "使用 any 约束而非 interface{}",
+    "category": "UP",
+    "severity": "info",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN004",
+    "name": "comparable-misuse",
+    "description": "comparable 约束的误用",
+    "category": "UP",
+    "severity": "error",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN005",
+    "name": "type-set-redundant",
+    "description": "冗余的类型集合",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN006",
+    "name": "generic-interface-method",
+    "description": "泛型接口中的方法限制",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN007",
+    "name": "type-inference-fail",
+    "description": "无法推断类型参数",
+    "category": "UP",
+    "severity": "error",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN008",
+    "name": "type-param-too-many",
+    "description": "过多的类型参数",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN009",
+    "name": "constraint-unnecessary",
+    "description": "不必要的类型约束",
+    "category": "UP",
+    "severity": "info",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN010",
+    "name": "generic-naming",
+    "description": "类型参数命名不规范 (应为大写字母)",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN011",
+    "name": "type-assertion-in-generic",
+    "description": "泛型函数中不必要的类型断言",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN012",
+    "name": "reflect-in-generic",
+    "description": "泛型函数中使用 reflect 而非类型参数",
+    "category": "UP",
+    "severity": "info",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN013",
+    "name": "pointer-receiver-generic",
+    "description": "泛型类型的指针接收器检查",
+    "category": "UP",
+    "severity": "warning",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN014",
+    "name": "type-param-bounds",
+    "description": "类型参数边界检查",
+    "category": "UP",
+    "severity": "error",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN015",
+    "name": "instantiation-error",
+    "description": "泛型实例化错误",
+    "category": "UP",
+    "severity": "error",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN101",
+    "name": "generic-boxing",
+    "description": "泛型装箱操作可能影响性能",
+    "category": "UP",
+    "severity": "info",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "GEN102",
+    "name": "generic-monomorphization",
+    "description": "建议泛型单态化优化",
+    "category": "UP",
+    "severity": "info",
+    "source": "generics",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ001",
+    "name": "fuzz-test-signature",
+    "description": "Fuzzing 测试函数签名错误",
+    "category": "D",
+    "severity": "error",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ002",
+    "name": "fuzz-target-name",
+    "description": "Fuzzing 目标命名不规范",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ003",
+    "name": "fuzz-missing-corpus",
+    "description": "缺少 Fuzzing 语料库目录",
+    "category": "D",
+    "severity": "info",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ004",
+    "name": "fuzz-seed-corpus",
+    "description": "建议使用种子语料库",
+    "category": "D",
+    "severity": "info",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ005",
+    "name": "fuzz-parallel",
+    "description": "Fuzzing 测试应考虑并行执行",
+    "category": "D",
+    "severity": "info",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ006",
+    "name": "fuzz-cleanup",
+    "description": "Fuzzing 测试后缺少清理",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ007",
+    "name": "fuzz-add-duplicate",
+    "description": "Fuzzing 中添加重复语料",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ008",
+    "name": "fuzz-skipped",
+    "description": "Fuzzing 测试被跳过",
+    "category": "D",
+    "severity": "info",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ009",
+    "name": "fuzz-timeout",
+    "description": "Fuzzing 测试应设置超时",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ010",
+    "name": "fuzz-panic-recover",
+    "description": "Fuzzing 中不建议使用 panic/recover",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ011",
+    "name": "fuzz-global-state",
+    "description": "Fuzzing 测试使用了全局状态",
+    "category": "D",
+    "severity": "error",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ012",
+    "name": "fuzz-non-deterministic",
+    "description": "Fuzzing 测试非确定性行为",
+    "category": "D",
+    "severity": "error",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ101",
+    "name": "fuzz-input-validation",
+    "description": "Fuzzing 输入应充分验证",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ102",
+    "name": "fuzz-expensive-op",
+    "description": "Fuzzing 循环中有昂贵操作",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ103",
+    "name": "fuzz-file-operation",
+    "description": "Fuzzing 测试中避免文件操作",
+    "category": "D",
+    "severity": "info",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "FUZZ104",
+    "name": "fuzz-network-access",
+    "description": "Fuzzing 测试中避免网络访问",
+    "category": "D",
+    "severity": "warning",
+    "source": "fuzzing",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS001",
+    "name": "workspace-go-version",
+    "description": "Workspace 中 Go 版本不一致",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS002",
+    "name": "workspace-module-path",
+    "description": "Workspace 模块路径冲突",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS003",
+    "name": "workspace-missing-module",
+    "description": "Workspace 缺少必要模块",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS004",
+    "name": "workspace-orphan-module",
+    "description": "Workspace 中孤立的模块",
+    "category": "UP",
+    "severity": "info",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS005",
+    "name": "workspace-replace-directive",
+    "description": "Workspace 中不当的 replace 指令",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS006",
+    "name": "workspace-exclude-directive",
+    "description": "Workspace 中不当的 exclude 指令",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS007",
+    "name": "workspace-use-directive",
+    "description": "Workspace 中 use 指令问题",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS008",
+    "name": "workspace-nested",
+    "description": "嵌套的 Workspace 配置",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS009",
+    "name": "workspace-vendor-conflict",
+    "description": "Workspace 与 vendor 冲突",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS010",
+    "name": "workspace-local-path",
+    "description": "Workspace 使用相对路径可能的问题",
+    "category": "UP",
+    "severity": "info",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS101",
+    "name": "workspace-dep-version-mismatch",
+    "description": "Workspace 依赖版本不一致",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS102",
+    "name": "workspace-dep-override",
+    "description": "Workspace 依赖覆盖",
+    "category": "UP",
+    "severity": "info",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS103",
+    "name": "workspace-dep-cycle",
+    "description": "Workspace 模块间循环依赖",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS104",
+    "name": "workspace-dep-deprecated",
+    "description": "Workspace 使用已弃用依赖",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS105",
+    "name": "workspace-dep-security",
+    "description": "Workspace 依赖存在安全漏洞",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS201",
+    "name": "gowork-format",
+    "description": "go.work 文件格式错误",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS202",
+    "name": "gowork-syntax",
+    "description": "go.work 文件语法错误",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS203",
+    "name": "gowork-duplicate-use",
+    "description": "go.work 中重复的 use 指令",
+    "category": "UP",
+    "severity": "warning",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "WS204",
+    "name": "gowork-missing-directive",
+    "description": "go.work 缺少必要指令",
+    "category": "UP",
+    "severity": "error",
+    "source": "workspace",
+    "min_go_version": "1.18"
+  },
+  {
+    "code": "UP1201",
+    "name": "use-context-with-cancel-cause",
+    "description": "使用 context.WithCancelCause 替代 WithCancel",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.20",
+    "min_go_version": "1.20"
+  },
+  {
+    "code": "UP1202",
+    "name": "use-errors-join",
+    "description": "使用 errors.Join 替代自定义错误合并",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.20",
+    "min_go_version": "1.20"
+  },
+  {
+    "code": "UP1203",
+    "name": "use-slices-binary-search",
+    "description": "使用 slices.BinarySearch 替代手动实现",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.20",
+    "min_go_version": "1.20"
+  },
+  {
+    "code": "UP1204",
+    "name": "use-maps-clone",
+    "description": "使用 maps.Clone 替代手动拷贝",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.20",
+    "min_go_version": "1.20"
+  },
+  {
+    "code": "UP1205",
+    "name": "use-maps-delete-func",
+    "description": "使用 maps.DeleteFunc 替代循环删除",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.20",
+    "min_go_version": "1.20"
+  },
+  {
+    "code": "UP1206",
+    "name": "use-atomic-types",
+    "description": "使用 atomic.Int64 等类型替代 atomic.AddInt64",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.20",
+    "min_go_version": "1.20"
+  },
+  {
+    "code": "UP1211",
+    "name": "use-slog-context",
+    "description": "使用 slog 的 Context 方法",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1212",
+    "name": "slog-attr-optimization",
+    "description": "slog 属性优化建议",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1213",
+    "name": "slog-group-nesting",
+    "description": "slog group 嵌套过深",
+    "category": "UP",
+    "severity": "warning",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1214",
+    "name": "slog-duplicate-attrs",
+    "description": "slog 重复属性",
+    "category": "UP",
+    "severity": "warning",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1215",
+    "name": "use-slices-sort-func",
+    "description": "使用 slices.SortFunc 替代 sort.Slice",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1216",
+    "name": "use-slices-reverse",
+    "description": "使用 slices.Reverse",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1217",
+    "name": "use-testing-option",
+    "description": "使用 testing 包的新 Option 类型",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1218",
+    "name": "test-skip-f",
+    "description": "使用 t.Skipf 而非 fmt.Sprintf + t.Skip",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.21",
+    "min_go_version": "1.21"
+  },
+  {
+    "code": "UP1221",
+    "name": "loopvar-capture-fixed",
+    "description": "Go 1.22+ 循环变量捕获已修复，无需 workarounds",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.22",
+    "min_go_version": "1.22"
+  },
+  {
+    "code": "UP1222",
+    "name": "range-over-int",
+    "description": "使用整数 range (Go 1.22+)",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.22",
+    "min_go_version": "1.22"
+  },
+  {
+    "code": "UP1223",
+    "name": "range-over-func",
+    "description": "使用函数 range (Go 1.23+)",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.22",
+    "min_go_version": "1.22"
+  },
+  {
+    "code": "UP1224",
+    "name": "use-http-servemux-patterns",
+    "description": "使用 http.ServeMux 的新模式语法",
+    "category": "UP",
+    "severity": "info",
+    "source": "go1.22",
+    "min_go_version": "1.22"
+  },
+  {
+    "code": "UP1225",
+    "name": "http-route-conflict",
+    "description": "HTTP 路由模式冲突",
+    "category": "UP",
+    "severity": "error",
+    "source": "go1.22",
+    "min_go_version": "1.22"
+  }
+]

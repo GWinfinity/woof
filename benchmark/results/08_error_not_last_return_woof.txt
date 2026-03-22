@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/08_error_not_last_return.go:4:1: info [D001] Exported 'ErrorNotLastReturnScenario' should have documentation comment

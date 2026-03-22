@@ -1,0 +1,54 @@
+/home/mey/woof/benchmark/scenarios/01_unused_import.go:8:1: info [D001] Exported 'UnusedImportScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/02_unused_variable.go:2:1: info [D001] Exported 'UnusedVariableScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/03_shadow_variable.go:4:1: info [D001] Exported 'ShadowVariableScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/04_unreachable_code.go:2:1: info [D001] Exported 'UnreachableCodeScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/05_empty_body.go:2:1: info [D001] Exported 'EmptyBodyScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/05_empty_body.go:4:11: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/05_empty_body.go:6:25: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/06_unchecked_error.go:7:1: info [D001] Exported 'UncheckedErrorScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/06_unchecked_error.go:9:2: warning [S002] Error return value of 'os.Open' is not checked
+/home/mey/woof/benchmark/scenarios/07_ignored_error.go:4:1: info [D001] Exported 'IgnoredErrorScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/07_ignored_error.go:6:10: warning [S002] Error return value of 'os.Open' is not checked
+/home/mey/woof/benchmark/scenarios/08_error_not_last_return.go:4:1: info [D001] Exported 'ErrorNotLastReturnScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/09_nil_error_return.go:2:1: info [D001] Exported 'NilErrorReturnScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/10_panic_error.go:2:1: info [D001] Exported 'PanicErrorScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/11_line_too_long.go:3:121: warning [E101] Line too long (127 > 120 characters)
+/home/mey/woof/benchmark/scenarios/11_line_too_long.go:4:28: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/12_mixed_tabs_spaces.go:2:1: info [D001] Exported 'MixedTabsSpacesScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/13_trailing_whitespace.go:2:1: info [D001] Exported 'TrailingWhitespaceScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/13_trailing_whitespace.go:3:36: info [E201] Trailing whitespace
+  --> Suggested fix: Remove trailing whitespace
+/home/mey/woof/benchmark/scenarios/13_trailing_whitespace.go:5:7: info [E201] Trailing whitespace
+  --> Suggested fix: Remove trailing whitespace
+/home/mey/woof/benchmark/scenarios/14_snake_case.go:3:28: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/15_stuttering.go:7:6: warning [S004] Parameter 's' is unused
+/home/mey/woof/benchmark/scenarios/15_stuttering.go:7:45: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/16_high_cyclomatic.go:2:1: info [D001] Exported 'HighCyclomaticScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/17_deep_nesting.go:2:1: info [D001] Exported 'DeepNestingScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/18_long_function.go:2:1: info [D001] Exported 'LongFunctionScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/19_many_parameters.go:2:1: info [D001] Exported 'ManyParametersScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:2:1: info [D001] Exported 'LongParameterListScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param1' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param2' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param3' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param4' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param5' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param6' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param7' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param8' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param9' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param10' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:121: warning [E101] Line too long (202 > 120 characters)
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:201: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/21_race_condition.go:2:1: info [D001] Exported 'RaceConditionScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/22_channel_close.go:2:1: info [D001] Exported 'ChannelCloseScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/23_goroutine_leak.go:4:1: info [D001] Exported 'GoroutineLeakScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/24_mutex_copy.go:9:1: info [D001] Exported 'MutexCopyScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/25_defer_in_loop.go:4:1: info [D001] Exported 'DeferInLoopScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/25_defer_in_loop.go:7:14: warning [S002] Error return value of 'os.Open' is not checked
+/home/mey/woof/benchmark/scenarios/27_simplify_slice.go:2:1: info [D001] Exported 'SimplifySliceScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/27_simplify_slice.go:4:9: info [S003] Redundant slice with full range, use the value directly
+/home/mey/woof/benchmark/scenarios/28_naked_return.go:2:1: info [D001] Exported 'NakedReturnScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/29_deprecated_ioutil.go:4:1: info [D001] Exported 'DeprecatedIOUtilScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/30_exported_missing_doc.go:6:1: info [D001] Exported 'ExportedFunction' should have documentation comment
+/home/mey/woof/benchmark/scenarios/30_exported_missing_doc.go:7:25: warning [E301] Empty block

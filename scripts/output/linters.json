@@ -1,0 +1,310 @@
+[
+  {
+    "name": "fmt",
+    "source": "golangci-lint",
+    "category": "format",
+    "description": "代码格式化检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gofmt",
+    "source": "golangci-lint",
+    "category": "format",
+    "description": "gofmt 格式化检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gofumpt",
+    "source": "golangci-lint",
+    "category": "format",
+    "description": "更严格的 gofmt",
+    "enabled_by_default": false
+  },
+  {
+    "name": "goimports",
+    "source": "golangci-lint",
+    "category": "imports",
+    "description": "导入语句检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gci",
+    "source": "golangci-lint",
+    "category": "imports",
+    "description": "导入语句排序",
+    "enabled_by_default": false
+  },
+  {
+    "name": "govet",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "Go 官方 vet 工具",
+    "enabled_by_default": true
+  },
+  {
+    "name": "staticcheck",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "高级静态分析",
+    "enabled_by_default": true
+  },
+  {
+    "name": "gosimple",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "简化代码建议",
+    "enabled_by_default": true
+  },
+  {
+    "name": "unused",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "未使用代码检测",
+    "enabled_by_default": true
+  },
+  {
+    "name": "ineffassign",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "无效赋值检测",
+    "enabled_by_default": true
+  },
+  {
+    "name": "deadcode",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "死代码检测",
+    "enabled_by_default": false
+  },
+  {
+    "name": "structcheck",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "未使用结构体字段",
+    "enabled_by_default": false
+  },
+  {
+    "name": "varcheck",
+    "source": "golangci-lint",
+    "category": "quality",
+    "description": "未使用变量检测",
+    "enabled_by_default": false
+  },
+  {
+    "name": "errcheck",
+    "source": "golangci-lint",
+    "category": "error",
+    "description": "未处理错误检查",
+    "enabled_by_default": true
+  },
+  {
+    "name": "errorlint",
+    "source": "golangci-lint",
+    "category": "error",
+    "description": "错误处理最佳实践",
+    "enabled_by_default": false
+  },
+  {
+    "name": "wrapcheck",
+    "source": "golangci-lint",
+    "category": "error",
+    "description": "错误包装检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "goerr113",
+    "source": "golangci-lint",
+    "category": "error",
+    "description": "错误处理规范",
+    "enabled_by_default": false
+  },
+  {
+    "name": "race",
+    "source": "golangci-lint",
+    "category": "concurrency",
+    "description": "数据竞争检测",
+    "enabled_by_default": false
+  },
+  {
+    "name": "copyloopvar",
+    "source": "golangci-lint",
+    "category": "concurrency",
+    "description": "循环变量拷贝检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "paralleltest",
+    "source": "golangci-lint",
+    "category": "concurrency",
+    "description": "并行测试检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "prealloc",
+    "source": "golangci-lint",
+    "category": "performance",
+    "description": "预分配建议",
+    "enabled_by_default": false
+  },
+  {
+    "name": "makezero",
+    "source": "golangci-lint",
+    "category": "performance",
+    "description": "make 初始化检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "perfsprint",
+    "source": "golangci-lint",
+    "category": "performance",
+    "description": "高性能字符串格式化",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gosec",
+    "source": "golangci-lint",
+    "category": "security",
+    "description": "安全漏洞扫描",
+    "enabled_by_default": false
+  },
+  {
+    "name": "govulncheck",
+    "source": "golangci-lint",
+    "category": "security",
+    "description": "漏洞检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gocyclo",
+    "source": "golangci-lint",
+    "category": "complexity",
+    "description": "圈复杂度检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "cyclop",
+    "source": "golangci-lint",
+    "category": "complexity",
+    "description": "循环复杂度",
+    "enabled_by_default": false
+  },
+  {
+    "name": "maintidx",
+    "source": "golangci-lint",
+    "category": "complexity",
+    "description": "可维护性指数",
+    "enabled_by_default": false
+  },
+  {
+    "name": "funlen",
+    "source": "golangci-lint",
+    "category": "complexity",
+    "description": "函数长度检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "revive",
+    "source": "golangci-lint",
+    "category": "style",
+    "description": "可配置的风格检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "golint",
+    "source": "golangci-lint",
+    "category": "style",
+    "description": "Go 风格检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "stylecheck",
+    "source": "golangci-lint",
+    "category": "style",
+    "description": "风格检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "misspell",
+    "source": "golangci-lint",
+    "category": "style",
+    "description": "拼写检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "nakedret",
+    "source": "golangci-lint",
+    "category": "style",
+    "description": "裸返回检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "nilnil",
+    "source": "golangci-lint",
+    "category": "style",
+    "description": "返回 nil,nil 检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "testifylint",
+    "source": "golangci-lint",
+    "category": "test",
+    "description": "testify 最佳实践",
+    "enabled_by_default": false
+  },
+  {
+    "name": "thelper",
+    "source": "golangci-lint",
+    "category": "test",
+    "description": "测试辅助函数检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "tparallel",
+    "source": "golangci-lint",
+    "category": "test",
+    "description": "并行测试检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "interfacebloat",
+    "source": "golangci-lint",
+    "category": "generics",
+    "description": "接口膨胀检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "ireturn",
+    "source": "golangci-lint",
+    "category": "generics",
+    "description": "接口返回检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "testableexamples",
+    "source": "golangci-lint",
+    "category": "fuzzing",
+    "description": "可测试示例检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gomoddirectives",
+    "source": "golangci-lint",
+    "category": "workspace",
+    "description": "go.mod 指令检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "gomodguard",
+    "source": "golangci-lint",
+    "category": "workspace",
+    "description": "go.mod 依赖检查",
+    "enabled_by_default": false
+  },
+  {
+    "name": "depguard",
+    "source": "golangci-lint",
+    "category": "workspace",
+    "description": "依赖守卫",
+    "enabled_by_default": false
+  }
+]

@@ -1,0 +1,2 @@
+/home/mey/woof/benchmark/scenarios/15_stuttering.go:7:6: warning [S004] Parameter 's' is unused
+/home/mey/woof/benchmark/scenarios/15_stuttering.go:7:45: warning [E301] Empty block

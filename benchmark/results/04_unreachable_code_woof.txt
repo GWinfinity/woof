@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/04_unreachable_code.go:2:1: info [D001] Exported 'UnreachableCodeScenario' should have documentation comment

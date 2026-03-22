@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/21_race_condition.go:2:1: info [D001] Exported 'RaceConditionScenario' should have documentation comment

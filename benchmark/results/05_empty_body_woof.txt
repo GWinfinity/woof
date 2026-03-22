@@ -1,0 +1,3 @@
+/home/mey/woof/benchmark/scenarios/05_empty_body.go:2:1: info [D001] Exported 'EmptyBodyScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/05_empty_body.go:4:11: warning [E301] Empty block
+/home/mey/woof/benchmark/scenarios/05_empty_body.go:6:25: warning [E301] Empty block

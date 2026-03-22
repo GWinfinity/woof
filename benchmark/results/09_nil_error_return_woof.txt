@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/09_nil_error_return.go:2:1: info [D001] Exported 'NilErrorReturnScenario' should have documentation comment

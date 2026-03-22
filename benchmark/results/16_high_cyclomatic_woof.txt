@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/16_high_cyclomatic.go:2:1: info [D001] Exported 'HighCyclomaticScenario' should have documentation comment

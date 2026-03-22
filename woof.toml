@@ -1,0 +1,15 @@
+# Woof configuration
+[global]
+target_go_version = "1.21"
+respect_gitignore = true
+exclude = ["vendor/", "*.gen.go"]
+
+[linter]
+# select = []  # Enable specific rules, empty means use defaults
+# ignore = []  # Disable specific rules
+
+[formatter]
+use_tabs = true
+tab_width = 4
+line_length = 120
+simplify = false

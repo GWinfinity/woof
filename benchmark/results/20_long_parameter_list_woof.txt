@@ -1,0 +1,13 @@
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:2:1: info [D001] Exported 'LongParameterListScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param1' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param2' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param3' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param4' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param5' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param6' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param7' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param8' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param9' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:31: warning [S004] Parameter 'param10' is unused
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:121: warning [E101] Line too long (202 > 120 characters)
+/home/mey/woof/benchmark/scenarios/20_long_parameter_list.go:3:201: warning [E301] Empty block

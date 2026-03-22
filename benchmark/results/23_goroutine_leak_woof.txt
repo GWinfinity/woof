@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/23_goroutine_leak.go:4:1: info [D001] Exported 'GoroutineLeakScenario' should have documentation comment

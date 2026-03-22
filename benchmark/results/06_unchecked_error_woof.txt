@@ -1,0 +1,2 @@
+/home/mey/woof/benchmark/scenarios/06_unchecked_error.go:7:1: info [D001] Exported 'UncheckedErrorScenario' should have documentation comment
+/home/mey/woof/benchmark/scenarios/06_unchecked_error.go:9:2: warning [S002] Error return value of 'os.Open' is not checked

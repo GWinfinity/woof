@@ -1,0 +1,314 @@
+# Woof Professional Test Dataset
+# 专业级测试数据集 - 用于基准测试和回归测试
+# 
+# 使用方式:
+#   ./scripts/download.sh    # 下载所有项目
+#   ./scripts/analyze.sh     # 运行分析
+#   ./scripts/report.sh      # 生成报告
+
+version: "1.0.0"
+description: "Professional Go projects test dataset for woof"
+created: "2026-03-21"
+
+# 项目列表
+projects:
+  # ============================================
+  # 1. Kubernetes - 超大规模CGO项目
+  # ============================================
+  - name: kubernetes
+    repo: https://github.com/kubernetes/kubernetes.git
+    commit: 8c6573e34f593c6965385b07f50bc718da88fc5f  # v1.29.0
+    tag: v1.29.0
+    size: "large"           # >10000 files
+    cgo: true               # 包含CGO
+    reflection: true        # 大量使用反射
+    codegen: true           # 代码生成
+    description: "Container orchestration platform"
+    characteristics:
+      - "大规模代码库 (~6000+ Go文件)"
+      - "大量CGO调用 (容器运行时)"
+      - "复杂接口和反射使用"
+      - "协议缓冲区代码生成"
+      - "多模块架构"
+    exclude_patterns:
+      - "vendor/"
+      - "_test.go"
+      - "generated/"
+      - "*.pb.go"
+    stats:
+      files: 6000
+      lines: 2500000
+      packages: 800
+      cgo_files: 150
+
+  # ============================================
+  # 2. Consul - 分布式系统CGO项目
+  # ============================================
+  - name: consul
+    repo: https://github.com/hashicorp/consul.git
+    commit: 209c0a857b70e35cd6b5ce01ebec71db8be49796  # v1.17.0
+    tag: v1.17.0
+    size: "medium"          # ~2000 files
+    cgo: true               # 包含CGO (libltdl等)
+    reflection: true        
+    codegen: false
+    description: "Service mesh and service discovery"
+    characteristics:
+      - "服务发现和配置管理"
+      - "CGO绑定系统库"
+      - "复杂错误处理模式"
+      - "并发密集型"
+      - "网络编程"
+    exclude_patterns:
+      - "vendor/"
+      - "ui/"
+      - "website/"
+      - "*_test.go"
+    stats:
+      files: 1800
+      lines: 600000
+      packages: 200
+      cgo_files: 45
+
+  # ============================================
+  # 3. Vault - 安全/加密CGO项目
+  # ============================================
+  - name: vault
+    repo: https://github.com/hashicorp/vault.git
+    commit: 72eedd088e66c5c00576f7b6fe6a7f9c2f9d6c17  # v1.15.0
+    tag: v1.15.0
+    size: "large"           # ~4000 files
+    cgo: true               # 大量加密库CGO绑定
+    reflection: true        # 插件系统使用反射
+    codegen: true           # protobuf生成
+    description: "Secrets management and data protection"
+    characteristics:
+      - "安全敏感代码"
+      - "大量CGO加密库 (OpenSSL等)"
+      - "插件架构使用反射"
+      - "多后端存储接口"
+      - "复杂权限系统"
+    exclude_patterns:
+      - "vendor/"
+      - "ui/"
+      - "website/"
+      - "builtin/"
+      - "*_test.go"
+    stats:
+      files: 3500
+      lines: 1200000
+      packages: 450
+      cgo_files: 120
+
+  # ============================================
+  # 4. Go-Ethereum - 区块链CGO项目
+  # ============================================
+  - name: go-ethereum
+    repo: https://github.com/ethereum/go-ethereum.git
+    commit: 6eabd6c74bf05cc0808b2d93a87dd33c5cbee158  # v1.13.0
+    tag: v1.13.0
+    size: "large"           # ~3000 files
+    cgo: true               # 加密和数据库CGO
+    reflection: false       # 较少反射
+    codegen: true           # 合约生成
+    description: "Official Go implementation of Ethereum"
+    characteristics:
+      - "区块链核心实现"
+      - "高性能加密 (CGO secp256k1)"
+      - "LevelDB RocksDB绑定"
+      - "EVM实现"
+      - "复杂状态管理"
+    exclude_patterns:
+      - "vendor/"
+      - "tests/"
+      - "cmd/clef/"
+      - "*_test.go"
+    stats:
+      files: 2800
+      lines: 900000
+      packages: 350
+      cgo_files: 80
+
+  # ============================================
+  # 5. Prometheus - 监控/时序数据库
+  # ============================================
+  - name: prometheus
+    repo: https://github.com/prometheus/prometheus.git
+    commit: 535f9a66e1f37c2b299c02e573f718342bb99c81  # v2.48.0
+    tag: v2.48.0
+    size: "medium"          # ~1500 files
+    cgo: true               # 部分CGO (可选)
+    reflection: true        # 大量反射用于序列化
+    codegen: true           # 协议生成
+    description: "Monitoring system and time series database"
+    characteristics:
+      - "时序数据库存储"
+      - "PromQL查询引擎"
+      - "反射密集型序列化"
+      - "协议缓冲区"
+      - "高性能抓取代�
+    exclude_patterns:
+      - "vendor/"
+      - "web/ui/"
+      - "documentation/"
+      - "*_test.go"
+    stats:
+      files: 1400
+      lines: 450000
+      packages: 180
+      cgo_files: 20
+
+  # ============================================
+  # 6. CockroachDB - 分布式SQL数据库
+  # ============================================
+  - name: cockroachdb
+    repo: https://github.com/cockroachdb/cockroach.git
+    commit: 7f056aa87f13644dc7828980ee5a5f2f2f362c6e  # v23.1.0
+    tag: v23.1.0
+    size: "xlarge"          # >10000 files
+    cgo: true               # 存储引擎CGO
+    reflection: true        
+    codegen: true           # SQL解析器生成
+    description: "Distributed SQL database"
+    characteristics:
+      - "分布式SQL数据库"
+      - "MVCC存储引擎"
+      - "CGO RocksDB绑定"
+      - "SQL解析器生成"
+      - "复杂事务系统"
+    exclude_patterns:
+      - "vendor/"
+      - "ui/"
+      - "docs/"
+      - "*_test.go"
+      - "*.eg.go"           # 生成的代码
+    stats:
+      files: 8000
+      lines: 3000000
+      packages: 900
+      cgo_files: 200
+
+  # ============================================
+  # 7. Docker - 容器运行时
+  # ============================================
+  - name: docker
+    repo: https://github.com/moby/moby.git
+    commit: 8d67d0c1a6d6c6a9f9f7f3c3f2c7d4a8b5e2f1a3  # v24.0.7
+    tag: v24.0.7
+    size: "large"
+    cgo: true               # 大量CGO (内核接口)
+    reflection: false
+    codegen: false
+    description: "Container runtime"
+    characteristics:
+      - "容器运行时"
+      - "Linux内核CGO接口"
+      - "namespace操作"
+      - "cgroups管理"
+    exclude_patterns:
+      - "vendor/"
+      - "hack/"
+      - "integration/"
+      - "*_test.go"
+    stats:
+      files: 2500
+      lines: 800000
+      packages: 300
+      cgo_files: 100
+
+  # ============================================
+  # 8. Grafana - 可视化平台
+  # ============================================
+  - name: grafana
+    repo: https://github.com/grafana/grafana.git
+    commit: 9b88f39f856400238f47a639e23c0c3f28d2f6d1  # v10.2.0
+    tag: v10.2.0
+    size: "large"
+    cgo: false              # 主要是纯Go
+    reflection: true        # 大量反射用于插件
+    codegen: true           # 前端生成
+    description: "Observability platform"
+    characteristics:
+      - "插件架构"
+      - "反射密集型"
+      - "复杂接口"
+      - "前端代码生成"
+    exclude_patterns:
+      - "vendor/"
+      - "public/"
+      - "devenv/"
+      - "*_test.go"
+    stats:
+      files: 2200
+      lines: 700000
+      packages: 250
+      cgo_files: 5
+
+# ============================================
+# 测试场景配置
+# ============================================
+test_scenarios:
+  # 场景1: 冷启动全量检查
+  cold_start:
+    description: "首次检查，无缓存"
+    projects: ["consul", "vault", "prometheus"]
+    iterations: 3
+    warmup: false
+    clear_cache: true
+    
+  # 场景2: 热启动增量检查
+  hot_incremental:
+    description: "增量检查，90%文件未变更"
+    projects: ["kubernetes", "cockroachdb"]
+    iterations: 5
+    warmup: true
+    change_ratio: 0.1
+    
+  # 场景3: CGO项目专项
+  cgo_stress:
+    description: "CGO项目性能测试"
+    projects: ["go-ethereum", "docker", "cockroachdb"]
+    iterations: 3
+    cgo_enabled: true
+    
+  # 场景4: 反射/代码生成
+  reflection_complexity:
+    description: "测试反射和代码生成处理"
+    projects: ["vault", "grafana", "kubernetes"]
+    iterations: 3
+    focus_rules: ["unused", "complexity"]
+    
+  # 场景5: 极限压力测试
+  stress_test:
+    description: "大规模项目压力测试"
+    projects: ["kubernetes", "cockroachdb"]
+    iterations: 1
+    parallel_jobs: 8
+    memory_limit: "4GB"
+
+# ============================================
+# 性能指标阈值
+# ============================================
+thresholds:
+  memory:
+    max_peak_mb: 2048
+    max_per_file_kb: 500
+    leak_threshold_mb: 50
+    
+  speed:
+    max_time_per_1k_files_ms: 5000
+    max_time_incremental_ratio: 0.2
+    
+  accuracy:
+    min_precision: 0.85
+    min_recall: 0.70
+    max_false_positive_rate: 0.15
+
+# ============================================
+# 输出格式
+# ============================================
+output:
+  formats: ["json", "csv", "html", "markdown"]
+  save_raw_results: true
+  save_diagnostics: true
+  compare_with: ["golangci-lint", "staticcheck"]

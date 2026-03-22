@@ -1,0 +1,1 @@
+/home/mey/woof/benchmark/scenarios/10_panic_error.go:2:1: info [D001] Exported 'PanicErrorScenario' should have documentation comment
