@@ -9,7 +9,7 @@
 use anyhow::Result;
 use std::collections::HashMap;
 use std::fs::File;
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
 use std::os::unix::fs::MetadataExt;  // for inode on Unix
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, RwLock};
@@ -220,7 +220,7 @@ impl std::fmt::Display for CacheStats {
     }
 }
 
-/// Global shared file cache (lazy initialized)
+// Global shared file cache (lazy initialized)
 lazy_static::lazy_static! {
     static ref GLOBAL_FILE_CACHE: SharedFileCache = SharedFileCache::new(
         // Use mmap for files > 1MB

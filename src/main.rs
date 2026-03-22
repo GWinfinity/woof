@@ -6,7 +6,7 @@ use std::process;
 
 use woof::cli::{Cli, Commands, OutputFormat};
 use woof::config::Config;
-use woof::linter;  // 临时简化
+
 use woof::logger::{LogLevel, is_enabled};
 
 fn main() {
@@ -81,7 +81,7 @@ fn run_check(
 
     let all_diagnostics = if use_parallel && !use_profiled && files.len() >= 1 {
         // Use high-performance parallel linter for all files at once
-        use woof::linter::parallel::{lint_paths_parallel, lint_path_parallel};
+        use woof::linter::parallel::{lint_paths_parallel};
         
         // Collect all files from all paths
         let mut all_files = Vec::new();

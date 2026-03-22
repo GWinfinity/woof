@@ -101,7 +101,7 @@ impl<T> ObjectPool<T> {
     }
 
     /// Get an object from the pool
-    pub fn acquire(&self) -> PooledObject<T> {
+    pub fn acquire(&self) -> PooledObject<'_, T> {
         let mut pool = self.pool.lock().unwrap();
         let mut obj = pool.pop().unwrap_or_else(|| (self.create)());
         (self.reset)(&mut obj);
@@ -112,11 +112,7 @@ impl<T> ObjectPool<T> {
         }
     }
 
-    /// Return an object to the pool
-    fn release(&self, obj: T) {
-        let mut pool = self.pool.lock().unwrap();
-        pool.push(obj);
-    }
+
 }
 
 /// A pooled object that returns to the pool when dropped

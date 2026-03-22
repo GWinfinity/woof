@@ -5,7 +5,7 @@
 
 use crate::config::Config;
 use crate::logger::{LogLevel, LinterPerfTracker, PerfStats, RulePerfStat};
-use crate::rules::{get_enabled_rules, Rule};
+use crate::rules::get_enabled_rules;
 use crate::Diagnostic;
 use anyhow::Result;
 use std::collections::HashMap;

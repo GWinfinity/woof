@@ -12,7 +12,7 @@ use crate::rules::get_enabled_rules;
 use crate::Diagnostic;
 use anyhow::Result;
 use rayon::prelude::*;
-use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::atomic::AtomicUsize;
 use std::path::{Path, PathBuf};
 use std::time::Instant;
 use std::cell::RefCell;

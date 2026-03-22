@@ -2,13 +2,13 @@
 
 use crate::config::Config;
 use crate::rules::{get_enabled_rules, Rule};
-use crate::{Diagnostic, Severity};
+use crate::Diagnostic;
 use crate::parser::{AstCache, CachedAst, ParserPool};
 use anyhow::Result;
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
 
-/// Global parser pool (shared across all threads)
+
+// Global parser pool (shared across all threads)
 lazy_static::lazy_static! {
     static ref PARSER_POOL: ParserPool = ParserPool::new().expect("Failed to create parser pool");
     static ref AST_CACHE: AstCache = AstCache::new(1000);

@@ -421,11 +421,9 @@ impl Rule for SliceIndexProtection {
         
         // 检查直接索引访问
         if node.kind() == "index_expression" {
-            let node_text = &source[node.byte_range()];
-            
             // 检查是否有 len 检查
             if let Some(parent) = node.parent() {
-                if !has_length_check(parent, source, node) {
+                if !has_length_check(parent, source) {
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "B202".to_string(),
@@ -444,7 +442,7 @@ impl Rule for SliceIndexProtection {
     }
 }
 
-fn has_length_check(node: Node, source: &str, target: Node) -> bool {
+fn has_length_check(node: Node, source: &str) -> bool {
     // 简化检查：检查是否在 if len(x) > idx 块中
     let mut current = node;
     

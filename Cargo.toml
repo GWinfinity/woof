@@ -4,10 +4,13 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Woof Contributors"]
 description = "An extremely fast Go linter and code formatter written in Rust"
-license = "MIT"
-repository = "https://github.com/yourusername/woof"
+license = "Apache-2.0"
+repository = "https://github.com/GWinfinity/woof"
+readme = "README.md"
+homepage = "https://github.com/GWinfinity/woof"
 keywords = ["go", "golang", "linter", "formatter", "rust"]
 categories = ["development-tools", "command-line-utilities"]
+exclude = ["benchmark/", "testdata/", "scripts/", "docs/", "benches/", ".github/"]
 rust-version = "1.70"
 
 [[bin]]

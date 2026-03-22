@@ -223,8 +223,6 @@ impl Rule for PossibleNilPointerDereference {
         
         // 检查 selector_expression: x.Field 或 x.Method()
         if node.kind() == "selector_expression" || node.kind() == "call_expression" {
-            let text = &source[node.byte_range()];
-            
             // 提取被访问的对象
             if let Some(obj_name) = self.extract_object_name(&node, source) {
                 // 检查同作用域内是否有 nil 检查但未返回
@@ -1148,9 +1146,8 @@ impl MissingDeferClose {
         var_name: &str,
         func: Node<'a>,
         source: &str,
-        current_node: &Node<'a>
+        _current_node: &Node<'a>
     ) -> bool {
-        let current_line = current_node.start_position().row;
         let func_text = &source[func.byte_range()];
         
         // 简单检查：函数体内是否有 defer var.Close()

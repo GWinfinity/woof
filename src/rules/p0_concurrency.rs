@@ -150,7 +150,7 @@ impl LoopVariableCapture {
     }
     
     /// 获取 go 语句中的函数字面量
-    fn get_func_literal<'a>(&self, go_stmt: Node<'a>, source: &str) -> Option<Node<'a>> {
+    fn get_func_literal<'a>(&self, go_stmt: Node<'a>, _source: &str) -> Option<Node<'a>> {
         let mut cursor = go_stmt.walk();
         for child in go_stmt.children(&mut cursor) {
             if child.kind() == "func_literal" || child.kind() == "call_expression" {
@@ -206,7 +206,7 @@ impl Rule for GoroutineLeak {
         let mut diagnostics = vec![];
         
         if node.kind() == "go_statement" {
-            let go_text = &source[node.byte_range()];
+            let _go_text = &source[node.byte_range()];
             
             // 获取函数字面量
             if let Some(func_lit) = self.get_func_literal(node, source) {
@@ -242,7 +242,7 @@ impl Rule for GoroutineLeak {
 }
 
 impl GoroutineLeak {
-    fn get_func_literal<'a>(&self, go_stmt: Node<'a>, source: &str) -> Option<Node<'a>> {
+    fn get_func_literal<'a>(&self, go_stmt: Node<'a>, _source: &str) -> Option<Node<'a>> {
         let mut cursor = go_stmt.walk();
         for child in go_stmt.children(&mut cursor) {
             if child.kind() == "func_literal" {
@@ -597,7 +597,7 @@ impl Rule for DeferInLoop {
 }
 
 impl DeferInLoop {
-    fn is_inside_loop(&self, node: Node, source: &str) -> bool {
+    fn is_inside_loop(&self, node: Node, _source: &str) -> bool {
         let mut current = node;
         while let Some(parent) = current.parent() {
             if parent.kind() == "for_statement" || 
@@ -668,7 +668,8 @@ impl Rule for DeferLockOrder {
 
 impl DeferLockOrder {
     fn has_lock_before(&self, defer_node: Node, parent: Node, source: &str) -> bool {
-        let mut found_defer = false;
+        let _found_defer = false;
+        let _ = _found_defer; // suppress unused warning
         let defer_line = defer_node.start_position().row;
         
         let mut cursor = parent.walk();
@@ -908,8 +909,6 @@ impl PrintfFormatMismatch {
     
     fn extract_format_info(&self, node: Node, source: &str) -> (Option<String>, usize) {
         if let Some(args) = node.child_by_field_name("arguments") {
-            let args_text = &source[args.byte_range()];
-            
             // 提取第一个参数（格式字符串）
             let mut cursor = args.walk();
             let mut children: Vec<Node> = vec![];

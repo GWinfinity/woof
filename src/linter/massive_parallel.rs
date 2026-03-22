@@ -17,7 +17,7 @@ use crossbeam_channel::{bounded, Sender};
 use rayon::{ThreadPool, ThreadPoolBuilder};
 
 use crate::config::Config;
-use crate::{Diagnostic, Severity};
+use crate::Diagnostic;
 use crate::io::ZeroCopyFileReader;
 use crate::rules::{get_all_rules, Rule};
 
@@ -126,12 +126,14 @@ impl MassiveParallelMetrics {
 #[derive(Clone)]
 struct WorkChunk {
     files: Vec<PathBuf>,
+    #[allow(dead_code)]
     scheduler_id: usize,
 }
 
 /// Result from a worker
-struct WorkerResult {
+pub struct WorkerResult {
     diagnostics: Vec<Diagnostic>,
+    #[allow(dead_code)]
     scheduler_id: usize,
     files_processed: usize,
     bytes_processed: usize,
@@ -284,13 +286,13 @@ impl HierarchicalScheduler {
     
     fn check_node(
         &self,
-        rule: &dyn Rule,
+        _rule: &dyn Rule,
         root: tree_sitter::Node,
-        source: &str,
-        path: &PathBuf,
+        _source: &str,
+        _path: &PathBuf,
     ) -> Vec<Diagnostic> {
         // Simplified - traverse and check
-        let mut results = Vec::new();
+        let results = Vec::new();
         
         fn traverse(node: tree_sitter::Node, f: &mut dyn FnMut(tree_sitter::Node)) {
             f(node);
@@ -301,7 +303,7 @@ impl HierarchicalScheduler {
             }
         }
         
-        traverse(root, &mut |node| {
+        traverse(root, &mut |_node| {
             // This would call the actual rule check
             // results.extend(rule.check(node, source, path.to_str().unwrap()));
         });

@@ -7,7 +7,7 @@
 //! - 泛型、Fuzzing、Workspace 关键错误
 
 use super::{Rule, RuleCategory, RuleMetadata, RulePriority};
-use crate::{Diagnostic, Fix, Severity};
+use crate::{Diagnostic, Severity};
 use tree_sitter::Node;
 
 // ==================== SA1xxx: 标准库 API 使用错误 ====================

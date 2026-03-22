@@ -3,13 +3,11 @@
 //! Demonstrates woof's scaling capabilities from 1 to 256 cores
 
 use std::path::PathBuf;
-use std::time::Instant;
 
 use anyhow::Result;
 use clap::Parser;
 
-use woof::config::Config;
-use woof::linter::massive_parallel::{lint_massive_parallel, MassiveParallelConfig};
+
 
 #[derive(Parser, Debug)]
 #[command(name = "benchmark_256core")]
@@ -23,14 +21,6 @@ struct Args {
     
     #[arg(long, default_value = "1,2,4,8,16,32,64,128,256")]
     cores: String,
-}
-
-#[derive(Debug)]
-struct BenchmarkResult {
-    cores: usize,
-    elapsed_ms: u64,
-    throughput: f64,
-    files_processed: usize,
 }
 
 fn main() -> Result<()> {
@@ -60,7 +50,7 @@ fn main() -> Result<()> {
     println!("{}", "─".repeat(75));
     
     let serial_fraction = 0.02; // 2% serial work
-    let baseline_ms = 100000; // Baseline for 100K files
+    let _baseline_ms = 100000; // Baseline for 100K files
     
     for cores in &core_counts {
         let amdahl_speedup = 1.0 / (serial_fraction + (1.0 - serial_fraction) / *cores as f64);
