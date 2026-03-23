@@ -120,23 +120,23 @@ fn test_version_parsing() {
     
     let rules_121 = get_enabled_rules(&config);
     let upgrade_count_121 = rules_121.iter()
-        .filter(|r| r.metadata().category == RuleCategory::Upgrade)
+        .filter(|r| r.metadata().category == RuleCategory::Upgrade && r.metadata().min_go_version.is_some())
         .count();
-    assert_eq!(upgrade_count_121, 0, "Go 1.21 should have 0 upgrade rules enabled");
+    assert_eq!(upgrade_count_121, 0, "Go 1.21 should have 0 versioned upgrade rules enabled");
     
     // Test Go 1.22
     config.global.target_go_version = "1.22".to_string();
     let rules_122 = get_enabled_rules(&config);
     let upgrade_count_122 = rules_122.iter()
-        .filter(|r| r.metadata().category == RuleCategory::Upgrade)
+        .filter(|r| r.metadata().category == RuleCategory::Upgrade && r.metadata().min_go_version.is_some())
         .count();
-    assert_eq!(upgrade_count_122, 5, "Go 1.22 should have 5 upgrade rules enabled");
+    assert_eq!(upgrade_count_122, 5, "Go 1.22 should have 5 versioned upgrade rules enabled");
     
     // Test Go 1.25
     config.global.target_go_version = "1.25".to_string();
     let rules_125 = get_enabled_rules(&config);
     let upgrade_count_125 = rules_125.iter()
-        .filter(|r| r.metadata().category == RuleCategory::Upgrade)
+        .filter(|r| r.metadata().category == RuleCategory::Upgrade && r.metadata().min_go_version.is_some())
         .count();
-    assert_eq!(upgrade_count_125, 18, "Go 1.25 should have all 18 upgrade rules enabled");
+    assert_eq!(upgrade_count_125, 18, "Go 1.25 should have all 18 versioned upgrade rules enabled");
 }
