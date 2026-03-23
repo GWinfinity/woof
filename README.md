@@ -1,4 +1,4 @@
-# Woof 🐕
+# woofmt 🐕
 
 **⚡ 极速 Go 语言 Linter & Formatter —— 比传统工具快 10-100 倍**
 
@@ -6,7 +6,7 @@
 [![Docs.rs](https://docs.rs/woofmt/badge.svg)](https://docs.rs/woofmt)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
-Woof 是用 Rust 编写的极速 Go 代码质量工具，将 Python 生态中 Ruff 的体验带到 Go 世界。从零开始设计，追求极致性能。
+woofmt 是用 Rust 编写的极速 Go 代码质量工具，将 Python 生态中 Ruff 的体验带到 Go 世界。从零开始设计，追求极致性能。
 
 ---
 
@@ -14,7 +14,7 @@ Woof 是用 Rust 编写的极速 Go 代码质量工具，将 Python 生态中 Ru
 
 ### 速度对比
 
-| 场景 | Woof | golangci-lint | staticcheck | 领先倍数 |
+| 场景 | woofmt | golangci-lint | staticcheck | 领先倍数 |
 |------|------|---------------|-------------|----------|
 | **冷启动** | 12ms | ~100ms | ~50ms | **5-10x** |
 | **热运行（单文件）** | **2ms** | ~300ms | ~100ms | **50-100x** |
@@ -95,7 +95,7 @@ CPU 核心 │ 耗时    │ 加速比 │ 效率
 | 📦 **单二进制** | 2MB 单文件，零依赖 |
 | 🔌 **GitHub Actions** | 原生支持 annotations |
 | 📊 **多格式输出** | text / json / github |
-| ⚙️ **TOML 配置** | 灵活可配置的 `woof.toml` |
+| ⚙️ **TOML 配置** | 灵活可配置的 `woofmt.toml` |
 
 ---
 
@@ -119,9 +119,9 @@ cargo install --path . --release
 
 ```bash
 # Linux x86_64
-curl -L https://github.com/GWinfinity/woof/releases/latest/download/woof-linux-amd64 -o woof
-chmod +x woof
-sudo mv woof /usr/local/bin/
+curl -L https://github.com/GWinfinity/woof/releases/latest/download/woofmt-linux-amd64 -o woofmt
+chmod +x woofmt
+sudo mv woofmt /usr/local/bin/
 ```
 
 ---
@@ -130,28 +130,28 @@ sudo mv woof /usr/local/bin/
 
 ```bash
 # 检查当前目录
-woof check .
+woofmt check .
 
 # 检查并自动修复
-woof check . --fix
+woofmt check . --fix
 
 # 格式化代码
-woof format .
+woofmt format .
 
 # 检查格式化（CI 模式）
-woof format . --check
+woofmt format . --check
 
 # 查看所有规则
-woof rules
+woofmt rules
 
 # 使用指定线程数
-woof check . --threads 8
+woofmt check . --threads 8
 
 # JSON 输出
-woof check . --format json
+woofmt check . --format json
 
 # 初始化配置
-woof init
+woofmt init
 ```
 
 ---
@@ -198,7 +198,7 @@ func process[int any](x int) {}  // int 遮蔽了内置类型
 
 ## ⚙️ 配置示例
 
-创建 `woof.toml`：
+创建 `woofmt.toml`：
 
 ```toml
 [global]
@@ -251,7 +251,7 @@ target_go_version = "1.25"
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Woof 高性能架构                           │
+│                    woofmt 高性能架构                         │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
@@ -297,7 +297,7 @@ target_go_version = "1.25"
 ```bash
 # 克隆测试仓库
 git clone https://github.com/kubernetes/kubernetes.git /tmp/k8s
-cd /home/mey/woof
+cd /home/mey/woofmt
 
 # 运行对比测试
 ./benchmark/run_parallel_comparison.sh /tmp/k8s
@@ -321,7 +321,7 @@ python3 benchmark/visualize_speedup.py /tmp/k8s
 ### IDE 集成（2ms 响应）
 
 ```
-用户保存文件 → woof lint → 显示结果
+用户保存文件 → woofmt lint → 显示结果
 总延迟: ~5ms (含 IDE 开销)
 体验: ✅ 即时反馈，无感知延迟
 ```
@@ -331,15 +331,15 @@ python3 benchmark/visualize_speedup.py /tmp/k8s
 ```bash
 #!/bin/bash
 # .git/hooks/pre-commit
-woof check . --fix
-woof format . --check
+woofmt check . --fix
+woofmt format . --check
 ```
 
 ### CI/CD 管道
 
 ```yaml
 # .github/workflows/lint.yml
-- name: Lint with Woof
+- name: Lint with woofmt
   uses: GWinfinity/woof-action@v1
   with:
     args: 'check . --format github'
@@ -349,7 +349,7 @@ woof format . --check
 
 ```bash
 # 256 核服务器
-woof check . --threads 64
+woofmt check . --threads 64
 # 处理 10,000+ 文件仅需数秒
 ```
 
@@ -387,4 +387,4 @@ Apache License 2.0 © GWinfinity
 
 **Made with ❤️ and 🦀 Rust**
 
-> *"Woof 让 Go 代码检查快到忘记它存在。"*
+> *"woofmt 让 Go 代码检查快到忘记它存在。"*
