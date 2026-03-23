@@ -2,6 +2,9 @@
 mod p0_critical_test;
 
 #[cfg(test)]
+mod upgrade_test;
+
+#[cfg(test)]
 mod tests {
     use super::super::*;
     use tree_sitter::Parser;

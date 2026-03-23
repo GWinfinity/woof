@@ -227,7 +227,7 @@ pub fn get_rules_by_priority(priority: RulePriority) -> Vec<Box<dyn Rule>> {
 }
 
 /// 解析版本字符串为可比数字 (e.g., "1.22" -> 1022)
-fn parse_version(v: &str) -> Option<u32> {
+pub fn parse_version(v: &str) -> Option<u32> {
     let parts: Vec<&str> = v.split('.').collect();
     if parts.len() >= 2 {
         let major = parts[0].parse::<u32>().ok()?;
@@ -257,3 +257,6 @@ pub fn get_enabled_rules(config: &crate::config::Config) -> Vec<Box<dyn Rule>> {
         })
         .collect()
 }
+
+#[cfg(test)]
+mod tests;
