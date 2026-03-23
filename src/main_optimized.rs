@@ -10,16 +10,16 @@ use clap::Parser;
 use colored::Colorize;
 use std::process;
 
-use woof::cli::{Cli, Commands, OutputFormat};
-use woof::config::Config;
-use woof::linter::{apply_fixes, LintStats};
+use woofmt::cli::{Cli, Commands, OutputFormat};
+use woofmt::config::Config;
+use woofmt::linter::{apply_fixes, LintStats};
 
 fn main() {
     // Spawn background thread for pre-initialization
     // This warms up the parser pool while CLI is being parsed
     let init_handle = std::thread::spawn(|| {
         // Access parser pool to trigger lazy initialization
-        let _ = woof::parser::PARSER_POOL;
+        let _ = woofmt::parser::PARSER_POOL;
     });
 
     if let Err(e) = run() {
@@ -99,7 +99,7 @@ fn run_check(
     let mut all_diagnostics = Vec::new();
 
     for file in files {
-        let diagnostics = woof::lint_path(file, config)?;
+        let diagnostics = woofmt::lint_path(file, config)?;
         all_diagnostics.extend(diagnostics);
     }
 
@@ -124,7 +124,7 @@ fn run_check(
     // Exit code
     if !all_diagnostics.is_empty() {
         let has_errors = all_diagnostics.iter().any(|d| {
-            matches!(d.severity, woof::Severity::Error)
+            matches!(d.severity, woofmt::Severity::Error)
         });
 
         if has_errors || (fix && exit_non_zero_on_fix) {
@@ -147,10 +147,10 @@ fn run_format(
         if stdout && file.is_file() {
             // Read and format to stdout
             let source = std::fs::read_to_string(file)?;
-            let formatted = woof::format_to_string(&source, config)?;
+            let formatted = woofmt::format_to_string(&source, config)?;
             print!("{}", formatted);
         } else {
-            let result = woof::format_path(file, check, config)?;
+            let result = woofmt::format_path(file, check, config)?;
 
             if check && !result.unchanged {
                 if all_unchanged {
@@ -170,7 +170,7 @@ fn run_format(
 }
 
 fn run_rules(all: bool, config: &Config) -> Result<()> {
-    let rules = woof::rules::ALL_RULES;
+    let rules = woofmt::rules::ALL_RULES;
 
     println!("{}", "Available Rules:".bold());
     println!();
@@ -224,12 +224,12 @@ fn run_init(strict: bool) -> Result<()> {
     Ok(())
 }
 
-fn output_text(diagnostics: &[woof::Diagnostic]) {
+fn output_text(diagnostics: &[woofmt::Diagnostic]) {
     for diag in diagnostics {
         let severity_color = match diag.severity {
-            woof::Severity::Error => "error".red().bold(),
-            woof::Severity::Warning => "warning".yellow().bold(),
-            woof::Severity::Info => "info".blue().bold(),
+            woofmt::Severity::Error => "error".red().bold(),
+            woofmt::Severity::Warning => "warning".yellow().bold(),
+            woofmt::Severity::Info => "info".blue().bold(),
         };
 
         println!(
@@ -252,7 +252,7 @@ fn output_text(diagnostics: &[woof::Diagnostic]) {
     }
 }
 
-fn output_json(diagnostics: &[woof::Diagnostic]) -> Result<()> {
+fn output_json(diagnostics: &[woofmt::Diagnostic]) -> Result<()> {
     let json: Vec<_> = diagnostics
         .iter()
         .map(|d| {
@@ -277,13 +277,13 @@ fn output_json(diagnostics: &[woof::Diagnostic]) -> Result<()> {
     Ok(())
 }
 
-fn output_github(diagnostics: &[woof::Diagnostic]) {
+fn output_github(diagnostics: &[woofmt::Diagnostic]) {
     // GitHub Actions annotation format
     for diag in diagnostics {
         let level = match diag.severity {
-            woof::Severity::Error => "error",
-            woof::Severity::Warning => "warning",
-            woof::Severity::Info => "notice",
+            woofmt::Severity::Error => "error",
+            woofmt::Severity::Warning => "warning",
+            woofmt::Severity::Info => "notice",
         };
 
         println!(
@@ -298,7 +298,7 @@ fn output_github(diagnostics: &[woof::Diagnostic]) {
     }
 }
 
-fn output_stats(stats: &woof::linter::LintStats) {
+fn output_stats(stats: &woofmt::linter::LintStats) {
     println!();
     println!("{}", "Statistics:".bold());
     println!("  Files checked: {}", stats.files_checked);
@@ -313,11 +313,11 @@ fn output_stats(stats: &woof::linter::LintStats) {
     }
 }
 
-fn apply_fixes_to_files(diagnostics: &[woof::Diagnostic]) -> Result<()> {
+fn apply_fixes_to_files(diagnostics: &[woofmt::Diagnostic]) -> Result<()> {
     use std::collections::HashMap;
 
     // Group diagnostics by file
-    let mut by_file: HashMap<&str, Vec<woof::Diagnostic>> = HashMap::new();
+    let mut by_file: HashMap<&str, Vec<woofmt::Diagnostic>> = HashMap::new();
     for diag in diagnostics {
         by_file.entry(&diag.file_path).or_default().push(diag.clone());
     }

@@ -1,3 +1,45 @@
+//! Configuration management for Woof.
+//!
+//! This module handles loading and parsing configuration from TOML files.
+//!
+//! # Configuration File Format
+//!
+//! Configuration is loaded from `woof.toml` or `.woof.toml` in the current directory:
+//!
+//! ```toml
+//! [global]
+//! target_go_version = "1.21"
+//! respect_gitignore = true
+//! exclude = ["vendor/", "*.gen.go"]
+//!
+//! [linter]
+//! select = ["E", "W", "D"]
+//! ignore = ["E101"]
+//!
+//! [linter.rules.line-too-long]
+//! enabled = true
+//! severity = "error"
+//! options = { max_length = 100 }
+//!
+//! [formatter]
+//! use_tabs = true
+//! tab_width = 4
+//! line_length = 120
+//! ```
+//!
+//! # Example
+//!
+//! ```
+//! use woofmt::config::Config;
+//! use std::path::Path;
+//!
+//! // Load from specific file
+//! let config = Config::load(Some(Path::new("woof.toml"))).unwrap();
+//!
+//! // Or load from default locations
+//! let config = Config::load(None).unwrap();
+//! ```
+
 use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

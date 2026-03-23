@@ -16,12 +16,12 @@ fn main() {
     println!("Baseline memory: {} MB", baseline);
     
     // Run optimized linter
-    let config = woof::config::Config::default();
+    let config = woofmt::config::Config::default();
     
     let start = Instant::now();
     let before_mem = get_memory_usage();
     
-    let result = woof::linter_optimized::lint_path_optimized(target, &config);
+    let result = woofmt::linter_optimized::lint_path_optimized(target, &config);
     
     let after_mem = get_memory_usage();
     let duration = start.elapsed();
@@ -42,9 +42,9 @@ fn main() {
             
             for diag in &diagnostics {
                 match diag.severity {
-                    woof::Severity::Error => errors += 1,
-                    woof::Severity::Warning => warnings += 1,
-                    woof::Severity::Info => infos += 1,
+                    woofmt::Severity::Error => errors += 1,
+                    woofmt::Severity::Warning => warnings += 1,
+                    woofmt::Severity::Info => infos += 1,
                 }
             }
             

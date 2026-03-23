@@ -1,6 +1,6 @@
 [package]
-name = "woof"
-version = "0.1.0"
+name = "woofmt"
+version = "0.1.2"
 edition = "2021"
 authors = ["Woof Contributors"]
 description = "An extremely fast Go linter and code formatter written in Rust"

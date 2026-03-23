@@ -1,3 +1,23 @@
+//! Linting engine for Go source code.
+//!
+//! This module provides the main linting functionality including:
+//! - Parallel linting with Rayon
+//! - Profiled linting for performance analysis
+//! - Massive parallel mode for large codebases
+//!
+//! # Example
+//!
+//! ```no_run
+//! use woofmt::linter::lint_path;
+//! use woofmt::config::Config;
+//!
+//! let config = Config::default();
+//! let diagnostics = lint_path("./src", &config).unwrap();
+//! for diag in diagnostics {
+//!     println!("{}:{}: {}", diag.file_path, diag.line, diag.message);
+//! }
+//! ```
+
 pub mod massive_parallel;
 pub mod parallel;
 pub mod profiled;

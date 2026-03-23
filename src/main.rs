@@ -4,10 +4,10 @@ use colored::Colorize;
 
 use std::process;
 
-use woof::cli::{Cli, Commands, OutputFormat};
-use woof::config::Config;
+use woofmt::cli::{Cli, Commands, OutputFormat};
+use woofmt::config::Config;
 
-use woof::logger::{LogLevel, is_enabled};
+use woofmt::logger::{LogLevel, is_enabled};
 
 fn main() {
     if let Err(e) = run() {
@@ -81,7 +81,7 @@ fn run_check(
 
     let all_diagnostics = if use_parallel && !use_profiled && files.len() >= 1 {
         // Use high-performance parallel linter for all files at once
-        use woof::linter::parallel::{lint_paths_parallel};
+        use woofmt::linter::parallel::{lint_paths_parallel};
         
         // Collect all files from all paths
         let mut all_files = Vec::new();
@@ -90,7 +90,7 @@ fn run_check(
                 all_files.push(file.clone());
             } else {
                 // Directory - collect Go files
-                let path_files = woof::linter::parallel::collect_go_files(file, config)?;
+                let path_files = woofmt::linter::parallel::collect_go_files(file, config)?;
                 all_files.extend(path_files);
             }
         }
@@ -101,11 +101,11 @@ fn run_check(
         let mut combined = Vec::new();
         for file in files {
             let diagnostics = if use_profiled {
-                use woof::linter::profiled::lint_path_profiled;
+                use woofmt::linter::profiled::lint_path_profiled;
                 let (diags, _stats) = lint_path_profiled(file, config)?;
                 diags
             } else {
-                woof::lint_path(file, config)?
+                woofmt::lint_path(file, config)?
             };
             combined.extend(diagnostics);
         }
@@ -135,7 +135,7 @@ fn run_check(
     // Exit code
     if !all_diagnostics.is_empty() {
         let has_errors = all_diagnostics.iter().any(|d| {
-            matches!(d.severity, woof::Severity::Error)
+            matches!(d.severity, woofmt::Severity::Error)
         });
 
         if has_errors || (fix && exit_non_zero_on_fix) {
@@ -158,10 +158,10 @@ fn run_format(
         if stdout && file.is_file() {
             // Read and format to stdout
             let source = std::fs::read_to_string(file)?;
-            let formatted = woof::format_to_string(&source, config)?;
+            let formatted = woofmt::format_to_string(&source, config)?;
             print!("{}", formatted);
         } else {
-            let result = woof::format_path(file, check, config)?;
+            let result = woofmt::format_path(file, check, config)?;
 
             if check && !result.unchanged {
                 if all_unchanged {
@@ -181,7 +181,7 @@ fn run_format(
 }
 
 fn run_rules(all: bool, config: &Config) -> Result<()> {
-    let rules = woof::rules::get_all_rules();
+    let rules = woofmt::rules::get_all_rules();
 
     println!("{}", "Available Rules:".bold());
     println!();
@@ -235,12 +235,12 @@ fn run_init(strict: bool) -> Result<()> {
     Ok(())
 }
 
-fn output_text(diagnostics: &[woof::Diagnostic]) {
+fn output_text(diagnostics: &[woofmt::Diagnostic]) {
     for diag in diagnostics {
         let severity_color = match diag.severity {
-            woof::Severity::Error => "error".red().bold(),
-            woof::Severity::Warning => "warning".yellow().bold(),
-            woof::Severity::Info => "info".blue().bold(),
+            woofmt::Severity::Error => "error".red().bold(),
+            woofmt::Severity::Warning => "warning".yellow().bold(),
+            woofmt::Severity::Info => "info".blue().bold(),
         };
 
         println!(
@@ -263,7 +263,7 @@ fn output_text(diagnostics: &[woof::Diagnostic]) {
     }
 }
 
-fn output_json(diagnostics: &[woof::Diagnostic]) -> Result<()> {
+fn output_json(diagnostics: &[woofmt::Diagnostic]) -> Result<()> {
     let json: Vec<_> = diagnostics
         .iter()
         .map(|d| {
@@ -288,13 +288,13 @@ fn output_json(diagnostics: &[woof::Diagnostic]) -> Result<()> {
     Ok(())
 }
 
-fn output_github(diagnostics: &[woof::Diagnostic]) {
+fn output_github(diagnostics: &[woofmt::Diagnostic]) {
     // GitHub Actions annotation format
     for diag in diagnostics {
         let level = match diag.severity {
-            woof::Severity::Error => "error",
-            woof::Severity::Warning => "warning",
-            woof::Severity::Info => "notice",
+            woofmt::Severity::Error => "error",
+            woofmt::Severity::Warning => "warning",
+            woofmt::Severity::Info => "notice",
         };
 
         println!(
@@ -313,7 +313,7 @@ fn _output_stats(_stats: &()) {
     // 统计功能暂时禁用
 }
 
-fn apply_fixes_to_files(_diagnostics: &[woof::Diagnostic]) -> Result<()> {
+fn apply_fixes_to_files(_diagnostics: &[woofmt::Diagnostic]) -> Result<()> {
     // 临时禁用自动修复功能
     println!("自动修复功能暂时禁用");
     Ok(())

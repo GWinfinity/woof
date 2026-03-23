@@ -1,3 +1,31 @@
+//! Lint rules implementation.
+//!
+//! This module contains all the lint rules organized by category.
+//!
+//! # Rule Categories
+//!
+//! | Category | Prefix | Description |
+//! |----------|--------|-------------|
+//! | P0 | P0 | Critical rules (staticcheck, concurrency, generics) |
+//! | Codestyle | E | Code style and syntax errors |
+//! | Logic | F | Logic errors and potential runtime issues |
+//! | Bugbear | B | Code quality and anti-patterns |
+//! | Imports | I | Import sorting and grouping |
+//! | Style | S | Style conventions |
+//! | Docs | D | Documentation and comments |
+//!
+//! # Example
+//!
+//! ```
+//! use woofmt::rules::{get_all_rules, RuleCategory, get_rules_by_category};
+//!
+//! // Get all rules
+//! let all_rules = get_all_rules();
+//!
+//! // Get rules by category
+//! let codestyle_rules = get_rules_by_category(RuleCategory::Codestyle);
+//! ```
+
 pub mod builtin;
 pub mod style;
 pub mod codestyle;    // E-series

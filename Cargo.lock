@@ -1027,8 +1027,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "woof"
-version = "0.1.0"
+name = "woofmt"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "bumpalo",

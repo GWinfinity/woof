@@ -1,3 +1,28 @@
+//! Code formatter for Go source code.
+//!
+//! This module provides opinionated formatting for Go code with support for:
+//! - In-place formatting
+//! - Check-only mode for CI
+//! - String-based formatting (no file I/O)
+//! - Parallel processing for directories
+//!
+//! # Example
+//!
+//! ```no_run
+//! use woofmt::formatter::{format_path, format_to_string};
+//! use woofmt::config::Config;
+//!
+//! let config = Config::default();
+//!
+//! // Format a directory
+//! let result = format_path("./src", false, &config).unwrap();
+//! println!("Formatted {} files", result.files_formatted);
+//!
+//! // Format a string
+//! let source = "package main\n\nfunc main() {\n  fmt.Println(\"hello\")\n}";
+//! let formatted = format_to_string(source, &config).unwrap();
+//! ```
+
 use crate::config::Config;
 use crate::FormatResult;
 use anyhow::Result;
