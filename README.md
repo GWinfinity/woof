@@ -110,7 +110,7 @@ cargo install woofmt
 ### 从源码
 
 ```bash
-git clone https://github.com/GWinfinity/woof.git
+git clone https://github.com/GWinfinity/woofmt.git
 cd woof
 cargo install --path . --release
 ```
@@ -119,7 +119,7 @@ cargo install --path . --release
 
 ```bash
 # Linux x86_64
-curl -L https://github.com/GWinfinity/woof/releases/latest/download/woofmt-linux-amd64 -o woofmt
+curl -L https://github.com/GWinfinity/woofmt/releases/latest/download/woofmt-linux-amd64 -o woofmt
 chmod +x woofmt
 sudo mv woofmt /usr/local/bin/
 ```
@@ -371,7 +371,7 @@ woofmt check . --threads 64
 
 ```bash
 # 开发环境
-git clone https://github.com/GWinfinity/woof.git
+git clone https://github.com/GWinfinity/woofmt.git
 cd woof
 cargo test
 cargo bench
