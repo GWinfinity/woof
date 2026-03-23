@@ -36,6 +36,7 @@ pub mod p0_critical;  // P0 核心规则
 pub mod p0_concurrency; // P0 Phase 1: 并发安全规则
 pub mod p0_runtime;   // P0 Phase 2: 运行时错误和代码结构规则
 pub mod p0_enhanced;  // P0 Phase 3: 增强规则和高价值新增
+pub mod upgrade;      // Go 版本升级规则
 
 use crate::{Diagnostic, Severity};
 use tree_sitter::Node;
@@ -138,6 +139,9 @@ pub struct RuleMetadata {
     pub category: RuleCategory,
     pub priority: RulePriority,
     pub default_severity: Severity,
+    /// 最低要求的 Go 版本（可选）
+    /// 例如 "1.22" 表示该规则只在目标 Go 版本 >= 1.22 时启用
+    pub min_go_version: Option<&'static str>,
 }
 
 /// 规则 trait - 所有 lint 规则必须实现
@@ -200,6 +204,9 @@ pub fn get_all_rules() -> Vec<Box<dyn Rule>> {
     // B-series: Uber Go Style / Bugbear
     rules.extend(bugbear::get_rules());
     
+    // UP-series: Go 版本升级规则 (Go 1.22/1.23/1.24/1.25+)
+    rules.extend(upgrade::get_upgrade_rules());
+    
     rules
 }
 
@@ -219,8 +226,34 @@ pub fn get_rules_by_priority(priority: RulePriority) -> Vec<Box<dyn Rule>> {
         .collect()
 }
 
-/// 获取启用的规则（简化版：返回所有规则）
-/// TODO: 根据配置过滤
-pub fn get_enabled_rules(_config: &crate::config::Config) -> Vec<Box<dyn Rule>> {
+/// 解析版本字符串为可比数字 (e.g., "1.22" -> 1022)
+fn parse_version(v: &str) -> Option<u32> {
+    let parts: Vec<&str> = v.split('.').collect();
+    if parts.len() >= 2 {
+        let major = parts[0].parse::<u32>().ok()?;
+        let minor = parts[1].parse::<u32>().ok()?;
+        Some(major * 1000 + minor)
+    } else {
+        None
+    }
+}
+
+/// 获取启用的规则，根据配置的目标 Go 版本过滤
+pub fn get_enabled_rules(config: &crate::config::Config) -> Vec<Box<dyn Rule>> {
+    let target_version = parse_version(&config.global.target_go_version).unwrap_or(1021); // 默认 1.21
+    
     get_all_rules()
+        .into_iter()
+        .filter(|r| {
+            // 检查规则是否有最低 Go 版本要求
+            if let Some(min_ver_str) = r.metadata().min_go_version {
+                if let Some(min_ver) = parse_version(min_ver_str) {
+                    // 只有当目标版本 >= 规则最低版本时才启用
+                    return target_version >= min_ver;
+                }
+            }
+            // 没有版本要求的规则总是启用
+            true
+        })
+        .collect()
 }

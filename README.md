@@ -227,6 +227,24 @@ ast_cache_size = 1000
 batch_size = 100
 ```
 
+### Go 版本控制
+
+通过 `target_go_version` 控制升级规则的启用：
+
+| 目标版本 | 启用的升级规则 |
+|----------|----------------|
+| `1.21` (默认) | 无，适用于 Go 1.21 及以下项目 |
+| `1.22` | UP1221-UP1225 (整数 range, math/rand/v2 等) |
+| `1.23` | UP122x + UP1231-UP1235 (slices/maps 迭代器, unique 包) |
+| `1.24` | UP12xx + UP1241-UP1244 (rand.Text, slog.DiscardHandler 等) |
+| `1.25` | 全部 (json/v2, synctest, 容器感知 GOMAXPROCS 等) |
+
+**示例**：为 Go 1.25 项目启用所有升级建议
+```toml
+[global]
+target_go_version = "1.25"
+```
+
 ---
 
 ## 🏗️ 架构亮点

@@ -20,6 +20,7 @@ impl Rule for UnusedImport {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -91,6 +92,7 @@ impl Rule for UnusedVariable {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -153,6 +155,7 @@ impl Rule for UnusedParameter {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -212,6 +215,7 @@ impl Rule for UnusedReturnValue {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -266,6 +270,7 @@ impl Rule for UnusedLabel {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -321,6 +326,7 @@ impl Rule for RedefinedVariable {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -378,6 +384,7 @@ impl Rule for UndefinedVariable {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -433,6 +440,7 @@ impl Rule for LoopVariableCapture {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -502,6 +510,7 @@ impl Rule for UnusedAssignment {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -558,6 +567,7 @@ impl Rule for UnreachableCode {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -612,6 +622,7 @@ impl Rule for DuplicateCase {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -663,6 +674,7 @@ impl Rule for MissingReturn {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 

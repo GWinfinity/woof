@@ -21,6 +21,7 @@ impl Rule for MutexZeroValue {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -65,6 +66,7 @@ impl Rule for ChannelBufferSize {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -122,6 +124,7 @@ impl Rule for GoroutineLeak {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -197,6 +200,7 @@ impl Rule for AtomicOperations {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -267,6 +271,7 @@ impl Rule for StrconvOverFmt {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -331,6 +336,7 @@ impl Rule for MapSliceCopy {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -413,6 +419,7 @@ impl Rule for SliceIndexProtection {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -477,6 +484,7 @@ impl Rule for MissingDeferClose {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -557,6 +565,7 @@ impl Rule for ContextCancel {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

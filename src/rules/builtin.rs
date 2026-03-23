@@ -18,6 +18,7 @@ impl Rule for ExportedMissingDoc {
             category: RuleCategory::Docs,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -74,6 +75,7 @@ impl Rule for PackageDocMissing {
             category: RuleCategory::Docs,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -120,6 +122,7 @@ impl Rule for TodoFormat {
             category: RuleCategory::Docs,
             priority: RulePriority::Optional,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -164,6 +167,7 @@ impl Rule for DeprecatedFormat {
             category: RuleCategory::Docs,
             priority: RulePriority::Recommended,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

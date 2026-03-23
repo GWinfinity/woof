@@ -20,6 +20,7 @@ impl Rule for MixedIndentation {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -60,6 +61,7 @@ impl Rule for TrailingWhitespace {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -96,6 +98,7 @@ impl Rule for MultipleTrailingNewlines {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -136,6 +139,7 @@ impl Rule for NoNewlineAtEnd {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -188,6 +192,7 @@ impl Rule for LineTooLong {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -227,6 +232,7 @@ impl Rule for BlankLineAfterImport {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -269,6 +275,7 @@ impl Rule for ImportNotAtTop {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -323,6 +330,7 @@ impl Rule for DuplicateImport {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -378,6 +386,7 @@ impl Rule for EmptyBlock {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -428,6 +437,7 @@ impl Rule for MissingWhitespaceAroundOperator {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -494,6 +504,7 @@ impl Rule for MultipleStatements {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -542,6 +553,7 @@ impl Rule for ComparisonToTrue {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -581,6 +593,7 @@ impl Rule for ComparisonToFalse {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -620,6 +633,7 @@ impl Rule for TypeComparison {
             category: RuleCategory::Codestyle,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

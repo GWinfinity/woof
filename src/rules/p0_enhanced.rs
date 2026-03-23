@@ -24,6 +24,7 @@ impl Rule for ImpossibleTypeAssertionEnhanced {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -160,6 +161,7 @@ impl Rule for InvalidNetworkAddressEnhanced {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -381,6 +383,7 @@ impl Rule for DeferInRangeLoop {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -464,6 +467,7 @@ impl Rule for NonASCIIIdentifier {
             category: RuleCategory::Style,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -571,6 +575,7 @@ impl Rule for StringOffsetCopy {
             category: RuleCategory::Performance,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -645,6 +650,7 @@ impl Rule for MissingCancelCheck {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

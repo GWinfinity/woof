@@ -18,6 +18,7 @@ impl Rule for UnsortedImports {
             category: RuleCategory::Imports,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -82,6 +83,7 @@ impl Rule for ImportGroupsMissing {
             category: RuleCategory::Imports,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -184,6 +186,7 @@ impl Rule for WrongImportOrder {
             category: RuleCategory::Imports,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -252,6 +255,7 @@ impl Rule for BlankImportUnused {
             category: RuleCategory::Imports,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -313,6 +317,7 @@ impl Rule for ImportAliasNecessary {
             category: RuleCategory::Imports,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -377,6 +382,7 @@ impl Rule for ImportAliasUnnecessary {
             category: RuleCategory::Imports,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -435,6 +441,7 @@ impl Rule for DotImport {
             category: RuleCategory::Imports,
             priority: RulePriority::Recommended,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

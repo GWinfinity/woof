@@ -18,6 +18,7 @@ impl Rule for NakedReturn {
             category: RuleCategory::Style,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -62,6 +63,7 @@ impl Rule for UncheckedError {
             category: RuleCategory::Style,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -103,6 +105,7 @@ impl Rule for RedundantSlice {
             category: RuleCategory::Style,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -141,6 +144,7 @@ impl Rule for UnusedParameter {
             category: RuleCategory::Style,
             priority: RulePriority::Recommended,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -188,6 +192,7 @@ impl Rule for CamelCaseFunction {
             category: RuleCategory::Style,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -229,6 +234,7 @@ impl Rule for ReceiverName {
             category: RuleCategory::Style,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -277,6 +283,7 @@ impl Rule for ErrorVarNaming {
             category: RuleCategory::Style,
             priority: RulePriority::Recommended,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -324,6 +331,7 @@ impl Rule for PackageName {
             category: RuleCategory::Style,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

@@ -26,6 +26,7 @@ impl Rule for AssignmentToNilMap {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -135,6 +136,7 @@ impl Rule for InfiniteRecursion {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -215,6 +217,7 @@ impl Rule for PossibleNilPointerDereference {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -328,6 +331,7 @@ impl Rule for InfiniteEmptyLoop {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -396,6 +400,7 @@ impl Rule for UnreachableCode {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -463,6 +468,7 @@ impl Rule for MissingReturn {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -519,6 +525,7 @@ impl Rule for IneffectualAssignment {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -612,6 +619,7 @@ impl Rule for DiscardPureFunctionResult {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -690,6 +698,7 @@ impl Rule for ImpossibleTypeAssertion {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -749,6 +758,7 @@ impl Rule for TimeParseFormat {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -846,6 +856,7 @@ impl Rule for InvalidNetworkAddress {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -920,6 +931,7 @@ impl Rule for HTTPHeaderFormat {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -988,6 +1000,7 @@ impl Rule for InvalidStructTag {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1072,6 +1085,7 @@ impl Rule for MissingDeferClose {
             category: RuleCategory::Bugbear,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 

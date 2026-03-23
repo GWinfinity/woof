@@ -26,6 +26,7 @@ impl Rule for LoopVariableCapture {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -199,6 +200,7 @@ impl Rule for GoroutineLeak {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -303,6 +305,7 @@ impl Rule for SendOnClosedChannel {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -421,6 +424,7 @@ impl Rule for SuspiciousChannelSize {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -491,6 +495,7 @@ impl Rule for InfiniteWait {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -565,6 +570,7 @@ impl Rule for DeferInLoop {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -633,6 +639,7 @@ impl Rule for DeferLockOrder {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -704,6 +711,7 @@ impl Rule for MutexZeroValue {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 
@@ -771,6 +779,7 @@ impl Rule for ContextCancelNotCalled {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -858,6 +867,7 @@ impl Rule for PrintfFormatMismatch {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1003,6 +1013,7 @@ impl Rule for ContextWithValueKey {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Info,
+            min_go_version: None,
         }
     }
 

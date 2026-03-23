@@ -24,6 +24,7 @@ impl Rule for InvalidRegex {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -118,6 +119,7 @@ impl Rule for InvalidTemplate {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -189,6 +191,7 @@ impl Rule for PrintfDynamicFormat {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -266,6 +269,7 @@ impl Rule for NilContext {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -318,6 +322,7 @@ impl Rule for DeprecatedFunction {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -379,6 +384,7 @@ impl Rule for SyncWaitgroupAddGoroutine {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -419,6 +425,7 @@ impl Rule for EmptyCriticalSection {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -481,6 +488,7 @@ impl Rule for TestFailNowGoroutine {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -522,6 +530,7 @@ impl Rule for AssignmentToNilMap {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -566,6 +575,7 @@ impl Rule for DeferCloseBeforeCheck {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Warning,
+            min_go_version: None,
         }
     }
 
@@ -619,6 +629,7 @@ impl Rule for InfiniteRecursion {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -677,6 +688,7 @@ impl Rule for InvalidStructTag {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -752,6 +764,7 @@ impl Rule for PossibleNilPointerDereference {
             category: RuleCategory::Logic,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -828,6 +841,7 @@ impl Rule for BadLock {
             category: RuleCategory::Concurrency,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -897,6 +911,7 @@ impl Rule for TypeParameterShadow {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -943,6 +958,7 @@ impl Rule for ComparableMisuse {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1004,6 +1020,7 @@ impl Rule for TypeInferenceFail {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1054,6 +1071,7 @@ impl Rule for FuzzTestSignature {
             category: RuleCategory::Docs,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1103,6 +1121,7 @@ impl Rule for FuzzGlobalState {
             category: RuleCategory::Docs,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1166,6 +1185,7 @@ impl Rule for FuzzNonDeterministic {
             category: RuleCategory::Docs,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1228,6 +1248,7 @@ impl Rule for WorkspaceGoVersion {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1282,6 +1303,7 @@ impl Rule for WorkspaceModulePath {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1345,6 +1367,7 @@ impl Rule for WorkspaceDepCycle {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
@@ -1389,6 +1412,7 @@ impl Rule for WorkspaceDepSecurity {
             category: RuleCategory::Upgrade,
             priority: RulePriority::Required,
             default_severity: Severity::Error,
+            min_go_version: None,
         }
     }
 
