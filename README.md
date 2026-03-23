@@ -6,7 +6,7 @@
 [![Docs.rs](https://docs.rs/woofmt/badge.svg)](https://docs.rs/woofmt)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
-woofmt 是用 Rust 编写的极速 Go 代码质量工具，将 Python 生态中 Ruff 的体验带到 Go 世界。从零开始设计，追求极致性能。
+woofmt 是用 Rust 编写的极速 Go 代码质量工具，将实时代码检查带入 vibe coding 世界。从零开始设计，追求极致性能。
 
 ---
 
