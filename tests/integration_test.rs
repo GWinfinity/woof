@@ -31,9 +31,13 @@ func main() {
     let stdout = String::from_utf8_lossy(&output.stdout);
 
     assert!(
-        stderr.contains("warning") || stdout.contains("warning") ||
-        stderr.contains("info") || stdout.contains("info"),
-        "Should detect empty block. stderr: {}, stdout: {}", stderr, stdout
+        stderr.contains("warning")
+            || stdout.contains("warning")
+            || stderr.contains("info")
+            || stdout.contains("info"),
+        "Should detect empty block. stderr: {}, stdout: {}",
+        stderr,
+        stdout
     );
 }
 
