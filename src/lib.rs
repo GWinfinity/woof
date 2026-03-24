@@ -36,22 +36,21 @@
 //! woofmt = "0.1.0"
 //! ```
 //!
-//! ```rust
+//! ```rust,no_run
 //! use woofmt::{lint_path, format_path, config::Config};
 //!
-//! # Load configuration
-//! let config = Config::load(None)?;
+//! // Load configuration
+//! let config = Config::load(None).unwrap();
 //!
-//! # Lint a file or directory
-//! let diagnostics = lint_path("./src", &config)?;
+//! // Lint a file or directory
+//! let diagnostics = lint_path("./src", &config).unwrap();
 //! for diag in diagnostics {
 //!     println!("{}: {}", diag.severity, diag.message);
 //! }
 //!
-//! # Format a file or directory
-//! let result = format_path("./src", false, &config)?;
+//! // Format a file or directory
+//! let result = format_path("./src", false, &config).unwrap();
 //! println!("Formatted {} files", result.files_formatted);
-//! # Ok::<(), anyhow::Error>(())
 //! ```
 //!
 //! ## Architecture
