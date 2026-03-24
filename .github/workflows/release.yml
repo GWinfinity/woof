@@ -174,14 +174,14 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: |
           cd target/${{ matrix.target }}/release
-          tar czvf ../../../woofmt-${{ matrix.target }}.tar.gz woof
+          tar czvf ../../../woofmt-${{ matrix.target }}.tar.gz woofmt
           cd -
       
       - name: Package binary (Windows)
         if: matrix.os == 'windows-latest'
         run: |
           cd target/${{ matrix.target }}/release
-          7z a ../../../woofmt-${{ matrix.target }}.zip woof.exe
+          7z a ../../../woofmt-${{ matrix.target }}.zip woofmt.exe
           cd -
       
       - name: Upload artifact
