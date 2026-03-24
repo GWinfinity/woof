@@ -1,6 +1,6 @@
 [package]
 name = "woofmt"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 authors = ["Woof Contributors"]
 description = "Blazing-fast Go code formatter —— Vibe Coding toolchain"
