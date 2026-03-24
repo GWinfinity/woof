@@ -8,8 +8,6 @@
 
 woofmt 是用 Rust 编写的极速 Go 代码质量工具，将实时代码检查带入 vibe coding 世界。从零开始设计，追求极致性能。
 
-> 🐕 **Woo Ecosystem 组成部分**: [woofind](https://github.com/GWinfinity/woofind) → [woolink](https://github.com/GWinfinity/woolink) → [wootype](https://github.com/GWinfinity/wootype) → [woofmt](https://github.com/GWinfinity/woofmt)
-
 📖 [English Documentation](README.md)
 
 ---
@@ -242,32 +240,6 @@ Summary: woofmt is 188.8x faster
 | **woofmt** | 45MB | 180MB |
 | golangci-lint | 120MB | 450MB |
 | staticcheck | 80MB | 320MB |
-
----
-
-## 🔌 生态系统
-
-woofmt 是 Woo Ecosystem 的一部分：
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Woo Ecosystem                            │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌─────────┐ │
-│   │ woofind  │──▶│ woolink  │──▶│ wootype  │──▶│ woofmt  │ │
-│   │ (搜索)    │   │ (链接)   │   │ (类型)   │   │ (格式化)│ │
-│   └──────────┘   └──────────┘   └──────────┘   └─────────┘ │
-│        │                                            ▲       │
-│        └────────────────────────────────────────────┘       │
-│                    (Import Resolution)                       │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
-```
-
-- **[woofind](https://github.com/GWinfinity/woofind)**: 符号搜索引擎
-- **[woolink](https://github.com/GWinfinity/woolink)**: 跨包符号解析  
-- **[wootype](https://github.com/GWinfinity/wootype)**: 类型检查引擎
 
 ---
 
