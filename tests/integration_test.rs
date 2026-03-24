@@ -4,7 +4,7 @@ use tempfile::TempDir;
 
 fn woof_bin() -> String {
     // Use the debug binary during tests
-    concat!(env!("CARGO_MANIFEST_DIR"), "/target/debug/woof").to_string()
+    concat!(env!("CARGO_MANIFEST_DIR"), "/target/debug/woofmt").to_string()
 }
 
 #[test]
