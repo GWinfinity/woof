@@ -237,6 +237,7 @@ jobs:
         with:
           path: artifacts
           pattern: woofmt-*
+          merge-multiple: true
       
       - name: Generate changelog
         id: changelog
@@ -245,6 +246,11 @@ jobs:
           git log --pretty=format:"- %s (%h)" $(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo HEAD~10)..HEAD >> $GITHUB_OUTPUT
           echo "" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: List artifacts
+        run: |
+          echo "Downloaded artifacts:"
+          ls -la artifacts/
       
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -259,7 +265,9 @@ jobs:
             ```
             
             Or download the binary for your platform below.
-          files: artifacts/**/*.tar.gz,artifacts/**/*.zip
+          files: |
+            artifacts/*.tar.gz
+            artifacts/*.zip
           draft: false
           prerelease: ${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') || contains(github.ref, '-rc') }}
         env:
