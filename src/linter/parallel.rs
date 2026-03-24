@@ -245,10 +245,9 @@ pub fn collect_go_files(path: &Path, config: &Config) -> Result<Vec<PathBuf>> {
         let entry = entry?;
         let path = entry.path();
 
-        if path.is_file() && is_go_file(path)
-            && !should_exclude(path, config) {
-                files.push(path.to_path_buf());
-            }
+        if path.is_file() && is_go_file(path) && !should_exclude(path, config) {
+            files.push(path.to_path_buf());
+        }
     }
 
     Ok(files)

@@ -166,14 +166,13 @@ fn has_template_error(template: &str) -> bool {
                 chars.next(); // consume second {
                 depth += 1;
             }
-        } else if c == '}'
-            && chars.peek() == Some(&'}') {
-                chars.next(); // consume second }
-                depth -= 1;
-                if depth < 0 {
-                    return true;
-                }
+        } else if c == '}' && chars.peek() == Some(&'}') {
+            chars.next(); // consume second }
+            depth -= 1;
+            if depth < 0 {
+                return true;
             }
+        }
     }
 
     depth != 0

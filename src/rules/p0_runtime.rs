@@ -155,18 +155,19 @@ impl Rule for InfiniteRecursion {
                     // 1. 函数体直接调用自身
                     // 2. 没有终止条件
                     if self.is_direct_recursive_call(body_text, func_name)
-                        && !self.has_termination_condition(&body, source, func_name) {
-                            let pos = name_node.start_position();
-                            diagnostics.push(Diagnostic {
-                                code: "SA5007".to_string(),
-                                message: format!("函数 '{}' 可能无限递归，缺少终止条件", func_name),
-                                severity: self.default_severity(),
-                                file_path: file_path.to_string(),
-                                line: pos.row + 1,
-                                column: pos.column + 1,
-                                fix: None,
-                            });
-                        }
+                        && !self.has_termination_condition(&body, source, func_name)
+                    {
+                        let pos = name_node.start_position();
+                        diagnostics.push(Diagnostic {
+                            code: "SA5007".to_string(),
+                            message: format!("函数 '{}' 可能无限递归，缺少终止条件", func_name),
+                            severity: self.default_severity(),
+                            file_path: file_path.to_string(),
+                            line: pos.row + 1,
+                            column: pos.column + 1,
+                            fix: None,
+                        });
+                    }
                 }
             }
         }
@@ -937,19 +938,20 @@ impl Rule for HTTPHeaderFormat {
 
             // 检查 HTTP Header 赋值
             if (text.contains("Header()") || text.contains("http.Header"))
-                && self.has_non_canonical_header(text) {
-                    let pos = node.start_position();
-                    diagnostics.push(Diagnostic {
-                        code: "SA1007".to_string(),
-                        message: "HTTP Header 键应该使用规范格式（首字母大写，如 'Content-Type'）"
-                            .to_string(),
-                        severity: self.default_severity(),
-                        file_path: file_path.to_string(),
-                        line: pos.row + 1,
-                        column: pos.column + 1,
-                        fix: None,
-                    });
-                }
+                && self.has_non_canonical_header(text)
+            {
+                let pos = node.start_position();
+                diagnostics.push(Diagnostic {
+                    code: "SA1007".to_string(),
+                    message: "HTTP Header 键应该使用规范格式（首字母大写，如 'Content-Type'）"
+                        .to_string(),
+                    severity: self.default_severity(),
+                    file_path: file_path.to_string(),
+                    line: pos.row + 1,
+                    column: pos.column + 1,
+                    fix: None,
+                });
+            }
         }
 
         diagnostics

@@ -106,8 +106,7 @@ fn default_work_steal() -> String {
 }
 
 /// Configuration for woof
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct Config {
     /// Global settings
     #[serde(default)]
@@ -141,8 +140,7 @@ pub struct GlobalConfig {
     pub parallelism: ParallelismConfig,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct LinterConfig {
     /// Enable all rules by default
     #[serde(default)]
@@ -207,7 +205,6 @@ fn default_line_length() -> usize {
     120
 }
 
-
 impl Default for GlobalConfig {
     fn default() -> Self {
         Self {
@@ -222,7 +219,6 @@ impl Default for GlobalConfig {
         }
     }
 }
-
 
 impl Default for FormatterConfig {
     fn default() -> Self {
@@ -310,9 +306,10 @@ simplify = false
     pub fn is_rule_enabled(&self, rule_code: &str) -> bool {
         // If select is specified, only those rules are enabled
         if !self.linter.select.is_empty()
-            && !self.linter.select.iter().any(|s| rule_code.starts_with(s)) {
-                return false;
-            }
+            && !self.linter.select.iter().any(|s| rule_code.starts_with(s))
+        {
+            return false;
+        }
 
         // If explicitly ignored, disable
         if self.linter.ignore.iter().any(|s| rule_code.starts_with(s)) {

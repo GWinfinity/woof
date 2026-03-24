@@ -73,19 +73,18 @@ impl Rule for UncheckedError {
         if node.kind() == "call_expression" {
             let func_name = get_function_name(node, source);
 
-            if func_returns_error(&func_name)
-                && !is_error_checked(node) {
-                    let pos = node.start_position();
-                    diagnostics.push(Diagnostic {
-                        code: "S002".to_string(),
-                        message: format!("'{}' 的错误返回值未被检查", func_name),
-                        severity: self.default_severity(),
-                        file_path: file_path.to_string(),
-                        line: pos.row + 1,
-                        column: pos.column + 1,
-                        fix: None,
-                    });
-                }
+            if func_returns_error(&func_name) && !is_error_checked(node) {
+                let pos = node.start_position();
+                diagnostics.push(Diagnostic {
+                    code: "S002".to_string(),
+                    message: format!("'{}' 的错误返回值未被检查", func_name),
+                    severity: self.default_severity(),
+                    file_path: file_path.to_string(),
+                    line: pos.row + 1,
+                    column: pos.column + 1,
+                    fix: None,
+                });
+            }
         }
 
         diagnostics
