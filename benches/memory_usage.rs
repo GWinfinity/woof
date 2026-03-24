@@ -5,27 +5,30 @@ use std::time::Instant;
 fn main() {
     println!("Woof Memory Usage Benchmark");
     println!("============================\n");
-    
+
     let args: Vec<String> = std::env::args().collect();
-    let target = args.get(1).map(|s| s.as_str()).unwrap_or("benchmark/scenarios");
-    
+    let target = args
+        .get(1)
+        .map(|s| s.as_str())
+        .unwrap_or("benchmark/scenarios");
+
     println!("Target: {}", target);
-    
+
     // Measure baseline memory
     let baseline = get_memory_usage();
     println!("Baseline memory: {} MB", baseline);
-    
+
     // Run optimized linter
     let config = woofmt::config::Config::default();
-    
+
     let start = Instant::now();
     let before_mem = get_memory_usage();
-    
+
     let result = woofmt::linter_optimized::lint_path_optimized(target, &config);
-    
+
     let after_mem = get_memory_usage();
     let duration = start.elapsed();
-    
+
     match result {
         Ok(diagnostics) => {
             println!("\nResults:");
@@ -34,12 +37,12 @@ fn main() {
             println!("  Memory before: {} MB", before_mem);
             println!("  Memory after: {} MB", after_mem);
             println!("  Memory delta: {} MB", after_mem - before_mem);
-            
+
             // Count issues by severity
             let mut errors = 0;
             let mut warnings = 0;
             let mut infos = 0;
-            
+
             for diag in &diagnostics {
                 match diag.severity {
                     woofmt::Severity::Error => errors += 1,
@@ -47,8 +50,11 @@ fn main() {
                     woofmt::Severity::Info => infos += 1,
                 }
             }
-            
-            println!("  Issues: {} errors, {} warnings, {} infos", errors, warnings, infos);
+
+            println!(
+                "  Issues: {} errors, {} warnings, {} infos",
+                errors, warnings, infos
+            );
         }
         Err(e) => {
             eprintln!("Error: {}", e);

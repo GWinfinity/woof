@@ -120,7 +120,7 @@ pub mod arena;
 pub mod cli;
 pub mod config;
 pub mod formatter;
-pub mod io;  // Zero-copy I/O
+pub mod io; // Zero-copy I/O
 pub mod linter;
 pub mod linter_optimized;
 pub mod linter_profiled {
@@ -137,7 +137,7 @@ pub mod rules;
 
 // Re-export logging macros
 #[doc(hidden)]
-pub use logger::{log_level, is_enabled, LogLevel};
+pub use logger::{is_enabled, log_level, LogLevel};
 
 use anyhow::Result;
 use std::path::Path;
@@ -303,7 +303,11 @@ pub fn lint_path<P: AsRef<Path>>(path: P, config: &config::Config) -> Result<Vec
 /// }
 /// # Ok::<(), anyhow::Error>(())
 /// ```
-pub fn format_path<P: AsRef<Path>>(path: P, check_only: bool, config: &config::Config) -> Result<FormatResult> {
+pub fn format_path<P: AsRef<Path>>(
+    path: P,
+    check_only: bool,
+    config: &config::Config,
+) -> Result<FormatResult> {
     formatter::format_path(path, check_only, config)
 }
 
@@ -328,7 +332,7 @@ pub fn format_path<P: AsRef<Path>>(path: P, check_only: bool, config: &config::C
 ///
 /// let config = Config::default();
 /// let source = r#"package main
-/// 
+///
 /// func main() {
 /// fmt.Println("Hello")
 /// }"#;

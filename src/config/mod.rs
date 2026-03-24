@@ -255,10 +255,12 @@ impl Config {
     /// Load configuration from file or use defaults
     pub fn load(path: Option<&Path>) -> Result<Self> {
         if let Some(config_path) = path {
-            let content = std::fs::read_to_string(config_path)
-                .with_context(|| format!("Failed to read config file: {}", config_path.display()))?;
-            let config: Config = toml::from_str(&content)
-                .with_context(|| format!("Failed to parse config file: {}", config_path.display()))?;
+            let content = std::fs::read_to_string(config_path).with_context(|| {
+                format!("Failed to read config file: {}", config_path.display())
+            })?;
+            let config: Config = toml::from_str(&content).with_context(|| {
+                format!("Failed to parse config file: {}", config_path.display())
+            })?;
             return Ok(config);
         }
 

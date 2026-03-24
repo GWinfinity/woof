@@ -7,7 +7,9 @@ use tree_sitter::Parser;
 
 fn parse_source(source: &str) -> (tree_sitter::Tree, String) {
     let mut parser = Parser::new();
-    parser.set_language(&tree_sitter_go::LANGUAGE.into()).unwrap();
+    parser
+        .set_language(&tree_sitter_go::LANGUAGE.into())
+        .unwrap();
     let tree = parser.parse(source, None).unwrap();
     (tree, source.to_string())
 }
@@ -15,16 +17,22 @@ fn parse_source(source: &str) -> (tree_sitter::Tree, String) {
 fn collect_diagnostics(rule: &dyn Rule, tree: &tree_sitter::Tree, source: &str) -> Vec<Diagnostic> {
     let mut diagnostics = vec![];
     let root = tree.root_node();
-    
-    fn walk(node: tree_sitter::Node, rule: &dyn Rule, source: &str, file_path: &str, diagnostics: &mut Vec<Diagnostic>) {
+
+    fn walk(
+        node: tree_sitter::Node,
+        rule: &dyn Rule,
+        source: &str,
+        file_path: &str,
+        diagnostics: &mut Vec<Diagnostic>,
+    ) {
         diagnostics.extend(rule.check(node, source, file_path));
-        
+
         let mut cursor = node.walk();
         for child in node.children(&mut cursor) {
             walk(child, rule, source, file_path, diagnostics);
         }
     }
-    
+
     walk(root, rule, source, "test.go", &mut diagnostics);
     diagnostics
 }
@@ -133,7 +141,10 @@ func test() {
 "#;
     let (tree, src) = parse_source(source);
     let diagnostics = collect_diagnostics(&rule, &tree, &src);
-    assert!(!diagnostics.is_empty(), "应检测到 WaitGroup.Add 在 goroutine 中调用");
+    assert!(
+        !diagnostics.is_empty(),
+        "应检测到 WaitGroup.Add 在 goroutine 中调用"
+    );
     assert_eq!(diagnostics[0].code, "SA2000");
 }
 
@@ -169,7 +180,10 @@ func TestSomething(t *testing.T) {
 "#;
     let (tree, src) = parse_source(source);
     let diagnostics = collect_diagnostics(&rule, &tree, &src);
-    assert!(!diagnostics.is_empty(), "应检测到 t.FailNow 在 goroutine 中调用");
+    assert!(
+        !diagnostics.is_empty(),
+        "应检测到 t.FailNow 在 goroutine 中调用"
+    );
     assert_eq!(diagnostics[0].code, "SA2002");
 }
 

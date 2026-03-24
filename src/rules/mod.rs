@@ -26,17 +26,17 @@
 //! let codestyle_rules = get_rules_by_category(RuleCategory::Codestyle);
 //! ```
 
+pub mod bugbear; // B-series (Uber Go Style)
 pub mod builtin;
-pub mod style;
-pub mod codestyle;    // E-series
-pub mod logic;        // F-series
-pub mod imports;      // I-series
-pub mod bugbear;      // B-series (Uber Go Style)
-pub mod p0_critical;  // P0 核心规则
+pub mod codestyle; // E-series
+pub mod imports; // I-series
+pub mod logic; // F-series
 pub mod p0_concurrency; // P0 Phase 1: 并发安全规则
-pub mod p0_runtime;   // P0 Phase 2: 运行时错误和代码结构规则
-pub mod p0_enhanced;  // P0 Phase 3: 增强规则和高价值新增
-pub mod upgrade;      // Go 版本升级规则
+pub mod p0_critical; // P0 核心规则
+pub mod p0_enhanced; // P0 Phase 3: 增强规则和高价值新增
+pub mod p0_runtime; // P0 Phase 2: 运行时错误和代码结构规则
+pub mod style;
+pub mod upgrade; // Go 版本升级规则
 
 use crate::{Diagnostic, Severity};
 use tree_sitter::Node;
@@ -148,23 +148,23 @@ pub struct RuleMetadata {
 pub trait Rule: Send + Sync {
     /// 规则元数据
     fn metadata(&self) -> RuleMetadata;
-    
+
     /// 检查节点
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic>;
-    
+
     /// 便捷方法
     fn code(&self) -> &'static str {
         self.metadata().code
     }
-    
+
     fn name(&self) -> &'static str {
         self.metadata().name
     }
-    
+
     fn description(&self) -> &'static str {
         self.metadata().description
     }
-    
+
     fn default_severity(&self) -> Severity {
         self.metadata().default_severity
     }
@@ -173,40 +173,40 @@ pub trait Rule: Send + Sync {
 /// 获取所有规则
 pub fn get_all_rules() -> Vec<Box<dyn Rule>> {
     let mut rules: Vec<Box<dyn Rule>> = vec![];
-    
+
     // P0: 核心关键规则 (staticcheck, 并发, 泛型, Fuzzing, Workspace)
     rules.extend(p0_critical::get_p0_rules());
-    
+
     // P0 Phase 1: 并发安全规则 (11条)
     rules.extend(p0_concurrency::get_p0_concurrency_rules());
-    
+
     // P0 Phase 2: 运行时错误和代码结构规则 (15条)
     rules.extend(p0_runtime::get_p0_runtime_rules());
-    
+
     // P0 Phase 3: 增强规则和高价值新增 (4条)
     rules.extend(p0_enhanced::get_p0_enhanced_rules());
-    
+
     // E-series: 代码风格 (gocodestyle)
     rules.extend(codestyle::get_rules());
-    
+
     // F-series: 逻辑错误 (goflakes)
     rules.extend(logic::get_rules());
-    
+
     // I-series: 导入 (goimports)
     rules.extend(imports::get_rules());
-    
+
     // S-series: 风格规范
     rules.extend(style::get_rules());
-    
+
     // D-series: 文档规范
     rules.extend(builtin::get_doc_rules());
-    
+
     // B-series: Uber Go Style / Bugbear
     rules.extend(bugbear::get_rules());
-    
+
     // UP-series: Go 版本升级规则 (Go 1.22/1.23/1.24/1.25+)
     rules.extend(upgrade::get_upgrade_rules());
-    
+
     rules
 }
 
@@ -241,7 +241,7 @@ pub fn parse_version(v: &str) -> Option<u32> {
 /// 获取启用的规则，根据配置的目标 Go 版本过滤
 pub fn get_enabled_rules(config: &crate::config::Config) -> Vec<Box<dyn Rule>> {
     let target_version = parse_version(&config.global.target_go_version).unwrap_or(1021); // 默认 1.21
-    
+
     get_all_rules()
         .into_iter()
         .filter(|r| {

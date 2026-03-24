@@ -1,12 +1,11 @@
 //! Memory-optimized linter with shared AST and streaming support
 
 use crate::config::Config;
+use crate::parser::{AstCache, CachedAst, ParserPool};
 use crate::rules::{get_enabled_rules, Rule};
 use crate::Diagnostic;
-use crate::parser::{AstCache, CachedAst, ParserPool};
 use anyhow::Result;
 use std::path::{Path, PathBuf};
-
 
 // Global parser pool (shared across all threads)
 lazy_static::lazy_static! {
@@ -26,23 +25,23 @@ pub fn lint_path_optimized<P: AsRef<Path>>(path: P, config: &Config) -> Result<V
         }
     } else if path.is_dir() {
         let files = collect_go_files(path, config)?;
-        
+
         // Process files with controlled parallelism and memory
         use rayon::prelude::*;
-        
+
         // Limit memory usage by processing in batches
         const BATCH_SIZE: usize = 100;
-        
+
         for batch in files.chunks(BATCH_SIZE) {
             let results: Vec<_> = batch
                 .par_iter()
                 .filter_map(|file| lint_file_optimized(file, config).ok())
                 .collect();
-            
+
             for diags in results {
                 all_diagnostics.extend(diags);
             }
-            
+
             // Clear cache after each batch to control memory
             if files.len() > BATCH_SIZE {
                 AST_CACHE.clear();
@@ -51,9 +50,8 @@ pub fn lint_path_optimized<P: AsRef<Path>>(path: P, config: &Config) -> Result<V
     }
 
     // Sort diagnostics by file and line
-    all_diagnostics.sort_by(|a, b| {
-        (&a.file_path, a.line, a.column).cmp(&(&b.file_path, b.line, b.column))
-    });
+    all_diagnostics
+        .sort_by(|a, b| (&a.file_path, a.line, a.column).cmp(&(&b.file_path, b.line, b.column)));
 
     Ok(all_diagnostics)
 }
@@ -62,24 +60,24 @@ pub fn lint_path_optimized<P: AsRef<Path>>(path: P, config: &Config) -> Result<V
 pub fn lint_file_optimized<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<Diagnostic>> {
     let path = path.as_ref();
     let file_path = path.to_string_lossy().to_string();
-    
+
     // Try to get from cache first
     if let Some(cached) = AST_CACHE.get(&file_path) {
         return lint_cached_ast(&cached, config);
     }
-    
+
     // Parse the file
     let source = std::fs::read_to_string(path)?;
     let mut parser = PARSER_POOL.acquire();
-    
-    let tree = parser.parse(&source, None).ok_or_else(|| {
-        anyhow::anyhow!("Failed to parse {}", path.display())
-    })?;
-    
+
+    let tree = parser
+        .parse(&source, None)
+        .ok_or_else(|| anyhow::anyhow!("Failed to parse {}", path.display()))?;
+
     // Cache the AST for potential reuse
     let cached = CachedAst::new(tree, source, file_path.clone());
     AST_CACHE.put(file_path.clone(), cached.clone());
-    
+
     lint_cached_ast(&cached, config)
 }
 
@@ -89,15 +87,15 @@ fn lint_cached_ast(ast: &CachedAst, config: &Config) -> Result<Vec<Diagnostic>> 
     let rules = get_enabled_rules(config);
     let file_path = ast.file_path.as_ref();
     let source = ast.source.as_ref();
-    
+
     let mut diagnostics = Vec::new();
-    
+
     // Run node-level rules via visitor
     let node_rules: Vec<Box<dyn Rule>> = rules
         .into_iter()
         .filter(|r| !is_file_level_rule(r.code()))
         .collect();
-    
+
     let mut visitor = crate::linter::visitor::Visitor::new(&node_rules, source, file_path);
     visitor.visit(root, &mut diagnostics);
 
@@ -106,7 +104,7 @@ fn lint_cached_ast(ast: &CachedAst, config: &Config) -> Result<Vec<Diagnostic>> 
         .into_iter()
         .filter(|r| is_file_level_rule(r.code()))
         .collect();
-    
+
     for rule in file_rules {
         let file_diagnostics = rule.check(root, source, file_path);
         diagnostics.extend(file_diagnostics);
@@ -128,7 +126,7 @@ fn is_go_file(path: &Path) -> bool {
 
 fn collect_go_files<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<PathBuf>> {
     let mut files = Vec::new();
-    
+
     let walker = if config.global.respect_gitignore {
         ignore::WalkBuilder::new(path)
             .standard_filters(true)
@@ -142,7 +140,7 @@ fn collect_go_files<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<Path
     for entry in walker {
         let entry = entry?;
         let path = entry.path();
-        
+
         if path.is_file() && is_go_file(path) {
             if !should_exclude(path, config) {
                 files.push(path.to_path_buf());
@@ -155,7 +153,7 @@ fn collect_go_files<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<Path
 
 fn should_exclude(path: &Path, config: &Config) -> bool {
     let path_str = path.to_string_lossy();
-    
+
     for pattern in &config.global.exclude {
         if globset::Glob::new(pattern)
             .ok()
@@ -165,6 +163,6 @@ fn should_exclude(path: &Path, config: &Config) -> bool {
             return true;
         }
     }
-    
+
     false
 }

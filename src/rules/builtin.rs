@@ -1,5 +1,5 @@
 //! Builtin rules - 基础规则（向后兼容）
-//! 
+//!
 //! 注意：这些规则将逐步迁移到新的分类模块中
 
 use super::{Rule, RuleCategory, RuleMetadata, RulePriority};
@@ -26,17 +26,24 @@ impl Rule for ExportedMissingDoc {
         let mut diagnostics = vec![];
 
         // Check for exported functions, types, variables, constants
-        let check_kinds = ["function_declaration", "type_declaration", "var_declaration", "const_declaration"];
-        
+        let check_kinds = [
+            "function_declaration",
+            "type_declaration",
+            "var_declaration",
+            "const_declaration",
+        ];
+
         if check_kinds.contains(&node.kind()) {
             // Check if there's a comment before this node
             let mut has_doc_comment = false;
-            
+
             // Look for comment before node in source
             let prev_text = &source[..node.start_byte()];
             if let Some(last_comment) = prev_text.rfind("//") {
                 let after_comment = &prev_text[last_comment..];
-                if !after_comment.contains('\n') || after_comment.find('\n').unwrap() > after_comment.find("//").unwrap() {
+                if !after_comment.contains('\n')
+                    || after_comment.find('\n').unwrap() > after_comment.find("//").unwrap()
+                {
                     has_doc_comment = true;
                 }
             }
@@ -44,7 +51,13 @@ impl Rule for ExportedMissingDoc {
             // Check if name is exported (starts with uppercase)
             if let Some(name_node) = get_declaration_name(node) {
                 let name = &source[name_node.byte_range()];
-                if name.chars().next().map(|c| c.is_uppercase()).unwrap_or(false) && !has_doc_comment {
+                if name
+                    .chars()
+                    .next()
+                    .map(|c| c.is_uppercase())
+                    .unwrap_or(false)
+                    && !has_doc_comment
+                {
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "D001".to_string(),
@@ -85,13 +98,13 @@ impl Rule for PackageDocMissing {
         if node.kind() == "package_clause" {
             // 检查 package 前面是否有注释
             let prev_text = &source[..node.start_byte()];
-            
-            let has_doc = prev_text.trim().ends_with("*/") ||
-                         prev_text.lines().rev().any(|line| {
-                             let trimmed = line.trim();
-                             trimmed.starts_with("//") && !trimmed.starts_with("//go:")
-                         });
-            
+
+            let has_doc = prev_text.trim().ends_with("*/")
+                || prev_text.lines().rev().any(|line| {
+                    let trimmed = line.trim();
+                    trimmed.starts_with("//") && !trimmed.starts_with("//go:")
+                });
+
             if !has_doc {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
@@ -132,7 +145,7 @@ impl Rule for TodoFormat {
         if node.kind() == "comment" {
             let comment_text = &source[node.byte_range()];
             let lower = comment_text.to_lowercase();
-            
+
             // 检查 TODO 格式
             if lower.contains("todo") {
                 // 检查是否有用户名和描述
@@ -177,7 +190,7 @@ impl Rule for DeprecatedFormat {
         if node.kind() == "comment" {
             let comment_text = &source[node.byte_range()];
             let lower = comment_text.to_lowercase();
-            
+
             if lower.contains("deprecated") {
                 // 应该在新的一行并且大写
                 if !comment_text.contains("Deprecated:") {

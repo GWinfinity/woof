@@ -14,12 +14,12 @@ pub struct ParserPool {
 impl ParserPool {
     pub fn new() -> Result<Self> {
         let language = tree_sitter_go::LANGUAGE.into();
-        
+
         // Pre-initialize parsers for each thread
         let num_threads = std::thread::available_parallelism()
             .map(|n| n.get())
             .unwrap_or(4);
-        
+
         let mut parsers = Vec::with_capacity(num_threads);
         for _ in 0..num_threads {
             let mut parser = Parser::new();
@@ -106,7 +106,7 @@ impl AstCache {
     pub fn new(max_entries: usize) -> Self {
         Self {
             cache: Mutex::new(lru::LruCache::new(
-                std::num::NonZeroUsize::new(max_entries).unwrap()
+                std::num::NonZeroUsize::new(max_entries).unwrap(),
             )),
             max_size: max_entries,
         }
@@ -154,16 +154,17 @@ impl StreamingParser {
     pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<(Tree, String)> {
         let path = path.as_ref();
         let source = std::fs::read_to_string(path)?;
-        
+
         // For now, use standard parsing
         // TODO: Implement actual streaming for files > 1MB
         let mut parser = Parser::new();
         let language = tree_sitter_go::LANGUAGE.into();
         parser.set_language(&language)?;
-        
-        let tree = parser.parse(&source, None)
+
+        let tree = parser
+            .parse(&source, None)
             .ok_or_else(|| anyhow::anyhow!("Failed to parse {}", path.display()))?;
-        
+
         Ok((tree, source))
     }
 }
@@ -179,7 +180,7 @@ impl FileSource {
     pub fn open<P: AsRef<Path>>(path: P) -> Result<Self> {
         let path = path.as_ref();
         let metadata = std::fs::metadata(path)?;
-        
+
         // Use memory mapping for files > 10MB
         if metadata.len() > 10 * 1024 * 1024 {
             let file = std::fs::File::open(path)?;
@@ -206,13 +207,13 @@ mod tests {
     #[test]
     fn test_parser_pool() {
         let pool = ParserPool::new().unwrap();
-        
+
         {
             let mut parser = pool.acquire();
             let tree = parser.parse("package main\nfunc main() {}", None);
             assert!(tree.is_some());
         } // Returns to pool
-        
+
         {
             let mut parser = pool.acquire();
             let tree = parser.parse("package test\nvar x = 1", None);
@@ -223,16 +224,16 @@ mod tests {
     #[test]
     fn test_ast_cache() {
         let cache = AstCache::new(100);
-        
+
         let source = "package main\nfunc main() {}".to_string();
         let mut parser = Parser::new();
         let language = tree_sitter_go::LANGUAGE.into();
         parser.set_language(&language).unwrap();
         let tree = parser.parse(&source, None).unwrap();
-        
+
         let ast = CachedAst::new(tree, source, "test.go".to_string());
         cache.put("test.go".to_string(), ast.clone());
-        
+
         let cached = cache.get("test.go");
         assert!(cached.is_some());
         assert_eq!(cached.unwrap().file_path.as_ref(), "test.go");

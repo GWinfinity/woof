@@ -1,5 +1,5 @@
 //! Arena-based memory management for AST nodes
-//! 
+//!
 //! This module provides efficient memory allocation for AST nodes
 //! by using arena allocators and object pooling.
 
@@ -105,14 +105,12 @@ impl<T> ObjectPool<T> {
         let mut pool = self.pool.lock().unwrap();
         let mut obj = pool.pop().unwrap_or_else(|| (self.create)());
         (self.reset)(&mut obj);
-        
+
         PooledObject {
             obj: Some(obj),
             pool: &self.pool,
         }
     }
-
-
 }
 
 /// A pooled object that returns to the pool when dropped
@@ -195,10 +193,7 @@ mod tests {
 
     #[test]
     fn test_object_pool() {
-        let pool = ObjectPool::new(
-            || Vec::<i32>::with_capacity(100),
-            |v| v.clear(),
-        );
+        let pool = ObjectPool::new(|| Vec::<i32>::with_capacity(100), |v| v.clear());
 
         {
             let mut obj = pool.acquire();

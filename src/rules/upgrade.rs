@@ -30,8 +30,11 @@ impl Rule for Up1221IntegerRange {
         let mut diagnostics = vec![];
         if node.kind() == "for_statement" {
             let for_text = &source[node.byte_range()];
-            if for_text.contains("for ") && for_text.contains(":= 0")
-                && for_text.contains("i++") && (for_text.contains("i < ") || for_text.contains("i <=")) {
+            if for_text.contains("for ")
+                && for_text.contains(":= 0")
+                && for_text.contains("i++")
+                && (for_text.contains("i < ") || for_text.contains("i <="))
+            {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
                     code: "UP1221".to_string(),
@@ -105,8 +108,10 @@ impl Rule for Up1223HttpRoute {
         let mut diagnostics = vec![];
         if node.kind() == "call_expression" {
             let call_text = &source[node.byte_range()];
-            if call_text.contains("strings.Split") && source.contains("r.URL.Path")
-                && source.contains("http.HandleFunc") {
+            if call_text.contains("strings.Split")
+                && source.contains("r.URL.Path")
+                && source.contains("http.HandleFunc")
+            {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
                     code: "UP1223".to_string(),
@@ -254,7 +259,10 @@ impl Rule for Up1232UniqueMake {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        if source.contains("intern") && source.contains("map[string]") && !source.contains("unique.Make") {
+        if source.contains("intern")
+            && source.contains("map[string]")
+            && !source.contains("unique.Make")
+        {
             diagnostics.push(Diagnostic {
                 code: "UP1232".to_string(),
                 message: "Go 1.23+ 建议使用 unique.Make 替代手动字符串 interning".to_string(),
@@ -326,7 +334,10 @@ impl Rule for Up1234MapsIter {
         let mut diagnostics = vec![];
         if node.kind() == "for_statement" {
             let text = &source[node.byte_range()];
-            if text.contains("range ") && source.contains("append(") && !source.contains("maps.Keys") {
+            if text.contains("range ")
+                && source.contains("append(")
+                && !source.contains("maps.Keys")
+            {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
                     code: "UP1234".to_string(),
@@ -403,7 +414,8 @@ impl Rule for Up1241RandText {
         if source.contains("randomString") || source.contains("generateToken") {
             diagnostics.push(Diagnostic {
                 code: "UP1241".to_string(),
-                message: "Go 1.24+ 建议使用 crypto/rand.Text() 生成密码安全的随机字符串".to_string(),
+                message: "Go 1.24+ 建议使用 crypto/rand.Text() 生成密码安全的随机字符串"
+                    .to_string(),
                 severity: Severity::Info,
                 file_path: file_path.to_string(),
                 line: 1,
@@ -507,7 +519,8 @@ impl Rule for Up1244MaphashComparable {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        if source.contains("interface{}") && source.contains("hash") && !source.contains("maphash") {
+        if source.contains("interface{}") && source.contains("hash") && !source.contains("maphash")
+        {
             diagnostics.push(Diagnostic {
                 code: "UP1244".to_string(),
                 message: "Go 1.24+ 建议使用 maphash.Comparable 替代类型断言式哈希".to_string(),
@@ -543,7 +556,8 @@ impl Rule for Up1251JsonV2 {
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
         if node.kind() == "import_declaration" && source.contains("encoding/json") {
-            let count = source.matches("json.Marshal").count() + source.matches("json.Unmarshal").count();
+            let count =
+                source.matches("json.Marshal").count() + source.matches("json.Unmarshal").count();
             if count >= 3 {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
@@ -585,7 +599,8 @@ impl Rule for Up1252Synctest {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
                     code: "UP1252".to_string(),
-                    message: "Go 1.25+ 建议使用 testing/synctest 替代 time.Sleep 测试并发".to_string(),
+                    message: "Go 1.25+ 建议使用 testing/synctest 替代 time.Sleep 测试并发"
+                        .to_string(),
                     severity: Severity::Info,
                     file_path: file_path.to_string(),
                     line: pos.row + 1,

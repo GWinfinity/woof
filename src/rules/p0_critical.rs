@@ -1,5 +1,5 @@
 //! P0 Critical Rules - 核心必须实现的规则
-//! 
+//!
 //! 包括:
 //! - SA1000-SA1030: API 使用错误 (staticcheck)
 //! - SA2000-SA2003: 并发问题
@@ -30,14 +30,14 @@ impl Rule for InvalidRegex {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             let call_text = &source[node.byte_range()];
-            
+
             // 检查 regexp.Compile 或 regexp.MustCompile 调用
-            if call_text.contains("regexp.") && 
-               (call_text.contains("Compile(") || call_text.contains("MustCompile(")) {
-                
+            if call_text.contains("regexp.")
+                && (call_text.contains("Compile(") || call_text.contains("MustCompile("))
+            {
                 // 尝试提取正则表达式参数
                 if let Some(arg) = extract_first_string_arg(&node, source) {
                     // 简单检查常见的正则错误
@@ -56,7 +56,7 @@ impl Rule for InvalidRegex {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -65,7 +65,8 @@ fn extract_first_string_arg(node: &Node, source: &str) -> Option<String> {
     if let Some(args) = node.child_by_field_name("arguments") {
         let mut cursor = args.walk();
         for child in args.children(&mut cursor) {
-            if child.kind() == "interpreted_string_literal" || child.kind() == "raw_string_literal" {
+            if child.kind() == "interpreted_string_literal" || child.kind() == "raw_string_literal"
+            {
                 let text = &source[child.byte_range()];
                 return Some(text.trim_matches('"').trim_matches('`').to_string());
             }
@@ -79,7 +80,7 @@ fn has_regex_error(pattern: &str) -> bool {
     let mut depth = 0;
     let mut in_class = false;
     let chars: Vec<char> = pattern.chars().collect();
-    
+
     for (i, &c) in chars.iter().enumerate() {
         match c {
             '(' if !in_class => depth += 1,
@@ -89,12 +90,12 @@ fn has_regex_error(pattern: &str) -> bool {
                     return true; // 未匹配的右括号
                 }
             }
-            '[' if i == 0 || chars[i-1] != '\\' => in_class = true,
+            '[' if i == 0 || chars[i - 1] != '\\' => in_class = true,
             ']' => in_class = false,
             '{' => {
                 // 检查量词语法 {n,m}
                 if !in_class && i + 1 < chars.len() {
-                    let rest: String = chars[i+1..].iter().collect();
+                    let rest: String = chars[i + 1..].iter().collect();
                     if !rest.contains('}') {
                         return true;
                     }
@@ -103,7 +104,7 @@ fn has_regex_error(pattern: &str) -> bool {
             _ => {}
         }
     }
-    
+
     depth != 0 || in_class
 }
 
@@ -125,13 +126,13 @@ impl Rule for InvalidTemplate {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             let call_text = &source[node.byte_range()];
-            
-            if call_text.contains("template.") && 
-               (call_text.contains("Parse(") || call_text.contains("ParseFiles(")) {
-                
+
+            if call_text.contains("template.")
+                && (call_text.contains("Parse(") || call_text.contains("ParseFiles("))
+            {
                 if let Some(arg) = extract_first_string_arg(&node, source) {
                     // 检查模板语法错误
                     if has_template_error(&arg) {
@@ -149,7 +150,7 @@ impl Rule for InvalidTemplate {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -158,7 +159,7 @@ fn has_template_error(template: &str) -> bool {
     // 检查常见的模板错误
     let mut depth = 0;
     let mut chars = template.chars().peekable();
-    
+
     while let Some(c) = chars.next() {
         if c == '{' {
             if chars.peek() == Some(&'{') {
@@ -175,7 +176,7 @@ fn has_template_error(template: &str) -> bool {
             }
         }
     }
-    
+
     depth != 0
 }
 
@@ -197,28 +198,30 @@ impl Rule for PrintfDynamicFormat {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             let call_text = &source[node.byte_range()];
-            
+
             // 检查 fmt.Printf 或 fmt.Sprintf 等
-            if call_text.contains("fmt.") && 
-               (call_text.contains("Printf(") || call_text.contains("Sprintf(")) {
-                
+            if call_text.contains("fmt.")
+                && (call_text.contains("Printf(") || call_text.contains("Sprintf("))
+            {
                 // 检查参数数量
                 if let Some(args) = node.child_by_field_name("arguments") {
                     let arg_count = count_arguments(&args);
-                    
+
                     if arg_count == 1 {
                         // 只有一个参数（格式字符串）
                         // 检查第一个参数是否是变量而非字符串字面量
                         if let Some(first_arg) = get_first_argument(&args) {
-                            if first_arg.kind() != "interpreted_string_literal" &&
-                               first_arg.kind() != "raw_string_literal" {
+                            if first_arg.kind() != "interpreted_string_literal"
+                                && first_arg.kind() != "raw_string_literal"
+                            {
                                 let pos = node.start_position();
                                 diagnostics.push(Diagnostic {
                                     code: "SA1006".to_string(),
-                                    message: "Printf 使用动态格式字符串，可能引入安全漏洞".to_string(),
+                                    message: "Printf 使用动态格式字符串，可能引入安全漏洞"
+                                        .to_string(),
                                     severity: self.default_severity(),
                                     file_path: file_path.to_string(),
                                     line: pos.row + 1,
@@ -231,7 +234,7 @@ impl Rule for PrintfDynamicFormat {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -275,21 +278,22 @@ impl Rule for NilContext {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             if let Some(args) = node.child_by_field_name("arguments") {
                 let args_text = &source[args.byte_range()];
-                
+
                 // 检查是否直接传递 nil 作为 context
                 if args_text.contains("nil") {
                     // 检查函数签名是否包含 context.Context 类型
                     let func_node = node.child_by_field_name("function");
                     if let Some(func) = func_node {
                         let func_name = &source[func.byte_range()];
-                        
+
                         // 常见需要 context 的函数模式
-                        if func_name.contains("WithContext") ||
-                           (func_name.contains(".") && args_text.contains("nil")) {
+                        if func_name.contains("WithContext")
+                            || (func_name.contains(".") && args_text.contains("nil"))
+                        {
                             let pos = args.start_position();
                             diagnostics.push(Diagnostic {
                                 code: "SA1012".to_string(),
@@ -305,7 +309,7 @@ impl Rule for NilContext {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -328,10 +332,10 @@ impl Rule for DeprecatedFunction {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" || node.kind() == "selector_expression" {
             let text = &source[node.byte_range()];
-            
+
             // 检查已弃用的函数
             let deprecated_items = [
                 ("ioutil.ReadFile", "os.ReadFile"),
@@ -343,7 +347,7 @@ impl Rule for DeprecatedFunction {
                 ("math/rand.Seed", ""),
                 ("math/rand.Read", "crypto/rand.Read"),
             ];
-            
+
             for (deprecated, replacement) in &deprecated_items {
                 if text.contains(deprecated) {
                     let msg = if replacement.is_empty() {
@@ -351,7 +355,7 @@ impl Rule for DeprecatedFunction {
                     } else {
                         format!("{} 已弃用，请使用 {}", deprecated, replacement)
                     };
-                    
+
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "SA1019".to_string(),
@@ -365,7 +369,7 @@ impl Rule for DeprecatedFunction {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -390,16 +394,17 @@ impl Rule for SyncWaitgroupAddGoroutine {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 go 语句中的 WaitGroup.Add
         if node.kind() == "go_statement" {
             let go_text = &source[node.byte_range()];
-            
+
             if go_text.contains("Add(") && go_text.contains("WaitGroup") {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
                     code: "SA2000".to_string(),
-                    message: "WaitGroup.Add 不应在 goroutine 中调用，应在启动 goroutine 之前调用".to_string(),
+                    message: "WaitGroup.Add 不应在 goroutine 中调用，应在启动 goroutine 之前调用"
+                        .to_string(),
                     severity: self.default_severity(),
                     file_path: file_path.to_string(),
                     line: pos.row + 1,
@@ -408,7 +413,7 @@ impl Rule for SyncWaitgroupAddGoroutine {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -431,18 +436,18 @@ impl Rule for EmptyCriticalSection {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 Lock() 后面直接 Unlock() 没有实际代码
         if node.kind() == "expression_statement" {
             let text = &source[node.byte_range()];
-            
+
             if text.contains("Lock()") {
                 // 检查下一个兄弟节点
                 if let Some(parent) = node.parent() {
                     let mut found_unlock = false;
                     let mut cursor = parent.walk();
                     let mut after_lock = false;
-                    
+
                     for child in parent.children(&mut cursor) {
                         if after_lock && !found_unlock {
                             let child_text = &source[child.byte_range()];
@@ -458,12 +463,14 @@ impl Rule for EmptyCriticalSection {
                                     column: pos.column + 1,
                                     fix: None,
                                 });
-                            } else if !child.kind().contains("comment") && 
-                                      child.kind() != "{" && child.kind() != "}" {
+                            } else if !child.kind().contains("comment")
+                                && child.kind() != "{"
+                                && child.kind() != "}"
+                            {
                                 break; // 中间有其他代码
                             }
                         }
-                        
+
                         if child.id() == node.id() {
                             after_lock = true;
                         }
@@ -471,7 +478,7 @@ impl Rule for EmptyCriticalSection {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -494,10 +501,10 @@ impl Rule for TestFailNowGoroutine {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "go_statement" {
             let go_text = &source[node.byte_range()];
-            
+
             if go_text.contains("FailNow()") || go_text.contains("SkipNow()") {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
@@ -511,7 +518,7 @@ impl Rule for TestFailNowGoroutine {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -536,10 +543,10 @@ impl Rule for AssignmentToNilMap {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "assignment_statement" || node.kind() == "short_var_declaration" {
             let text = &source[node.byte_range()];
-            
+
             // 检查是否是 map[key] = value 模式
             if text.contains('[') && text.contains("]=") || text.contains("] =") {
                 // 这里需要更复杂的分析来确定 map 是否为 nil
@@ -558,7 +565,7 @@ impl Rule for AssignmentToNilMap {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -581,22 +588,24 @@ impl Rule for DeferCloseBeforeCheck {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "defer_statement" {
             let defer_text = &source[node.byte_range()];
-            
+
             if defer_text.contains("Close()") {
                 // 检查前一个语句是否是错误检查
                 if let Some(parent) = node.parent() {
                     let parent_text = &source[parent.byte_range()];
-                    
+
                     // 简单检查：defer Close 前没有 if err != nil
-                    if parent_text.contains("os.Open(") || 
-                       parent_text.contains("os.Create(") ||
-                       parent_text.contains("net") {
+                    if parent_text.contains("os.Open(")
+                        || parent_text.contains("os.Create(")
+                        || parent_text.contains("net")
+                    {
                         // 检查是否检查了错误
-                        if !parent_text.contains("if err != nil") && 
-                           !parent_text.contains("if err==nil") {
+                        if !parent_text.contains("if err != nil")
+                            && !parent_text.contains("if err==nil")
+                        {
                             let pos = node.start_position();
                             diagnostics.push(Diagnostic {
                                 code: "SA5001".to_string(),
@@ -612,7 +621,7 @@ impl Rule for DeferCloseBeforeCheck {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -635,26 +644,29 @@ impl Rule for InfiniteRecursion {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "function_declaration" {
             if let Some(body) = node.child_by_field_name("body") {
                 if let Some(name) = node.child_by_field_name("name") {
                     let func_name = &source[name.byte_range()];
                     let body_text = &source[body.byte_range()];
-                    
+
                     // 检查函数体是否直接调用自身（无条件递归）
                     // 简化检查：函数体以函数名开头，后面跟着括号
                     let lines: Vec<&str> = body_text.lines().collect();
                     if lines.len() >= 2 {
                         let first_stmt = lines[1].trim(); // 跳过 {
-                        
-                        if first_stmt.starts_with(func_name) && 
-                           first_stmt.contains("(") && 
-                           !first_stmt.contains("if ") &&
-                           !first_stmt.contains("for ") {
+
+                        if first_stmt.starts_with(func_name)
+                            && first_stmt.contains("(")
+                            && !first_stmt.contains("if ")
+                            && !first_stmt.contains("for ")
+                        {
                             // 检查是否有返回语句或其他终止条件
-                            if !body_text.contains("return") || 
-                               body_text.matches(func_name).count() == body_text.matches("return").count() {
+                            if !body_text.contains("return")
+                                || body_text.matches(func_name).count()
+                                    == body_text.matches("return").count()
+                            {
                                 let pos = node.start_position();
                                 diagnostics.push(Diagnostic {
                                     code: "SA5007".to_string(),
@@ -671,7 +683,7 @@ impl Rule for InfiniteRecursion {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -694,17 +706,17 @@ impl Rule for InvalidStructTag {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "field_declaration" {
             let field_text = &source[node.byte_range()];
-            
+
             // 检查 struct tag
             if field_text.contains('`') {
                 // 提取 tag 部分
                 if let Some(tag_start) = field_text.find('`') {
-                    if let Some(tag_end) = field_text[tag_start+1..].find('`') {
-                        let tag = &field_text[tag_start+1..tag_start+1+tag_end];
-                        
+                    if let Some(tag_end) = field_text[tag_start + 1..].find('`') {
+                        let tag = &field_text[tag_start + 1..tag_start + 1 + tag_end];
+
                         // 检查常见错误
                         if has_struct_tag_error(tag) {
                             let pos = node.start_position();
@@ -722,7 +734,7 @@ impl Rule for InvalidStructTag {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -730,15 +742,18 @@ impl Rule for InvalidStructTag {
 fn has_struct_tag_error(tag: &str) -> bool {
     // 检查常见的 struct tag 错误
     // 例如：重复的 key，格式错误等
-    let keys: Vec<&str> = tag.split(' ').map(|s| s.split(':').next().unwrap_or("")).collect();
-    
+    let keys: Vec<&str> = tag
+        .split(' ')
+        .map(|s| s.split(':').next().unwrap_or(""))
+        .collect();
+
     // 检查重复 key
     for (i, key) in keys.iter().enumerate() {
-        if keys.iter().skip(i+1).any(|k| k == key) {
+        if keys.iter().skip(i + 1).any(|k| k == key) {
             return true;
         }
     }
-    
+
     // 检查格式：key:"value" 格式
     for part in tag.split(' ') {
         if !part.is_empty() && !part.contains(':') {
@@ -748,7 +763,7 @@ fn has_struct_tag_error(tag: &str) -> bool {
             return true;
         }
     }
-    
+
     false
 }
 
@@ -770,42 +785,46 @@ impl Rule for PossibleNilPointerDereference {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 selector_expression (如 x.Field)
         if node.kind() == "selector_expression" {
             let text = &source[node.byte_range()];
-            
+
             // 简单检查：如果之前有对该变量的 nil 检查但没有返回
             if let Some(parent) = node.parent().and_then(|p| p.parent()) {
                 let block_text = &source[parent.byte_range()];
-                
+
                 // 提取变量名
                 if let Some(dot_pos) = text.find('.') {
                     let var_name = &text[..dot_pos];
-                    
+
                     // 检查是否有 nil 检查后继续使用
-                    if block_text.contains(&format!("{} == nil", var_name)) ||
-                       block_text.contains(&format!("{}==nil", var_name)) {
+                    if block_text.contains(&format!("{} == nil", var_name))
+                        || block_text.contains(&format!("{}==nil", var_name))
+                    {
                         // 检查 nil 检查后是否有返回
                         let lines: Vec<&str> = block_text.lines().collect();
                         let mut found_nil_check = false;
                         let mut found_deref = false;
-                        
+
                         for line in lines {
-                            if line.contains(&format!("{} == nil", var_name)) ||
-                               line.contains(&format!("{}==nil", var_name)) {
+                            if line.contains(&format!("{} == nil", var_name))
+                                || line.contains(&format!("{}==nil", var_name))
+                            {
                                 found_nil_check = true;
                             }
-                            
+
                             if found_nil_check && line.contains(text) {
                                 found_deref = true;
                             }
-                            
-                            if found_nil_check && (line.contains("return") || line.contains("panic(")) {
+
+                            if found_nil_check
+                                && (line.contains("return") || line.contains("panic("))
+                            {
                                 found_nil_check = false; // 安全，因为有返回
                             }
                         }
-                        
+
                         if found_deref {
                             let pos = node.start_position();
                             diagnostics.push(Diagnostic {
@@ -822,7 +841,7 @@ impl Rule for PossibleNilPointerDereference {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -847,11 +866,11 @@ impl Rule for BadLock {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 sync.Mutex 作为值传递
         if node.kind() == "parameter_declaration" || node.kind() == "field_declaration" {
             let text = &source[node.byte_range()];
-            
+
             if text.contains("sync.Mutex") || text.contains("sync.RWMutex") {
                 // 检查是否是值传递（不是指针）
                 if !text.contains('*') && text.contains("func") {
@@ -868,16 +887,19 @@ impl Rule for BadLock {
                 }
             }
         }
-        
+
         // 检查 Lock 后没有 Unlock
         if node.kind() == "function_declaration" {
             if let Some(body) = node.child_by_field_name("body") {
                 let body_text = &source[body.byte_range()];
-                
+
                 let lock_count = body_text.matches(".Lock()").count();
                 let unlock_count = body_text.matches(".Unlock()").count();
-                let defer_unlock_count = body_text.matches("defer").filter(|_| body_text.contains("Unlock()")).count();
-                
+                let defer_unlock_count = body_text
+                    .matches("defer")
+                    .filter(|_| body_text.contains("Unlock()"))
+                    .count();
+
                 if lock_count > unlock_count + defer_unlock_count {
                     let pos = body.start_position();
                     diagnostics.push(Diagnostic {
@@ -892,7 +914,7 @@ impl Rule for BadLock {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -917,16 +939,25 @@ impl Rule for TypeParameterShadow {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "type_parameter_declaration" {
             // 提取类型参数名
             if let Some(name_node) = node.child_by_field_name("name") {
                 let param_name = &source[name_node.byte_range()];
-                
+
                 // 检查是否是常见类型名
-                let common_types = ["int", "string", "bool", "float64", "error", 
-                                   "byte", "rune", "any", "interface"];
-                
+                let common_types = [
+                    "int",
+                    "string",
+                    "bool",
+                    "float64",
+                    "error",
+                    "byte",
+                    "rune",
+                    "any",
+                    "interface",
+                ];
+
                 if common_types.contains(&param_name) {
                     let pos = name_node.start_position();
                     diagnostics.push(Diagnostic {
@@ -941,7 +972,7 @@ impl Rule for TypeParameterShadow {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -964,16 +995,16 @@ impl Rule for ComparableMisuse {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "type_constraint" || node.kind() == "type_parameter_list" {
             let text = &source[node.byte_range()];
-            
+
             // 检查 comparable 约束在切片或 map 上
             if text.contains("comparable") {
                 // 检查函数体内是否对切片/map 使用 ==
                 if let Some(parent_func) = find_parent_function(&node) {
                     let func_text = &source[parent_func.byte_range()];
-                    
+
                     // 检查是否比较了切片
                     if func_text.contains("[]") && func_text.contains(" == ") {
                         let pos = node.start_position();
@@ -990,21 +1021,21 @@ impl Rule for ComparableMisuse {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
 
 fn find_parent_function<'a>(node: &'a Node<'a>) -> Option<Node<'a>> {
     let mut current = *node;
-    
+
     while let Some(parent) = current.parent() {
         if parent.kind() == "function_declaration" || parent.kind() == "method_declaration" {
             return Some(parent);
         }
         current = parent;
     }
-    
+
     None
 }
 
@@ -1026,16 +1057,16 @@ impl Rule for TypeInferenceFail {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             let text = &source[node.byte_range()];
-            
+
             // 检查是否显式指定了类型参数（这表明可能需要推断）
             if text.contains("[") {
                 // 简单检查：调用使用了类型参数列表 [T]
                 if let Some(args) = node.child_by_field_name("arguments") {
                     let args_text = &source[args.byte_range()];
-                    
+
                     // 检查参数是否为空
                     if args_text.trim() == "()" || args_text.trim() == "( )" {
                         let pos = node.start_position();
@@ -1052,7 +1083,7 @@ impl Rule for TypeInferenceFail {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1077,18 +1108,19 @@ impl Rule for FuzzTestSignature {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "function_declaration" {
             if let Some(name) = node.child_by_field_name("name") {
                 let func_name = &source[name.byte_range()];
-                
+
                 if func_name.starts_with("Fuzz") {
                     // 检查参数
                     if let Some(params) = node.child_by_field_name("parameters") {
                         let params_text = &source[params.byte_range()];
-                        
+
                         // Fuzz 函数必须接受 *testing.F
-                        if !params_text.contains("*testing.F") && !params_text.contains("testing.F") {
+                        if !params_text.contains("*testing.F") && !params_text.contains("testing.F")
+                        {
                             let pos = params.start_position();
                             diagnostics.push(Diagnostic {
                                 code: "FUZZ001".to_string(),
@@ -1104,7 +1136,7 @@ impl Rule for FuzzTestSignature {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1127,18 +1159,21 @@ impl Rule for FuzzGlobalState {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "function_declaration" {
             if let Some(name) = node.child_by_field_name("name") {
                 let func_name = &source[name.byte_range()];
-                
+
                 if func_name.starts_with("Fuzz") {
                     if let Some(body) = node.child_by_field_name("body") {
                         let body_text = &source[body.byte_range()];
-                        
+
                         // 检查是否访问了包级变量
                         // 简化检查：检查是否对包级变量赋值
-                        if body_text.contains(" = ") || body_text.contains("++") || body_text.contains("--") {
+                        if body_text.contains(" = ")
+                            || body_text.contains("++")
+                            || body_text.contains("--")
+                        {
                             // 检查是否使用了 f.Fuzz 回调
                             if body_text.contains("f.Fuzz(") || body_text.contains("f.Add(") {
                                 // 进一步的复杂分析... 简化版
@@ -1146,9 +1181,12 @@ impl Rule for FuzzGlobalState {
                                 for line in lines {
                                     let trimmed = line.trim();
                                     // 检查是否修改了全局变量
-                                    if (trimmed.contains(" = ") || trimmed.ends_with("++") || trimmed.ends_with("--")) &&
-                                       !trimmed.starts_with(":=") && 
-                                       !trimmed.starts_with("var ") {
+                                    if (trimmed.contains(" = ")
+                                        || trimmed.ends_with("++")
+                                        || trimmed.ends_with("--"))
+                                        && !trimmed.starts_with(":=")
+                                        && !trimmed.starts_with("var ")
+                                    {
                                         let pos = body.start_position();
                                         diagnostics.push(Diagnostic {
                                             code: "FUZZ011".to_string(),
@@ -1168,7 +1206,7 @@ impl Rule for FuzzGlobalState {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1191,15 +1229,15 @@ impl Rule for FuzzNonDeterministic {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "function_declaration" {
             if let Some(name) = node.child_by_field_name("name") {
                 let func_name = &source[name.byte_range()];
-                
+
                 if func_name.starts_with("Fuzz") {
                     if let Some(body) = node.child_by_field_name("body") {
                         let body_text = &source[body.byte_range()];
-                        
+
                         // 检查非确定性来源
                         let non_deterministic = [
                             "time.Now()",
@@ -1209,7 +1247,7 @@ impl Rule for FuzzNonDeterministic {
                             "os.Getenv",
                             "uuid.New()",
                         ];
-                        
+
                         for pattern in &non_deterministic {
                             if body_text.contains(pattern) {
                                 let pos = body.start_position();
@@ -1229,7 +1267,7 @@ impl Rule for FuzzNonDeterministic {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1254,12 +1292,12 @@ impl Rule for WorkspaceGoVersion {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 go.work 文件
         if file_path.ends_with("go.work") {
             // 提取 go 版本
             let go_version = extract_go_version(source);
-            
+
             // 这是一个简化实现
             // 完整实现需要解析所有引用模块的 go.mod 文件
             if let Some(version) = go_version {
@@ -1276,7 +1314,7 @@ impl Rule for WorkspaceGoVersion {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1309,7 +1347,7 @@ impl Rule for WorkspaceModulePath {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if file_path.ends_with("go.mod") {
             // 提取模块路径
             if let Some(module_path) = extract_module_path(source) {
@@ -1325,7 +1363,7 @@ impl Rule for WorkspaceModulePath {
                         fix: None,
                     });
                 }
-                
+
                 // 检查是否包含大写字母（Go 模块路径规范）
                 if module_path.chars().any(|c| c.is_uppercase()) {
                     diagnostics.push(Diagnostic {
@@ -1340,7 +1378,7 @@ impl Rule for WorkspaceModulePath {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1373,11 +1411,11 @@ impl Rule for WorkspaceDepCycle {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if file_path.ends_with("go.mod") {
             // 这是一个简化检查
             // 完整实现需要分析整个 Workspace 的依赖图
-            
+
             // 检查是否有 replace 指令指向自己
             if source.contains("replace ") {
                 if let Some(module_path) = extract_module_path(source) {
@@ -1395,7 +1433,7 @@ impl Rule for WorkspaceDepCycle {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1418,15 +1456,19 @@ impl Rule for WorkspaceDepSecurity {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if file_path.ends_with("go.mod") {
             // 检查已知有漏洞的依赖版本
             let vulnerable_deps = [
-                ("golang.org/x/crypto", "0.0.0-20200220183623-bac4c82f6975", "CVE-2020-9283"),
+                (
+                    "golang.org/x/crypto",
+                    "0.0.0-20200220183623-bac4c82f6975",
+                    "CVE-2020-9283",
+                ),
                 ("github.com/gin-gonic/gin", "1.6.2", "CVE-2020-28483"),
                 ("github.com/dgrijalva/jwt-go", "3.2.0", "CVE-2020-26160"),
             ];
-            
+
             for (dep, bad_version, cve) in &vulnerable_deps {
                 if source.contains(dep) && source.contains(bad_version) {
                     diagnostics.push(Diagnostic {
@@ -1441,7 +1483,7 @@ impl Rule for WorkspaceDepSecurity {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1456,32 +1498,26 @@ pub fn get_p0_rules() -> Vec<Box<dyn Rule>> {
         Box::new(PrintfDynamicFormat),
         Box::new(NilContext),
         Box::new(DeprecatedFunction),
-        
         // SA2xxx: 并发问题
         Box::new(SyncWaitgroupAddGoroutine),
         Box::new(EmptyCriticalSection),
         Box::new(TestFailNowGoroutine),
-        
         // SA5xxx: 运行时问题
         Box::new(AssignmentToNilMap),
         Box::new(DeferCloseBeforeCheck),
         Box::new(InfiniteRecursion),
         Box::new(InvalidStructTag),
         Box::new(PossibleNilPointerDereference),
-        
         // 并发相关
         Box::new(BadLock),
-        
         // 泛型规则
         Box::new(TypeParameterShadow),
         Box::new(ComparableMisuse),
         Box::new(TypeInferenceFail),
-        
         // Fuzzing 规则
         Box::new(FuzzTestSignature),
         Box::new(FuzzGlobalState),
         Box::new(FuzzNonDeterministic),
-        
         // Workspace 规则
         Box::new(WorkspaceGoVersion),
         Box::new(WorkspaceModulePath),

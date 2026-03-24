@@ -10,11 +10,11 @@ use anyhow::Result;
 use std::collections::HashMap;
 use std::fs::File;
 use std::hash::Hash;
-use std::os::unix::fs::MetadataExt;  // for inode on Unix
+use std::os::unix::fs::MetadataExt; // for inode on Unix
 use std::path::{Path, PathBuf};
+use std::sync::atomic::AtomicUsize;
 use std::sync::{Arc, RwLock};
 use std::time::SystemTime;
-use std::sync::atomic::AtomicUsize;
 
 /// File identifier for cache lookup (inode + modification time)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -55,7 +55,7 @@ pub enum ZeroCopySource {
 
 impl ZeroCopySource {
     /// Open file with zero-copy strategy
-    /// 
+    ///
     /// For files > threshold: use mmap
     /// For files <= threshold: read into shared string
     pub fn open<P: AsRef<Path>>(path: P, mmap_threshold: usize) -> Result<Self> {
@@ -81,15 +81,13 @@ impl ZeroCopySource {
     }
 
     /// Get content as string slice
-    /// 
+    ///
     /// For mmap: validates UTF-8 (may fail for binary files)
     /// For shared: direct reference
     pub fn as_str(&self) -> Result<&str> {
         match self {
-            Self::Mmap(mmap) => {
-                std::str::from_utf8(mmap)
-                    .map_err(|e| anyhow::anyhow!("Invalid UTF-8 in mmap: {}", e))
-            }
+            Self::Mmap(mmap) => std::str::from_utf8(mmap)
+                .map_err(|e| anyhow::anyhow!("Invalid UTF-8 in mmap: {}", e)),
             Self::Shared(s) => Ok(s.as_str()),
             Self::Static(s) => Ok(s),
         }
@@ -143,7 +141,7 @@ impl SharedFileCache {
     }
 
     /// Get or load file content
-    /// 
+    ///
     /// If file is in cache and not modified, returns cached reference.
     /// Otherwise, loads file and caches it.
     pub fn get_or_load<P: AsRef<Path>>(&self, path: P) -> Result<Arc<ZeroCopySource>> {
@@ -160,7 +158,8 @@ impl SharedFileCache {
         }
 
         // Cache miss - load file
-        self.misses.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        self.misses
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         let content = Arc::new(ZeroCopySource::open(path, self.mmap_threshold)?);
 
         // Insert with write lock
@@ -244,7 +243,7 @@ impl ZeroCopyFileReader {
 
     /// Read file without caching (for one-time access)
     pub fn read_uncached<P: AsRef<Path>>(path: P) -> Result<ZeroCopySource> {
-        ZeroCopySource::open(path, 1024 * 1024)  // 1MB threshold
+        ZeroCopySource::open(path, 1024 * 1024) // 1MB threshold
     }
 
     /// Get cache statistics
@@ -273,7 +272,9 @@ impl BufferPool {
     /// Acquire a buffer from the pool
     pub fn acquire(&self) -> Vec<u8> {
         let mut buffers = self.buffers.write().unwrap();
-        buffers.pop().unwrap_or_else(|| Vec::with_capacity(self.max_size))
+        buffers
+            .pop()
+            .unwrap_or_else(|| Vec::with_capacity(self.max_size))
     }
 
     /// Return a buffer to the pool
@@ -290,14 +291,11 @@ impl BufferPool {
 }
 
 /// Fast file collection with parallel directory traversal
-pub fn collect_files_parallel<P: AsRef<Path>>(
-    root: P,
-    pattern: &str,
-) -> Result<Vec<PathBuf>> {
+pub fn collect_files_parallel<P: AsRef<Path>>(root: P, pattern: &str) -> Result<Vec<PathBuf>> {
     use rayon::prelude::*;
-    
+
     let root = root.as_ref();
-    
+
     // Single-threaded walk (I/O bound)
     let entries: Vec<_> = ignore::WalkBuilder::new(root)
         .standard_filters(true)
@@ -325,17 +323,17 @@ pub fn collect_files_parallel<P: AsRef<Path>>(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use tempfile::NamedTempFile;
     use std::io::Write;
+    use tempfile::NamedTempFile;
 
     #[test]
     fn test_file_id() {
         let mut tmp = NamedTempFile::new().unwrap();
         writeln!(tmp, "test content").unwrap();
-        
+
         let id1 = FileId::from_path(tmp.path()).unwrap();
         let id2 = FileId::from_path(tmp.path()).unwrap();
-        
+
         assert_eq!(id1, id2);
     }
 
@@ -351,18 +349,18 @@ mod tests {
     #[test]
     fn test_shared_cache() {
         let cache = SharedFileCache::new(1024);
-        
+
         let mut tmp = NamedTempFile::new().unwrap();
         writeln!(tmp, "cached content").unwrap();
-        
+
         // First access - miss
         let content1 = cache.get_or_load(tmp.path()).unwrap();
-        
+
         // Second access - hit
         let content2 = cache.get_or_load(tmp.path()).unwrap();
-        
+
         assert_eq!(content1.as_str().unwrap(), content2.as_str().unwrap());
-        
+
         let stats = cache.stats();
         assert_eq!(stats.hits, 1);
         assert_eq!(stats.misses, 1);
@@ -371,12 +369,12 @@ mod tests {
     #[test]
     fn test_buffer_pool() {
         let pool = BufferPool::new(1024, 10);
-        
+
         let buf = pool.acquire();
         assert!(buf.capacity() <= 1024);
-        
+
         pool.release(buf);
-        
+
         let buf2 = pool.acquire();
         assert!(buf2.capacity() <= 1024);
     }

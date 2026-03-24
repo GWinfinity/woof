@@ -32,11 +32,11 @@ impl Rule for AssignmentToNilMap {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查赋值语句 m[key] = value
         if node.kind() == "assignment_statement" {
             let text = &source[node.byte_range()];
-            
+
             // 检查是否是 map 赋值（包含 [ 和 ]= 模式）
             if text.contains('[') && text.contains("]=") {
                 // 提取 map 变量名
@@ -62,7 +62,7 @@ impl Rule for AssignmentToNilMap {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -79,16 +79,16 @@ impl AssignmentToNilMap {
         }
         None
     }
-    
+
     fn has_make_initialization<'a>(
         &self,
         map_name: &str,
         block: Node<'a>,
         source: &str,
-        current_node: &Node<'a>
+        current_node: &Node<'a>,
     ) -> bool {
         let current_line = current_node.start_position().row;
-        
+
         // 遍历块内所有语句
         let mut cursor = block.walk();
         for child in block.children(&mut cursor) {
@@ -96,16 +96,17 @@ impl AssignmentToNilMap {
             if child.start_position().row >= current_line {
                 break;
             }
-            
+
             let text = &source[child.byte_range()];
-            
+
             // 检查是否有 make 初始化
             // 模式: m = make(map[...]...) 或 m := make(map[...]...)
-            if text.contains(&format!("{} = make(map[", map_name)) ||
-               text.contains(&format!("{} := make(map[", map_name)) {
+            if text.contains(&format!("{} = make(map[", map_name))
+                || text.contains(&format!("{} := make(map[", map_name))
+            {
                 return true;
             }
-            
+
             // 检查短变量声明中的 make
             if text.contains(":=") && text.contains("make(map[") {
                 let parts: Vec<&str> = text.split(":=").collect();
@@ -117,7 +118,7 @@ impl AssignmentToNilMap {
                 }
             }
         }
-        
+
         false
     }
 }
@@ -142,14 +143,14 @@ impl Rule for InfiniteRecursion {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "function_declaration" || node.kind() == "method_declaration" {
             if let Some(name_node) = node.child_by_field_name("name") {
                 let func_name = &source[name_node.byte_range()];
-                
+
                 if let Some(body) = node.child_by_field_name("body") {
                     let body_text = &source[body.byte_range()];
-                    
+
                     // 检查是否是明显的无限递归
                     // 1. 函数体直接调用自身
                     // 2. 没有终止条件
@@ -158,10 +159,7 @@ impl Rule for InfiniteRecursion {
                             let pos = name_node.start_position();
                             diagnostics.push(Diagnostic {
                                 code: "SA5007".to_string(),
-                                message: format!(
-                                    "函数 '{}' 可能无限递归，缺少终止条件",
-                                    func_name
-                                ),
+                                message: format!("函数 '{}' 可能无限递归，缺少终止条件", func_name),
                                 severity: self.default_severity(),
                                 file_path: file_path.to_string(),
                                 line: pos.row + 1,
@@ -173,7 +171,7 @@ impl Rule for InfiniteRecursion {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -185,19 +183,19 @@ impl InfiniteRecursion {
         let pattern = format!("{}(", func_name);
         body_text.contains(&pattern)
     }
-    
+
     fn has_termination_condition(&self, body: &Node, source: &str, func_name: &str) -> bool {
         let body_text = &source[body.byte_range()];
-        
+
         // 检查是否有 if 语句
         if !body_text.contains("if ") {
             return false;
         }
-        
+
         // 检查是否有 return 语句（除了递归调用处的 return）
         let return_count = body_text.matches("return").count();
         let recursive_calls = body_text.matches(&format!("{}(", func_name)).count();
-        
+
         // 如果有 return 且递归调用少于 return，可能有终止条件
         return_count > recursive_calls
     }
@@ -223,7 +221,7 @@ impl Rule for PossibleNilPointerDereference {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 selector_expression: x.Field 或 x.Method()
         if node.kind() == "selector_expression" || node.kind() == "call_expression" {
             // 提取被访问的对象
@@ -248,7 +246,7 @@ impl Rule for PossibleNilPointerDereference {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -276,42 +274,43 @@ impl PossibleNilPointerDereference {
         }
         None
     }
-    
+
     fn has_nil_check_no_return<'a>(
         &self,
         obj_name: &str,
         block: Node<'a>,
         source: &str,
-        current_node: &Node<'a>
+        current_node: &Node<'a>,
     ) -> bool {
         let current_line = current_node.start_position().row;
         let mut found_nil_check = false;
         let mut found_return_after_check = false;
-        
+
         let mut cursor = block.walk();
         for child in block.children(&mut cursor) {
             let child_line = child.start_position().row;
             let text = &source[child.byte_range()];
-            
+
             // 在当前语句之前检查
             if child_line >= current_line {
                 break;
             }
-            
+
             // 检查 nil 检查
-            if text.contains(&format!("{} == nil", obj_name)) ||
-               text.contains(&format!("{} != nil", obj_name)) {
+            if text.contains(&format!("{} == nil", obj_name))
+                || text.contains(&format!("{} != nil", obj_name))
+            {
                 found_nil_check = true;
                 found_return_after_check = false; // 重置
                 continue;
             }
-            
+
             // nil 检查后是否有 return
             if found_nil_check && text.contains("return") {
                 found_return_after_check = true;
             }
         }
-        
+
         // 有 nil 检查但没有 return 处理
         found_nil_check && !found_return_after_check
     }
@@ -337,21 +336,22 @@ impl Rule for InfiniteEmptyLoop {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "for_statement" || node.kind() == "range_clause" {
             let text = &source[node.byte_range()];
-            
+
             // 检查无限循环 for { ... }
             if text.starts_with("for {") || text.contains("for {\n") {
                 if let Some(body) = node.child_by_field_name("body") {
                     let body_text = &source[body.byte_range()];
-                    
+
                     // 检查循环体是否为空或只有注释
                     if self.is_empty_or_comment_only(body_text) {
                         let pos = node.start_position();
                         diagnostics.push(Diagnostic {
                             code: "SA5002".to_string(),
-                            message: "空的无限循环会浪费 CPU。考虑添加 sleep、select 或 break 条件".to_string(),
+                            message: "空的无限循环会浪费 CPU。考虑添加 sleep、select 或 break 条件"
+                                .to_string(),
                             severity: self.default_severity(),
                             file_path: file_path.to_string(),
                             line: pos.row + 1,
@@ -362,7 +362,7 @@ impl Rule for InfiniteEmptyLoop {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -371,12 +371,14 @@ impl InfiniteEmptyLoop {
     fn is_empty_or_comment_only(&self, body_text: &str) -> bool {
         // 去除空白和注释后是否为空
         let lines: Vec<&str> = body_text.lines().collect();
-        for line in lines.iter().skip(1) { // 跳过 {
+        for line in lines.iter().skip(1) {
+            // 跳过 {
             let trimmed = line.trim();
-            if !trimmed.is_empty() && 
-               !trimmed.starts_with("//") && 
-               !trimmed.starts_with("/*") &&
-               trimmed != "}" {
+            if !trimmed.is_empty()
+                && !trimmed.starts_with("//")
+                && !trimmed.starts_with("/*")
+                && trimmed != "}"
+            {
                 return false;
             }
         }
@@ -406,18 +408,16 @@ impl Rule for UnreachableCode {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "block" {
             let mut saw_terminator = false;
             let mut cursor = node.walk();
-            
+
             for child in node.children(&mut cursor) {
                 if saw_terminator {
                     // 检查是否是注释、空白或结束符
                     let text = &source[child.byte_range()];
-                    if !text.trim().is_empty() && 
-                       text != "}" && 
-                       !text.starts_with("//") {
+                    if !text.trim().is_empty() && text != "}" && !text.starts_with("//") {
                         let pos = child.start_position();
                         diagnostics.push(Diagnostic {
                             code: "F901".to_string(),
@@ -431,14 +431,14 @@ impl Rule for UnreachableCode {
                         break; // 只报告第一个
                     }
                 }
-                
+
                 // 检查是否是终止语句
                 if self.is_terminator(&child, source) {
                     saw_terminator = true;
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -446,11 +446,11 @@ impl Rule for UnreachableCode {
 impl UnreachableCode {
     fn is_terminator(&self, node: &Node, source: &str) -> bool {
         let text = &source[node.byte_range()];
-        
-        node.kind() == "return_statement" ||
-        text.starts_with("panic(") ||
-        text.starts_with("os.Exit(") ||
-        text.starts_with("log.Fatal")
+
+        node.kind() == "return_statement"
+            || text.starts_with("panic(")
+            || text.starts_with("os.Exit(")
+            || text.starts_with("log.Fatal")
     }
 }
 
@@ -474,17 +474,17 @@ impl Rule for MissingReturn {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "function_declaration" || node.kind() == "method_declaration" {
             // 检查是否有返回类型
             if let Some(result) = node.child_by_field_name("result") {
                 let result_text = &source[result.byte_range()];
-                
+
                 // 排除 named return values (它们可以 naked return)
                 if !result_text.contains("(") && !result_text.trim().is_empty() {
                     if let Some(body) = node.child_by_field_name("body") {
                         let body_text = &source[body.byte_range()];
-                        
+
                         // 简单检查：函数体是否有 return
                         // 注意：这是一个简化版，没有处理所有控制流分支
                         if !body_text.contains("return") {
@@ -506,7 +506,7 @@ impl Rule for MissingReturn {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -531,33 +531,25 @@ impl Rule for IneffectualAssignment {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查赋值语句 x = value
         if node.kind() == "assignment_statement" {
             if let Some(left) = node.child_by_field_name("left") {
                 let left_text = &source[left.byte_range()];
-                
+
                 // 简单情况：单变量赋值
                 if !left_text.contains(',') {
                     let var_name = left_text.trim();
-                    
+
                     // 排除 _
                     if var_name != "_" {
                         // 检查后续是否被读取
                         if let Some(parent) = find_parent_block(&node) {
-                            if !self.is_variable_read_after(
-                                var_name, 
-                                parent, 
-                                source, 
-                                &node
-                            ) {
+                            if !self.is_variable_read_after(var_name, parent, source, &node) {
                                 let pos = left.start_position();
                                 diagnostics.push(Diagnostic {
                                     code: "SA4006".to_string(),
-                                    message: format!(
-                                        "变量 '{}' 被赋值后未被读取",
-                                        var_name
-                                    ),
+                                    message: format!("变量 '{}' 被赋值后未被读取", var_name),
                                     severity: self.default_severity(),
                                     file_path: file_path.to_string(),
                                     line: pos.row + 1,
@@ -570,7 +562,7 @@ impl Rule for IneffectualAssignment {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -581,26 +573,26 @@ impl IneffectualAssignment {
         var_name: &str,
         block: Node<'a>,
         source: &str,
-        current_node: &Node<'a>
+        current_node: &Node<'a>,
     ) -> bool {
         let current_line = current_node.start_position().row;
         let mut cursor = block.walk();
-        
+
         for child in block.children(&mut cursor) {
             // 只检查当前赋值之后的语句
             if child.start_position().row <= current_line {
                 continue;
             }
-            
+
             let text = &source[child.byte_range()];
-            
+
             // 简单检查：变量名是否出现在右侧
             // 注意：这是一个简化版，可能误判
             if text.contains(var_name) && !text.contains(&format!("{} =", var_name)) {
                 return true;
             }
         }
-        
+
         false
     }
 }
@@ -625,11 +617,11 @@ impl Rule for DiscardPureFunctionResult {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查表达式语句中的纯函数调用
         if node.kind() == "expression_statement" {
             let text = &source[node.byte_range()];
-            
+
             // 检查是否是纯函数调用
             if let Some(func_name) = self.extract_pure_function_call(text) {
                 let pos = node.start_position();
@@ -647,7 +639,7 @@ impl Rule for DiscardPureFunctionResult {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -673,13 +665,13 @@ impl DiscardPureFunctionResult {
             "sort.Ints",
             "sort.Strings",
         ];
-        
+
         for func in &pure_functions {
             if text.contains(func) && text.contains("(") {
                 return Some(func.to_string());
             }
         }
-        
+
         None
     }
 }
@@ -704,10 +696,10 @@ impl Rule for ImpossibleTypeAssertion {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "type_assertion_expression" {
             let text = &source[node.byte_range()];
-            
+
             // 简单检查：明显的类型不匹配
             // 例如: var x int; x.(string)
             if let Some(type_info) = self.extract_type_info(text, source) {
@@ -725,7 +717,7 @@ impl Rule for ImpossibleTypeAssertion {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -735,7 +727,7 @@ impl ImpossibleTypeAssertion {
         // 简化版：实际实现需要类型推断
         None
     }
-    
+
     fn is_impossible_assertion(&self, _type_info: &str) -> bool {
         // 简化版：实际实现需要类型系统
         false
@@ -764,10 +756,10 @@ impl Rule for TimeParseFormat {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             let text = &source[node.byte_range()];
-            
+
             if text.contains("time.Parse") {
                 if let Some(format_str) = self.extract_format_string(node, source) {
                     // 检查是否使用了其他语言的格式
@@ -789,7 +781,7 @@ impl Rule for TimeParseFormat {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -799,45 +791,48 @@ impl TimeParseFormat {
         if let Some(args) = node.child_by_field_name("arguments") {
             let mut cursor = args.walk();
             let mut children = vec![];
-            
+
             for child in args.children(&mut cursor) {
                 if child.kind() != "(" && child.kind() != ")" && child.kind() != "," {
                     children.push(child);
                 }
             }
-            
+
             if !children.is_empty() {
                 let format_node = &children[0];
                 if format_node.kind() == "interpreted_string_literal" {
-                    return Some(source[format_node.byte_range()].trim_matches('"').to_string());
+                    return Some(
+                        source[format_node.byte_range()]
+                            .trim_matches('"')
+                            .to_string(),
+                    );
                 }
             }
         }
         None
     }
-    
+
     fn is_wrong_format(&self, format: &str) -> bool {
         // 检查其他语言的常见格式
         let wrong_patterns = [
-            "yyyy",      // Java/C# 格式
-            "YYYY",      // 错误的大小写
-            "MM",        // 月份应该使用 01
-            "DD",        // 日期应该使用 02
-            "dd",        // 错误的大小写
-            "HH",        // 小时应该使用 15
-            "mm",        // 分钟应该使用 04
-            "ss",        // 秒应该使用 05
-            "%Y",        // strftime 格式
-            "%m",
-            "%d",
+            "yyyy", // Java/C# 格式
+            "YYYY", // 错误的大小写
+            "MM",   // 月份应该使用 01
+            "DD",   // 日期应该使用 02
+            "dd",   // 错误的大小写
+            "HH",   // 小时应该使用 15
+            "mm",   // 分钟应该使用 04
+            "ss",   // 秒应该使用 05
+            "%Y",   // strftime 格式
+            "%m", "%d",
         ];
-        
+
         for pattern in &wrong_patterns {
             if format.contains(pattern) {
                 return true;
             }
         }
-        
+
         false
     }
 }
@@ -862,10 +857,10 @@ impl Rule for InvalidNetworkAddress {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "call_expression" {
             let text = &source[node.byte_range()];
-            
+
             if text.contains("net.Listen") || text.contains("net.Dial") {
                 if let Some(addr) = self.extract_address(node, source) {
                     if self.is_invalid_address(&addr) {
@@ -886,7 +881,7 @@ impl Rule for InvalidNetworkAddress {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -904,7 +899,7 @@ impl InvalidNetworkAddress {
         }
         None
     }
-    
+
     fn is_invalid_address(&self, addr: &str) -> bool {
         // 检查端口范围
         if let Some(colon_pos) = addr.rfind(':') {
@@ -937,17 +932,18 @@ impl Rule for HTTPHeaderFormat {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "assignment_statement" || node.kind() == "short_var_declaration" {
             let text = &source[node.byte_range()];
-            
+
             // 检查 HTTP Header 赋值
             if text.contains("Header()") || text.contains("http.Header") {
                 if self.has_non_canonical_header(text) {
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "SA1007".to_string(),
-                        message: "HTTP Header 键应该使用规范格式（首字母大写，如 'Content-Type'）".to_string(),
+                        message: "HTTP Header 键应该使用规范格式（首字母大写，如 'Content-Type'）"
+                            .to_string(),
                         severity: self.default_severity(),
                         file_path: file_path.to_string(),
                         line: pos.row + 1,
@@ -957,7 +953,7 @@ impl Rule for HTTPHeaderFormat {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -967,7 +963,7 @@ impl HTTPHeaderFormat {
         // 简单的启发式检查
         // 非规范格式: "content-type", "x-custom-header"
         // 规范格式: "Content-Type", "X-Custom-Header"
-        
+
         // 检查小写的常见 header
         let lowercase_headers = [
             "\"content-type\"",
@@ -975,13 +971,13 @@ impl HTTPHeaderFormat {
             "\"accept-encoding\"",
             "\"user-agent\"",
         ];
-        
+
         for header in &lowercase_headers {
             if text.contains(header) {
                 return true;
             }
         }
-        
+
         false
     }
 }
@@ -1006,10 +1002,10 @@ impl Rule for InvalidStructTag {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "field_declaration" {
             let text = &source[node.byte_range()];
-            
+
             // 检查是否有 tag
             if text.contains('`') {
                 if let Some(tag) = self.extract_tag(text) {
@@ -1031,7 +1027,7 @@ impl Rule for InvalidStructTag {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -1045,26 +1041,27 @@ impl InvalidStructTag {
         }
         None
     }
-    
+
     fn has_tag_error(&self, tag: &str) -> bool {
         // 检查引号是否匹配
         let double_quotes = tag.matches('"').count();
         if double_quotes % 2 != 0 {
             return true;
         }
-        
+
         // 检查是否有重复的 key
-        let keys: Vec<&str> = tag.split(' ')
+        let keys: Vec<&str> = tag
+            .split(' ')
             .filter(|s| !s.is_empty())
             .map(|s| s.split(':').next().unwrap_or(""))
             .collect();
-        
+
         for (i, key) in keys.iter().enumerate() {
             if keys.iter().skip(i + 1).any(|k| k == key) {
                 return true;
             }
         }
-        
+
         false
     }
 }
@@ -1091,11 +1088,11 @@ impl Rule for MissingDeferClose {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查资源打开调用
         if node.kind() == "short_var_declaration" || node.kind() == "assignment_statement" {
             let text = &source[node.byte_range()];
-            
+
             if self.is_resource_open(text) {
                 // 提取变量名
                 if let Some(var_name) = self.extract_variable_name(text) {
@@ -1120,19 +1117,19 @@ impl Rule for MissingDeferClose {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
 
 impl MissingDeferClose {
     fn is_resource_open(&self, text: &str) -> bool {
-        text.contains("os.Open(") ||
-        text.contains("os.Create(") ||
-        text.contains("net.Listen(") ||
-        text.contains("sql.Open(")
+        text.contains("os.Open(")
+            || text.contains("os.Create(")
+            || text.contains("net.Listen(")
+            || text.contains("sql.Open(")
     }
-    
+
     fn extract_variable_name(&self, text: &str) -> Option<String> {
         // 从 "f, err := os.Open(...)" 提取 "f"
         if let Some(pos) = text.find(":=") {
@@ -1142,7 +1139,7 @@ impl MissingDeferClose {
                 return Some(vars[0].trim().to_string());
             }
         }
-        
+
         // 从 "f, err = os.Open(...)" 提取 "f"
         if let Some(pos) = text.find("= ") {
             let left = &text[..pos];
@@ -1151,23 +1148,23 @@ impl MissingDeferClose {
                 return Some(vars[0].trim().to_string());
             }
         }
-        
+
         None
     }
-    
+
     fn has_defer_close<'a>(
         &self,
         var_name: &str,
         func: Node<'a>,
         source: &str,
-        _current_node: &Node<'a>
+        _current_node: &Node<'a>,
     ) -> bool {
         let func_text = &source[func.byte_range()];
-        
+
         // 简单检查：函数体内是否有 defer var.Close()
         let close_pattern = format!("defer {}.Close()", var_name);
         let close_pattern_alt = format!("defer defer {}.Close()", var_name);
-        
+
         func_text.contains(&close_pattern) || func_text.contains(&close_pattern_alt)
     }
 }
@@ -1176,31 +1173,33 @@ impl MissingDeferClose {
 
 fn find_parent_block<'a>(node: &'a Node<'a>) -> Option<Node<'a>> {
     let mut current = *node;
-    
+
     while let Some(parent) = current.parent() {
-        if parent.kind() == "block" || 
-           parent.kind() == "function_declaration" ||
-           parent.kind() == "method_declaration" {
+        if parent.kind() == "block"
+            || parent.kind() == "function_declaration"
+            || parent.kind() == "method_declaration"
+        {
             return Some(parent);
         }
         current = parent;
     }
-    
+
     None
 }
 
 fn find_parent_function<'a>(node: &'a Node<'a>) -> Option<Node<'a>> {
     let mut current = *node;
-    
+
     while let Some(parent) = current.parent() {
-        if parent.kind() == "function_declaration" || 
-           parent.kind() == "method_declaration" ||
-           parent.kind() == "func_literal" {
+        if parent.kind() == "function_declaration"
+            || parent.kind() == "method_declaration"
+            || parent.kind() == "func_literal"
+        {
             return Some(parent);
         }
         current = parent;
     }
-    
+
     None
 }
 
@@ -1213,20 +1212,17 @@ pub fn get_p0_runtime_rules() -> Vec<Box<dyn Rule>> {
         Box::new(InfiniteRecursion),
         Box::new(PossibleNilPointerDereference),
         Box::new(InfiniteEmptyLoop),
-        
         // Category B: Code Structure (4条)
         Box::new(UnreachableCode),
         Box::new(MissingReturn),
         Box::new(IneffectualAssignment),
         Box::new(DiscardPureFunctionResult),
         Box::new(ImpossibleTypeAssertion),
-        
         // Category C: API Misuse (4条)
         Box::new(TimeParseFormat),
         Box::new(InvalidNetworkAddress),
         Box::new(HTTPHeaderFormat),
         Box::new(InvalidStructTag),
-        
         // Category D: Resource Management (2条)
         Box::new(MissingDeferClose),
     ]

@@ -25,8 +25,8 @@ pub mod visitor;
 
 use crate::config::Config;
 use crate::Diagnostic;
-use std::path::Path;
 use anyhow::Result;
+use std::path::Path;
 
 /// Main lint entry point - chooses appropriate implementation
 pub fn lint_path<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<Diagnostic>> {
@@ -36,9 +36,17 @@ pub fn lint_path<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<Diagnos
 
 /// Check if we should use massive parallel mode
 pub fn should_use_massive_parallel(config: &Config) -> bool {
-    let threads = config.global.parallelism.num_threads
-        .max(std::env::var("WOOF_THREADS").ok().and_then(|s| s.parse().ok()).unwrap_or(0))
+    let threads = config
+        .global
+        .parallelism
+        .num_threads
+        .max(
+            std::env::var("WOOF_THREADS")
+                .ok()
+                .and_then(|s| s.parse().ok())
+                .unwrap_or(0),
+        )
         .max(num_cpus::get());
-    
+
     threads >= 64
 }

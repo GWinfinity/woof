@@ -72,7 +72,7 @@ impl Rule for UncheckedError {
 
         if node.kind() == "call_expression" {
             let func_name = get_function_name(node, source);
-            
+
             if func_returns_error(&func_name) {
                 if !is_error_checked(node) {
                     let pos = node.start_position();
@@ -154,10 +154,10 @@ impl Rule for UnusedParameter {
         if node.kind() == "function_declaration" || node.kind() == "method_declaration" {
             if let Some(params) = find_child_by_kind(node, "parameter_list") {
                 let param_names = extract_parameter_names(params, source);
-                
+
                 if let Some(body) = find_child_by_kind(node, "block") {
                     let body_text = &source[body.byte_range()];
-                    
+
                     for param in param_names {
                         if param != "_" && !body_text.contains(&param) {
                             let pos = params.start_position();
@@ -202,8 +202,12 @@ impl Rule for CamelCaseFunction {
         if node.kind() == "function_declaration" || node.kind() == "method_declaration" {
             if let Some(name_node) = node.child_by_field_name("name") {
                 let name = &source[name_node.byte_range()];
-                
-                if name.contains('_') && !name.starts_with("Test") && !name.starts_with("Benchmark") && !name.starts_with("Example") {
+
+                if name.contains('_')
+                    && !name.starts_with("Test")
+                    && !name.starts_with("Benchmark")
+                    && !name.starts_with("Example")
+                {
                     let pos = name_node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "S005".to_string(),
@@ -244,12 +248,13 @@ impl Rule for ReceiverName {
         if node.kind() == "method_declaration" {
             if let Some(recv) = node.child_by_field_name("receiver") {
                 let recv_text = &source[recv.byte_range()];
-                
+
                 // 提取接收器名
-                let parts: Vec<&str> = recv_text.trim_matches(&['(', ')'][..])
+                let parts: Vec<&str> = recv_text
+                    .trim_matches(&['(', ')'][..])
                     .split_whitespace()
                     .collect();
-                
+
                 if let Some(name) = parts.first() {
                     if name.len() > 2 && !name.starts_with("self") && !name.starts_with("this") {
                         let pos = recv.start_position();
@@ -292,13 +297,13 @@ impl Rule for ErrorVarNaming {
 
         if node.kind() == "const_declaration" || node.kind() == "var_declaration" {
             let decl_text = &source[node.byte_range()];
-            
+
             // 检查是否是 error 类型
             if decl_text.contains("errors.New") || decl_text.contains("fmt.Errorf") {
                 // 提取变量名
                 if let Some(name_node) = node.child_by_field_name("name") {
                     let name = &source[name_node.byte_range()];
-                    
+
                     if !name.starts_with("Err") && !name.ends_with("Error") {
                         let pos = name_node.start_position();
                         diagnostics.push(Diagnostic {
@@ -341,7 +346,7 @@ impl Rule for PackageName {
         if node.kind() == "package_clause" {
             if let Some(name_node) = node.child_by_field_name("name") {
                 let name = &source[name_node.byte_range()];
-                
+
                 if name.contains('_') {
                     let pos = name_node.start_position();
                     diagnostics.push(Diagnostic {
@@ -354,7 +359,7 @@ impl Rule for PackageName {
                         fix: None,
                     });
                 }
-                
+
                 if name.chars().any(|c| c.is_uppercase()) {
                     let pos = name_node.start_position();
                     diagnostics.push(Diagnostic {
@@ -377,7 +382,7 @@ impl Rule for PackageName {
 // Helper functions
 fn has_named_returns(func: Node, source: &str) -> bool {
     let text = &source[func.byte_range()];
-    
+
     if let Some(end) = text.rfind(')') {
         let after_params = &text[end..];
         if let Some(ret_start) = after_params.find('(') {
@@ -399,20 +404,34 @@ fn get_function_name(call: Node, source: &str) -> String {
 
 fn func_returns_error(func_name: &str) -> bool {
     let error_funcs = [
-        "os.Open", "os.Create", "os.ReadFile", "os.WriteFile",
-        "json.Marshal", "json.Unmarshal", "json.NewEncoder", "json.NewDecoder",
-        "io.ReadAll", "io.Copy",
-        "http.NewRequest", "http.Get", "http.Post",
-        "fmt.Errorf", "fmt.Sscanf", "fmt.Fscanf",
+        "os.Open",
+        "os.Create",
+        "os.ReadFile",
+        "os.WriteFile",
+        "json.Marshal",
+        "json.Unmarshal",
+        "json.NewEncoder",
+        "json.NewDecoder",
+        "io.ReadAll",
+        "io.Copy",
+        "http.NewRequest",
+        "http.Get",
+        "http.Post",
+        "fmt.Errorf",
+        "fmt.Sscanf",
+        "fmt.Fscanf",
     ];
-    
+
     error_funcs.iter().any(|&f| func_name.contains(f))
 }
 
 fn is_error_checked(node: Node) -> bool {
     if let Some(parent) = node.parent() {
         let parent_kind = parent.kind();
-        if matches!(parent_kind, "assignment_statement" | "short_var_declaration" | "if_statement") {
+        if matches!(
+            parent_kind,
+            "assignment_statement" | "short_var_declaration" | "if_statement"
+        ) {
             return true;
         }
     }
@@ -448,9 +467,9 @@ fn find_parent_by_kind<'a>(node: Node<'a>, kind: &str) -> Option<Node<'a>> {
 fn extract_parameter_names(params: Node, source: &str) -> Vec<String> {
     let mut names = vec![];
     let text = &source[params.byte_range()];
-    
+
     let inner = text.trim_start_matches('(').trim_end_matches(')');
-    
+
     for param in inner.split(',') {
         let parts: Vec<&str> = param.trim().split_whitespace().collect();
         if !parts.is_empty() {
@@ -460,7 +479,7 @@ fn extract_parameter_names(params: Node, source: &str) -> Vec<String> {
             }
         }
     }
-    
+
     names
 }
 

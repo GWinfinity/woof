@@ -1,5 +1,5 @@
 //! Logging system for woof
-//! 
+//!
 //! Supports debug logging via GOLOGGING environment variable:
 //! - GOLOGGING=debug - Enable debug logging
 //! - GOLOGGING=trace - Enable trace logging (more verbose)
@@ -32,7 +32,7 @@ impl LogLevel {
             _ => LogLevel::Off,
         }
     }
-    
+
     /// Check if level is enabled
     pub fn is_enabled(&self, required: LogLevel) -> bool {
         let self_val = *self as u8;
@@ -102,39 +102,39 @@ impl PerfTimer {
     pub fn new<S: Into<String>>(name: S) -> Self {
         let name = name.into();
         let start = Instant::now();
-        
+
         if is_enabled(LogLevel::Perf) {
             eprintln!("[woof:perf] Started: {}", name);
         }
-        
+
         Self {
             name,
             start,
             level: LogLevel::Perf,
         }
     }
-    
+
     /// Create a timer with debug level
     pub fn debug<S: Into<String>>(name: S) -> Self {
         let name = name.into();
         let start = Instant::now();
-        
+
         if is_enabled(LogLevel::Debug) {
             eprintln!("[woof:debug] Started: {}", name);
         }
-        
+
         Self {
             name,
             start,
             level: LogLevel::Debug,
         }
     }
-    
+
     /// Create a timer with custom level
     pub fn with_level<S: Into<String>>(name: S, level: LogLevel) -> Self {
         let name = name.into();
         let start = Instant::now();
-        
+
         if is_enabled(level) {
             let level_str = match level {
                 LogLevel::Trace => "trace",
@@ -144,24 +144,20 @@ impl PerfTimer {
             };
             eprintln!("[woof:{}] Started: {}", level_str, name);
         }
-        
-        Self {
-            name,
-            start,
-            level,
-        }
+
+        Self { name, start, level }
     }
-    
+
     /// Get elapsed time without stopping
     pub fn elapsed(&self) -> Duration {
         self.start.elapsed()
     }
-    
+
     /// Stop the timer and log the result
     pub fn stop(self) -> Duration {
         let elapsed = self.start.elapsed();
         let micros = elapsed.as_micros();
-        
+
         if is_enabled(self.level) {
             let level_str = match self.level {
                 LogLevel::Trace => "trace",
@@ -169,7 +165,7 @@ impl PerfTimer {
                 LogLevel::Perf => "perf",
                 LogLevel::Off => "off",
             };
-            
+
             if micros < 1000 {
                 eprintln!(
                     "[woof:{}] Finished: {} - {}µs",
@@ -183,7 +179,7 @@ impl PerfTimer {
                 );
             }
         }
-        
+
         elapsed
     }
 }
@@ -208,26 +204,23 @@ impl LinterPerfTracker {
         let rule_code = rule_code.into();
         let rule_name = rule_name.into();
         let start = Instant::now();
-        
+
         if is_enabled(LogLevel::Perf) || is_enabled(LogLevel::Debug) {
-            eprintln!(
-                "[woof:perf] Rule started: [{}] {}",
-                rule_code, rule_name
-            );
+            eprintln!("[woof:perf] Rule started: [{}] {}", rule_code, rule_name);
         }
-        
+
         Self {
             rule_name,
             rule_code,
             start,
         }
     }
-    
+
     /// Stop tracking and log the result
     pub fn stop(self) -> Duration {
         let elapsed = self.start.elapsed();
         let micros = elapsed.as_micros();
-        
+
         if is_enabled(LogLevel::Perf) || is_enabled(LogLevel::Debug) {
             if micros < 1000 {
                 eprintln!(
@@ -242,10 +235,10 @@ impl LinterPerfTracker {
                 );
             }
         }
-        
+
         elapsed
     }
-    
+
     /// Get elapsed time without stopping
     pub fn elapsed(&self) -> Duration {
         self.start.elapsed()
@@ -274,17 +267,17 @@ impl PerfStats {
         if !is_enabled(LogLevel::Perf) && !is_enabled(LogLevel::Debug) {
             return;
         }
-        
+
         eprintln!("\n[woof:perf] === Linter Performance Summary ===");
         eprintln!("[woof:perf] Total rules: {}", self.total_rules);
         eprintln!("[woof:perf] Total time: {}ms", self.total_time_ms);
         eprintln!("[woof:perf]");
         eprintln!("[woof:perf] Rule breakdown:");
-        
+
         // Sort by time descending
         let mut sorted = self.rule_times.clone();
         sorted.sort_by(|a, b| b.time_us.cmp(&a.time_us));
-        
+
         for stat in sorted.iter().take(10) {
             let time_ms = stat.time_us as f64 / 1000.0;
             eprintln!(
@@ -292,11 +285,11 @@ impl PerfStats {
                 stat.code, stat.name, time_ms, stat.percentage
             );
         }
-        
+
         if sorted.len() > 10 {
             eprintln!("[woof:perf]   ... and {} more rules", sorted.len() - 10);
         }
-        
+
         eprintln!("[woof:perf] === End Performance Summary ===\n");
     }
 }
@@ -304,7 +297,7 @@ impl PerfStats {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_log_level_from_env() {
         // Note: This test may fail depending on environment
@@ -312,7 +305,7 @@ mod tests {
         let level = LogLevel::from_env();
         println!("Current log level: {:?}", level);
     }
-    
+
     #[test]
     fn test_perf_timer() {
         if is_enabled(LogLevel::Perf) {

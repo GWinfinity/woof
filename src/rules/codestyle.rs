@@ -1,5 +1,5 @@
 //! E-series: gocodestyle - 代码风格与语法错误
-//! 
+//!
 //! 包括：布局格式、导入、空白、代码结构、比较判断等
 
 use super::{Rule, RuleCategory, RuleMetadata, RulePriority};
@@ -26,12 +26,12 @@ impl Rule for MixedIndentation {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查所有行是否同时包含空格和 Tab
         for (line_num, line) in source.lines().enumerate() {
             let has_space = line.starts_with(' ');
             let has_tab = line.starts_with('\t');
-            
+
             if has_space && has_tab {
                 diagnostics.push(Diagnostic {
                     code: "E101".to_string(),
@@ -44,7 +44,7 @@ impl Rule for MixedIndentation {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -67,7 +67,7 @@ impl Rule for TrailingWhitespace {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         for (line_num, line) in source.lines().enumerate() {
             if line.ends_with(' ') || line.ends_with('\t') {
                 diagnostics.push(Diagnostic {
@@ -81,7 +81,7 @@ impl Rule for TrailingWhitespace {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -104,17 +104,20 @@ impl Rule for MultipleTrailingNewlines {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查末尾是否有超过两个换行
         let trailing_newlines = source.chars().rev().take_while(|&c| c == '\n').count();
-        
+
         if trailing_newlines > 2 {
             let lines: Vec<&str> = source.lines().collect();
             let last_line = lines.len();
-            
+
             diagnostics.push(Diagnostic {
                 code: "E116".to_string(),
-                message: format!("文件末尾存在 {} 个空行，建议保留最多 1 个", trailing_newlines - 1),
+                message: format!(
+                    "文件末尾存在 {} 个空行，建议保留最多 1 个",
+                    trailing_newlines - 1
+                ),
                 severity: self.default_severity(),
                 file_path: file_path.to_string(),
                 line: last_line,
@@ -122,7 +125,7 @@ impl Rule for MultipleTrailingNewlines {
                 fix: None,
             });
         }
-        
+
         diagnostics
     }
 }
@@ -145,12 +148,12 @@ impl Rule for NoNewlineAtEnd {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if !source.is_empty() && !source.ends_with('\n') {
             let lines: Vec<&str> = source.lines().collect();
             let last_line = lines.len();
             let last_line_len = lines.last().map(|l| l.len()).unwrap_or(0);
-            
+
             diagnostics.push(Diagnostic {
                 code: "E117".to_string(),
                 message: "文件末尾应有一个换行符".to_string(),
@@ -161,7 +164,7 @@ impl Rule for NoNewlineAtEnd {
                 fix: None,
             });
         }
-        
+
         diagnostics
     }
 }
@@ -198,7 +201,7 @@ impl Rule for LineTooLong {
 
     fn check(&self, _node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         for (line_num, line) in source.lines().enumerate() {
             let line_length = line.chars().count();
             if line_length > self.max_length {
@@ -213,7 +216,7 @@ impl Rule for LineTooLong {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -238,13 +241,13 @@ impl Rule for BlankLineAfterImport {
 
     fn check(&self, node: Node, _source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "import_declaration" {
             if let Some(next_sibling) = node.next_sibling() {
                 // 检查是否有空行
                 let import_end = node.end_position().row;
                 let next_start = next_sibling.start_position().row;
-                
+
                 if next_start == import_end + 1 {
                     diagnostics.push(Diagnostic {
                         code: "E201".to_string(),
@@ -258,7 +261,7 @@ impl Rule for BlankLineAfterImport {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -281,7 +284,7 @@ impl Rule for ImportNotAtTop {
 
     fn check(&self, node: Node, _source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "import_declaration" {
             // 检查是否有非 import 的兄弟节点在它之前
             if let Some(parent) = node.parent() {
@@ -291,14 +294,15 @@ impl Rule for ImportNotAtTop {
                     if child.id() == node.id() {
                         break;
                     }
-                    if child.kind() != "package_clause" 
+                    if child.kind() != "package_clause"
                         && child.kind() != "import_declaration"
-                        && child.kind() != "comment" {
+                        && child.kind() != "comment"
+                    {
                         found_non_import = true;
                         break;
                     }
                 }
-                
+
                 if found_non_import {
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
@@ -313,7 +317,7 @@ impl Rule for ImportNotAtTop {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -336,11 +340,11 @@ impl Rule for DuplicateImport {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "source_file" {
             use std::collections::HashSet;
             let mut seen: HashSet<String> = HashSet::new();
-            
+
             let mut cursor = node.walk();
             for child in node.children(&mut cursor) {
                 if child.kind() == "import_declaration" {
@@ -348,7 +352,7 @@ impl Rule for DuplicateImport {
                     if let Some(path_node) = child.child_by_field_name("path") {
                         let path_text = &source[path_node.byte_range()];
                         let clean_path = path_text.trim_matches('"').to_string();
-                        
+
                         if seen.contains(&clean_path) {
                             let pos = child.start_position();
                             diagnostics.push(Diagnostic {
@@ -367,7 +371,7 @@ impl Rule for DuplicateImport {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -392,21 +396,26 @@ impl Rule for EmptyBlock {
 
     fn check(&self, node: Node, _source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
-        let block_kinds = ["block", "function_declaration", "if_statement", 
-                          "for_statement", "range_clause"];
-        
+
+        let block_kinds = [
+            "block",
+            "function_declaration",
+            "if_statement",
+            "for_statement",
+            "range_clause",
+        ];
+
         if block_kinds.contains(&node.kind()) {
             let mut has_content = false;
             let mut cursor = node.walk();
-            
+
             for child in node.children(&mut cursor) {
                 if !matches!(child.kind(), "{" | "}" | "comment") {
                     has_content = true;
                     break;
                 }
             }
-            
+
             if !has_content {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
@@ -420,7 +429,7 @@ impl Rule for EmptyBlock {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -443,20 +452,25 @@ impl Rule for MissingWhitespaceAroundOperator {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
-        let binary_ops = ["+", "-", "*", "/", "%", "==", "!=", "<", ">", 
-                         "<=", ">=", "&&", "||", "&", "|", "^", "<<", ">>",
-                         "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^="];
-        
+
+        let binary_ops = [
+            "+", "-", "*", "/", "%", "==", "!=", "<", ">", "<=", ">=", "&&", "||", "&", "|", "^",
+            "<<", ">>", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=",
+        ];
+
         if binary_ops.contains(&node.kind()) {
             let pos = node.start_position();
             let byte_start = node.start_byte();
             let byte_end = node.end_byte();
-            
+
             // 检查前后字符
-            let before = if byte_start > 0 { source.get(byte_start-1..byte_start) } else { None };
-            let after = source.get(byte_end..byte_end+1);
-            
+            let before = if byte_start > 0 {
+                source.get(byte_start - 1..byte_start)
+            } else {
+                None
+            };
+            let after = source.get(byte_end..byte_end + 1);
+
             if let Some(b) = before {
                 if !b.chars().next().map(|c| c.is_whitespace()).unwrap_or(true) {
                     diagnostics.push(Diagnostic {
@@ -470,7 +484,7 @@ impl Rule for MissingWhitespaceAroundOperator {
                     });
                 }
             }
-            
+
             if let Some(a) = after {
                 if !a.chars().next().map(|c| c.is_whitespace()).unwrap_or(true) {
                     diagnostics.push(Diagnostic {
@@ -485,7 +499,7 @@ impl Rule for MissingWhitespaceAroundOperator {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -510,12 +524,12 @@ impl Rule for MultipleStatements {
 
     fn check(&self, node: Node, _source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查是否在同一行有多个语句
         if node.kind() == "block" || node.kind() == "statement_list" {
             let mut last_line = 0;
             let mut cursor = node.walk();
-            
+
             for child in node.children(&mut cursor) {
                 if child.kind().ends_with("_statement") || child.kind().ends_with("_declaration") {
                     let line = child.start_position().row;
@@ -534,7 +548,7 @@ impl Rule for MultipleStatements {
                 }
             }
         }
-        
+
         diagnostics
     }
 }
@@ -559,10 +573,10 @@ impl Rule for ComparisonToTrue {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "binary_expression" {
             let node_text = &source[node.byte_range()];
-            
+
             if node_text.contains(" == true") || node_text.contains("==true") {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
@@ -576,7 +590,7 @@ impl Rule for ComparisonToTrue {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -599,10 +613,10 @@ impl Rule for ComparisonToFalse {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         if node.kind() == "binary_expression" {
             let node_text = &source[node.byte_range()];
-            
+
             if node_text.contains(" == false") || node_text.contains("==false") {
                 let pos = node.start_position();
                 diagnostics.push(Diagnostic {
@@ -616,7 +630,7 @@ impl Rule for ComparisonToFalse {
                 });
             }
         }
-        
+
         diagnostics
     }
 }
@@ -639,7 +653,7 @@ impl Rule for TypeComparison {
 
     fn check(&self, node: Node, source: &str, file_path: &str) -> Vec<Diagnostic> {
         let mut diagnostics = vec![];
-        
+
         // 检查 reflect.TypeOf(x) == reflect.TypeOf(y) 模式
         if node.kind() == "call_expression" {
             let node_text = source[node.byte_range()].to_lowercase();
@@ -661,7 +675,7 @@ impl Rule for TypeComparison {
                 }
             }
         }
-        
+
         diagnostics
     }
 }

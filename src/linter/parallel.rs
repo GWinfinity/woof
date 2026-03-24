@@ -12,11 +12,11 @@ use crate::rules::get_enabled_rules;
 use crate::Diagnostic;
 use anyhow::Result;
 use rayon::prelude::*;
-use std::sync::atomic::AtomicUsize;
-use std::path::{Path, PathBuf};
-use std::time::Instant;
 use std::cell::RefCell;
+use std::path::{Path, PathBuf};
+use std::sync::atomic::AtomicUsize;
 use std::sync::Arc;
+use std::time::Instant;
 
 /// Metrics for parallel execution monitoring
 #[derive(Debug, Default)]
@@ -32,7 +32,7 @@ impl ParallelMetrics {
         let num_cpus = std::thread::available_parallelism()
             .map(|n| n.get())
             .unwrap_or(1) as f64;
-        
+
         let theoretical_max = (self.elapsed_ms as f64 / 1000.0) * num_cpus * 1000.0;
         if theoretical_max > 0.0 {
             ((self.total_files as f64 / theoretical_max) * 100.0).min(100.0)
@@ -77,7 +77,7 @@ fn optimal_batch_size(total_files: usize, num_cpus: usize) -> usize {
 }
 
 /// Lint multiple paths with optimized parallel execution
-/// 
+///
 /// Achieves near-linear speedup by:
 /// 1. Using work-stealing for dynamic load balancing
 /// 2. Optimized batch sizes to minimize scheduling overhead
@@ -89,21 +89,21 @@ pub fn lint_paths_parallel(
 ) -> Result<(Vec<Diagnostic>, ParallelMetrics)> {
     let start = Instant::now();
     let total_files = files.len();
-    
+
     if total_files == 0 {
         return Ok((Vec::new(), ParallelMetrics::default()));
     }
 
     // Get enabled rules once - Arc for cheap cloning
     let rules = Arc::new(get_enabled_rules(config));
-    
+
     // Determine optimal parallelism
-    let num_cpus = config.global.parallelism.num_threads
-        .max(1)
-        .min(std::thread::available_parallelism()
+    let num_cpus = config.global.parallelism.num_threads.max(1).min(
+        std::thread::available_parallelism()
             .map(|n| n.get())
-            .unwrap_or(4));
-    
+            .unwrap_or(4),
+    );
+
     // Calculate optimal batch size for this workload
     let batch_size = if config.global.parallelism.batch_size > 0 {
         config.global.parallelism.batch_size
@@ -113,7 +113,9 @@ pub fn lint_paths_parallel(
 
     crate::log_debug!(
         "Parallel lint: {} files, {} CPUs, batch size {}",
-        total_files, num_cpus, batch_size
+        total_files,
+        num_cpus,
+        batch_size
     );
 
     // Use work-stealing parallel iterator for best load balancing
@@ -124,9 +126,7 @@ pub fn lint_paths_parallel(
             let rules = Arc::clone(&rules);
             chunk
                 .iter()
-                .flat_map(|file| {
-                    lint_single_file(file, &rules).unwrap_or_default()
-                })
+                .flat_map(|file| lint_single_file(file, &rules).unwrap_or_default())
                 .collect::<Vec<_>>()
         })
         .collect();
@@ -166,7 +166,7 @@ pub fn lint_path_parallel<P: AsRef<Path>>(
     } else {
         collect_go_files(path.as_ref(), config)?
     };
-    
+
     lint_paths_parallel(&files, config)
 }
 
@@ -176,16 +176,15 @@ fn lint_single_file(
     rules: &Arc<Vec<Box<dyn crate::rules::Rule>>>,
 ) -> Result<Vec<Diagnostic>> {
     let file_path = path.to_string_lossy().to_string();
-    
+
     // Use zero-copy file reading (mmap for large files)
     let source_arc = ZeroCopyFileReader::read(path)?;
     let source = source_arc.as_str()?;
-    
+
     // Parse file using thread-local parser
-    let tree = with_parser(|parser| {
-        parser.parse(source, None)
-    }).ok_or_else(|| anyhow::anyhow!("Failed to parse {}", path.display()))?;
-    
+    let tree = with_parser(|parser| parser.parse(source, None))
+        .ok_or_else(|| anyhow::anyhow!("Failed to parse {}", path.display()))?;
+
     let root = tree.root_node();
 
     let mut diagnostics = Vec::new();
@@ -231,7 +230,7 @@ fn visit_node_recursive(
 /// Collect all Go files (public for CLI usage)
 pub fn collect_go_files(path: &Path, config: &Config) -> Result<Vec<PathBuf>> {
     let mut files = Vec::new();
-    
+
     let walker = if config.global.respect_gitignore {
         ignore::WalkBuilder::new(path)
             .standard_filters(true)
@@ -245,7 +244,7 @@ pub fn collect_go_files(path: &Path, config: &Config) -> Result<Vec<PathBuf>> {
     for entry in walker {
         let entry = entry?;
         let path = entry.path();
-        
+
         if path.is_file() && is_go_file(path) {
             if !should_exclude(path, config) {
                 files.push(path.to_path_buf());
@@ -258,7 +257,7 @@ pub fn collect_go_files(path: &Path, config: &Config) -> Result<Vec<PathBuf>> {
 
 fn should_exclude(path: &Path, config: &Config) -> bool {
     let path_str = path.to_string_lossy();
-    
+
     for pattern in &config.global.exclude {
         if globset::Glob::new(pattern)
             .ok()
@@ -268,15 +267,15 @@ fn should_exclude(path: &Path, config: &Config) -> bool {
             return true;
         }
     }
-    
+
     false
 }
 
 /// File-level rule codes
 fn is_file_level_rule(code: &str) -> bool {
-    matches!(code, 
-        "E101" | "E115" | "E116" | "E117" | "E118" |
-        "E201" | "E401"
+    matches!(
+        code,
+        "E101" | "E115" | "E116" | "E117" | "E118" | "E201" | "E401"
     )
 }
 
@@ -298,15 +297,15 @@ pub fn benchmark_parallel<P: AsRef<Path>>(
     } else {
         collect_go_files(path.as_ref(), config)?
     };
-    
+
     let mut results = Vec::with_capacity(iterations);
-    
+
     for i in 0..iterations {
         crate::log_debug!("Benchmark iteration {}/{}", i + 1, iterations);
         let (_, metrics) = lint_paths_parallel(&files, config)?;
         results.push(metrics);
     }
-    
+
     Ok(results)
 }
 
@@ -315,23 +314,27 @@ pub fn analyze_scaling(baseline_ms: u64, results: &[(usize, u64)]) {
     println!("\n=== Parallel Scaling Analysis ===");
     println!("Baseline (1 CPU): {} ms", baseline_ms);
     println!();
-    println!("{:>8} {:>12} {:>12} {:>12}", "CPUs", "Time (ms)", "Speedup", "Efficiency");
+    println!(
+        "{:>8} {:>12} {:>12} {:>12}",
+        "CPUs", "Time (ms)", "Speedup", "Efficiency"
+    );
     println!("{:-^48}", "");
-    
+
     for (cpus, time_ms) in results {
         let speedup = baseline_ms as f64 / *time_ms as f64;
         let efficiency = (speedup / *cpus as f64) * 100.0;
-        
+
         println!(
             "{:>8} {:>12} {:>11.2}x {:>10.1}%",
             cpus, time_ms, speedup, efficiency
         );
     }
-    
+
     println!();
-    
+
     // Find best efficiency point
-    let best = results.iter()
+    let best = results
+        .iter()
         .map(|(cpus, time_ms)| {
             let speedup = baseline_ms as f64 / *time_ms as f64;
             let efficiency = (speedup / *cpus as f64) * 100.0;
@@ -339,9 +342,9 @@ pub fn analyze_scaling(baseline_ms: u64, results: &[(usize, u64)]) {
         })
         .max_by(|a, b| a.1.partial_cmp(&b.1).unwrap())
         .unwrap_or((1, 100.0));
-    
+
     println!("Best efficiency: {} CPUs at {:.1}%", best.0, best.1);
-    
+
     if best.1 > 80.0 {
         println!("✓ Excellent parallel scaling!");
     } else if best.1 > 60.0 {

@@ -95,9 +95,9 @@ pub fn format_source(source: &str, config: &Config) -> Result<String> {
     let language = tree_sitter_go::LANGUAGE.into();
     parser.set_language(&language)?;
 
-    let tree = parser.parse(source, None).ok_or_else(|| {
-        anyhow::anyhow!("Failed to parse source code")
-    })?;
+    let tree = parser
+        .parse(source, None)
+        .ok_or_else(|| anyhow::anyhow!("Failed to parse source code"))?;
 
     let formatter = engine::Formatter::new(config);
     formatter.format(tree.root_node(), source)

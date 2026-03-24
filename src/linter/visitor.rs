@@ -1,5 +1,5 @@
-use crate::Diagnostic;
 use crate::rules::Rule;
+use crate::Diagnostic;
 use tree_sitter::{Node, TreeCursor};
 
 /// AST visitor that applies rules to each node
@@ -31,7 +31,7 @@ impl<'a> Visitor<'a> {
             loop {
                 let child = cursor.node();
                 self.visit(child, diagnostics);
-                
+
                 if !cursor.goto_next_sibling() {
                     break;
                 }
@@ -52,14 +52,14 @@ pub trait NodeVisitor {
 pub fn walk_tree(cursor: &mut TreeCursor, visitor: &mut dyn NodeVisitor) {
     let node = cursor.node();
     visitor.visit(node);
-    
+
     if visitor.should_visit_children(node) && cursor.goto_first_child() {
         walk_tree(cursor, visitor);
-        
+
         while cursor.goto_next_sibling() {
             walk_tree(cursor, visitor);
         }
-        
+
         cursor.goto_parent();
     }
 }
@@ -68,13 +68,13 @@ pub fn walk_tree(cursor: &mut TreeCursor, visitor: &mut dyn NodeVisitor) {
 pub fn find_nodes_by_kind<'a>(root: Node<'a>, kind: &str, _source: &'a str) -> Vec<Node<'a>> {
     let mut results = Vec::new();
     let mut cursor = root.walk();
-    
+
     fn find_recursive<'a>(cursor: &mut TreeCursor<'a>, kind: &str, results: &mut Vec<Node<'a>>) {
         let node = cursor.node();
         if node.kind() == kind {
             results.push(node);
         }
-        
+
         if cursor.goto_first_child() {
             loop {
                 find_recursive(cursor, kind, results);
@@ -85,7 +85,7 @@ pub fn find_nodes_by_kind<'a>(root: Node<'a>, kind: &str, _source: &'a str) -> V
             cursor.goto_parent();
         }
     }
-    
+
     find_recursive(&mut cursor, kind, &mut results);
     results
 }
@@ -112,7 +112,7 @@ pub fn get_package_name(root: Node, source: &str) -> Option<String> {
     if root.kind() != "source_file" {
         return None;
     }
-    
+
     let mut cursor = root.walk();
     if cursor.goto_first_child() {
         loop {

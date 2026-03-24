@@ -54,11 +54,11 @@ func main() {
 "#;
         let tree = parse_go(source);
         let root = tree.root_node();
-        
+
         // Find block nodes
         let blocks = crate::linter::visitor::find_nodes_by_kind(root, "block", source);
         let mut found_empty = false;
-        
+
         for block in blocks {
             let diags = rule.check(block, source, "test.go");
             if !diags.is_empty() {
@@ -66,7 +66,7 @@ func main() {
                 assert_eq!(diags[0].code, "E301");
             }
         }
-        
+
         assert!(found_empty);
     }
 
@@ -89,11 +89,12 @@ func ExportedFunction() {}
 "#;
         let tree = parse_go(source);
         let root = tree.root_node();
-        
+
         // Find function declarations
-        let funcs = crate::linter::visitor::find_nodes_by_kind(root, "function_declaration", source);
+        let funcs =
+            crate::linter::visitor::find_nodes_by_kind(root, "function_declaration", source);
         let mut found_missing = false;
-        
+
         for func in funcs {
             let diags = rule.check(func, source, "test.go");
             if !diags.is_empty() {
@@ -101,7 +102,7 @@ func ExportedFunction() {}
                 assert_eq!(diags[0].code, "D001");
             }
         }
-        
+
         assert!(found_missing);
     }
 
@@ -114,12 +115,16 @@ func ExportedFunction() {}
 "#;
         let tree = parse_go(source);
         let root = tree.root_node();
-        
-        let funcs = crate::linter::visitor::find_nodes_by_kind(root, "function_declaration", source);
-        
+
+        let funcs =
+            crate::linter::visitor::find_nodes_by_kind(root, "function_declaration", source);
+
         for func in funcs {
             let diags = rule.check(func, source, "test.go");
-            assert!(diags.is_empty(), "Exported function with doc should not trigger");
+            assert!(
+                diags.is_empty(),
+                "Exported function with doc should not trigger"
+            );
         }
     }
 }

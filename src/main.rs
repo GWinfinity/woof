@@ -7,7 +7,7 @@ use std::process;
 use woofmt::cli::{Cli, Commands, OutputFormat};
 use woofmt::config::Config;
 
-use woofmt::logger::{LogLevel, is_enabled};
+use woofmt::logger::{is_enabled, LogLevel};
 
 fn main() {
     if let Err(e) = run() {
@@ -73,7 +73,7 @@ fn run_check(
 ) -> Result<()> {
     // Use profiled linter when GOLOGGING is enabled
     let use_profiled = is_enabled(LogLevel::Perf) || is_enabled(LogLevel::Debug);
-    
+
     // Use parallel linter for better performance
     let use_parallel = std::env::var("WOOF_PARALLEL")
         .map(|v| v == "1" || v == "true")
@@ -81,8 +81,8 @@ fn run_check(
 
     let all_diagnostics = if use_parallel && !use_profiled && files.len() >= 1 {
         // Use high-performance parallel linter for all files at once
-        use woofmt::linter::parallel::{lint_paths_parallel};
-        
+        use woofmt::linter::parallel::lint_paths_parallel;
+
         // Collect all files from all paths
         let mut all_files = Vec::new();
         for file in files {
@@ -94,7 +94,7 @@ fn run_check(
                 all_files.extend(path_files);
             }
         }
-        
+
         let (diags, _metrics) = lint_paths_parallel(&all_files, config)?;
         diags
     } else {
@@ -134,9 +134,9 @@ fn run_check(
 
     // Exit code
     if !all_diagnostics.is_empty() {
-        let has_errors = all_diagnostics.iter().any(|d| {
-            matches!(d.severity, woofmt::Severity::Error)
-        });
+        let has_errors = all_diagnostics
+            .iter()
+            .any(|d| matches!(d.severity, woofmt::Severity::Error));
 
         if has_errors || (fix && exit_non_zero_on_fix) {
             process::exit(1);
@@ -165,7 +165,10 @@ fn run_format(
 
             if check && !result.unchanged {
                 if all_unchanged {
-                    eprintln!("{}: The following files need formatting:", "Error".red().bold());
+                    eprintln!(
+                        "{}: The following files need formatting:",
+                        "Error".red().bold()
+                    );
                 }
                 eprintln!("  - {}", file.display());
                 all_unchanged = false;
@@ -226,11 +229,7 @@ fn run_init(strict: bool) -> Result<()> {
     let content = Config::generate_default(strict);
     std::fs::write(config_path, content)?;
 
-    println!(
-        "{} Created {}",
-        "✓".green().bold(),
-        config_path.green()
-    );
+    println!("{} Created {}", "✓".green().bold(), config_path.green());
 
     Ok(())
 }
@@ -299,12 +298,7 @@ fn output_github(diagnostics: &[woofmt::Diagnostic]) {
 
         println!(
             "::{} file={},line={},col={}::[{}] {}",
-            level,
-            diag.file_path,
-            diag.line,
-            diag.column,
-            diag.code,
-            diag.message
+            level, diag.file_path, diag.line, diag.column, diag.code, diag.message
         );
     }
 }
