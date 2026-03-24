@@ -10,11 +10,13 @@ use anyhow::Result;
 use std::collections::HashMap;
 use std::fs::File;
 use std::hash::Hash;
-use std::os::unix::fs::MetadataExt; // for inode on Unix
 use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicUsize;
 use std::sync::{Arc, RwLock};
 use std::time::SystemTime;
+
+#[cfg(unix)]
+use std::os::unix::fs::MetadataExt;
 
 /// File identifier for cache lookup (inode + modification time)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -27,6 +29,7 @@ pub struct FileId {
 
 impl FileId {
     /// Create FileId from file metadata
+    #[cfg(unix)]
     pub fn from_metadata(metadata: &std::fs::Metadata) -> Self {
         Self {
             inode: metadata.ino(),
@@ -36,10 +39,41 @@ impl FileId {
         }
     }
 
+    /// Create FileId from file metadata (Windows version)
+    #[cfg(windows)]
+    pub fn from_metadata(metadata: &std::fs::Metadata) -> Self {
+        // On Windows, we use file creation time and size as a fallback
+        // since there's no inode concept
+        Self {
+            inode: 0,
+            device: 0,
+            mtime: metadata.modified().unwrap_or(SystemTime::UNIX_EPOCH),
+            size: metadata.len(),
+        }
+    }
+
     /// Create FileId from path
+    #[cfg(unix)]
     pub fn from_path<P: AsRef<Path>>(path: P) -> Result<Self> {
         let metadata = std::fs::metadata(path)?;
         Ok(Self::from_metadata(&metadata))
+    }
+
+    /// Create FileId from path (Windows version)
+    #[cfg(windows)]
+    pub fn from_path<P: AsRef<Path>>(path: P) -> Result<Self> {
+        use std::collections::hash_map::DefaultHasher;
+
+        let metadata = std::fs::metadata(&path)?;
+        let mut file_id = Self::from_metadata(&metadata);
+
+        // On Windows, hash the file path to create a pseudo-inode
+        let path_str = path.as_ref().to_string_lossy();
+        let mut hasher = DefaultHasher::new();
+        path_str.hash(&mut hasher);
+        file_id.inode = hasher.finish();
+
+        Ok(file_id)
     }
 }
 
