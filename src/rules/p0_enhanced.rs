@@ -122,8 +122,7 @@ impl Rule for ImpossibleTypeAssertionEnhanced {
 impl ImpossibleTypeAssertionEnhanced {
     fn is_pointer_to_value_assertion(&self, operand: &str, assert_type: &str) -> bool {
         // 简单的启发式检查: *X.(X) 模式
-        if operand.starts_with('*') {
-            let inner = &operand[1..];
+        if let Some(inner) = operand.strip_prefix('*') {
             // 去掉可能的括号
             let inner_clean = inner.trim_start_matches('(').trim_end_matches(')');
             let type_clean = assert_type.trim_start_matches('(').trim_end_matches(')');
@@ -235,8 +234,8 @@ impl InvalidNetworkAddressEnhanced {
         }
 
         // 检查是否是纯端口（如 ":8080"）
-        if addr.starts_with(':') {
-            return self.validate_port(&addr[1..]);
+        if let Some(port) = addr.strip_prefix(':') {
+            return self.validate_port(port);
         }
 
         // 检查 host:port 格式
@@ -273,8 +272,8 @@ impl InvalidNetworkAddressEnhanced {
             }
 
             // 检查端口部分
-            if rest.starts_with(':') {
-                return self.validate_port(&rest[1..]);
+            if let Some(port) = rest.strip_prefix(':') {
+                return self.validate_port(port);
             } else if !rest.is_empty() {
                 return Some("IPv6 地址后应有 :port".to_string());
             }
@@ -433,6 +432,7 @@ impl DeferInRangeLoop {
         self.traverse_for_defer(*body, source)
     }
 
+    #[allow(clippy::only_used_in_recursion)]
     fn traverse_for_defer<'a>(&self, node: Node<'a>, source: &str) -> bool {
         if node.kind() == "defer_statement" {
             return true;
@@ -551,7 +551,7 @@ impl Rule for NonASCIIIdentifier {
 
 impl NonASCIIIdentifier {
     fn contains_non_ascii(&self, s: &str) -> bool {
-        s.chars().any(|c| !c.is_ascii())
+        !s.is_ascii()
     }
 }
 

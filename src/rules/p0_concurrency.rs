@@ -552,7 +552,7 @@ impl InfiniteWait {
         // 从 "<-ch" 或 "v := <-ch" 提取 ch
         if let Some(pos) = text.find("<-") {
             let after = &text[pos + 2..];
-            let channel = after.trim().split_whitespace().next()?;
+            let channel = after.split_whitespace().next()?;
             return Some(channel.to_string());
         }
         None

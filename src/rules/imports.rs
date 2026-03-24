@@ -378,7 +378,7 @@ impl Rule for ImportAliasNecessary {
                 && import_text
                     .split('"')
                     .next()
-                    .map(|before| before.trim().split_whitespace().count() > 1)
+                    .map(|before| before.split_whitespace().count() > 1)
                     .unwrap_or(false);
 
             if !has_alias {
@@ -393,7 +393,7 @@ impl Rule for ImportAliasNecessary {
 
                             // 如果目录名包含连字符或点，建议别名
                             if dir_name.contains('-') || dir_name.contains('.') {
-                                let suggested_alias = dir_name.replace('-', "").replace('.', "");
+                                let suggested_alias = dir_name.replace(['-', '.'], "");
                                 let pos = node.start_position();
                                 diagnostics.push(Diagnostic {
                                     code: "I006".to_string(),

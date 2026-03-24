@@ -73,8 +73,8 @@ impl Rule for UncheckedError {
         if node.kind() == "call_expression" {
             let func_name = get_function_name(node, source);
 
-            if func_returns_error(&func_name) {
-                if !is_error_checked(node) {
+            if func_returns_error(&func_name)
+                && !is_error_checked(node) {
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "S002".to_string(),
@@ -86,7 +86,6 @@ impl Rule for UncheckedError {
                         fix: None,
                     });
                 }
-            }
         }
 
         diagnostics
@@ -471,7 +470,7 @@ fn extract_parameter_names(params: Node, source: &str) -> Vec<String> {
     let inner = text.trim_start_matches('(').trim_end_matches(')');
 
     for param in inner.split(',') {
-        let parts: Vec<&str> = param.trim().split_whitespace().collect();
+        let parts: Vec<&str> = param.split_whitespace().collect();
         if !parts.is_empty() {
             let first = parts[0];
             if !first.contains('.') && !first.starts_with("[]") && !first.starts_with('*') {

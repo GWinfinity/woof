@@ -158,6 +158,12 @@ pub struct MemoryContext {
     stats: MemoryStats,
 }
 
+impl Default for MemoryContext {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MemoryContext {
     pub fn new() -> Self {
         Self {

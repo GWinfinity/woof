@@ -154,8 +154,8 @@ impl Rule for InfiniteRecursion {
                     // 检查是否是明显的无限递归
                     // 1. 函数体直接调用自身
                     // 2. 没有终止条件
-                    if self.is_direct_recursive_call(body_text, func_name) {
-                        if !self.has_termination_condition(&body, source, func_name) {
+                    if self.is_direct_recursive_call(body_text, func_name)
+                        && !self.has_termination_condition(&body, source, func_name) {
                             let pos = name_node.start_position();
                             diagnostics.push(Diagnostic {
                                 code: "SA5007".to_string(),
@@ -167,7 +167,6 @@ impl Rule for InfiniteRecursion {
                                 fix: None,
                             });
                         }
-                    }
                 }
             }
         }
@@ -937,8 +936,8 @@ impl Rule for HTTPHeaderFormat {
             let text = &source[node.byte_range()];
 
             // 检查 HTTP Header 赋值
-            if text.contains("Header()") || text.contains("http.Header") {
-                if self.has_non_canonical_header(text) {
+            if (text.contains("Header()") || text.contains("http.Header"))
+                && self.has_non_canonical_header(text) {
                     let pos = node.start_position();
                     diagnostics.push(Diagnostic {
                         code: "SA1007".to_string(),
@@ -951,7 +950,6 @@ impl Rule for HTTPHeaderFormat {
                         fix: None,
                     });
                 }
-            }
         }
 
         diagnostics

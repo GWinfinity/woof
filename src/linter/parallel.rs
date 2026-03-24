@@ -44,7 +44,7 @@ impl ParallelMetrics {
 
 // Thread-local parser cache
 thread_local! {
-    static PARSER: RefCell<Option<tree_sitter::Parser>> = RefCell::new(None);
+    static PARSER: RefCell<Option<tree_sitter::Parser>> = const { RefCell::new(None) };
 }
 
 /// Get or create thread-local parser
@@ -199,7 +199,7 @@ fn lint_single_file(
     // Run node-level rules
     for rule in rules.iter() {
         if !is_file_level_rule(rule.code()) {
-            visit_node_recursive(root, rule, source, &file_path, &mut diagnostics);
+            visit_node_recursive(root, rule.as_ref(), source, &file_path, &mut diagnostics);
         }
     }
 
@@ -209,7 +209,7 @@ fn lint_single_file(
 /// Recursively visit nodes and apply rule
 fn visit_node_recursive(
     node: tree_sitter::Node,
-    rule: &Box<dyn crate::rules::Rule>,
+    rule: &dyn crate::rules::Rule,
     source: &str,
     file_path: &str,
     diagnostics: &mut Vec<Diagnostic>,
@@ -245,11 +245,10 @@ pub fn collect_go_files(path: &Path, config: &Config) -> Result<Vec<PathBuf>> {
         let entry = entry?;
         let path = entry.path();
 
-        if path.is_file() && is_go_file(path) {
-            if !should_exclude(path, config) {
+        if path.is_file() && is_go_file(path)
+            && !should_exclude(path, config) {
                 files.push(path.to_path_buf());
             }
-        }
     }
 
     Ok(files)

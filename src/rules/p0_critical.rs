@@ -166,15 +166,14 @@ fn has_template_error(template: &str) -> bool {
                 chars.next(); // consume second {
                 depth += 1;
             }
-        } else if c == '}' {
-            if chars.peek() == Some(&'}') {
+        } else if c == '}'
+            && chars.peek() == Some(&'}') {
                 chars.next(); // consume second }
                 depth -= 1;
                 if depth < 0 {
                     return true;
                 }
             }
-        }
     }
 
     depth != 0
@@ -1322,8 +1321,8 @@ impl Rule for WorkspaceGoVersion {
 fn extract_go_version(source: &str) -> Option<String> {
     for line in source.lines() {
         let trimmed = line.trim();
-        if trimmed.starts_with("go ") {
-            return Some(trimmed[3..].trim().to_string());
+        if let Some(version) = trimmed.strip_prefix("go ") {
+            return Some(version.trim().to_string());
         }
     }
     None
@@ -1386,8 +1385,8 @@ impl Rule for WorkspaceModulePath {
 fn extract_module_path(source: &str) -> Option<String> {
     for line in source.lines() {
         let trimmed = line.trim();
-        if trimmed.starts_with("module ") {
-            return Some(trimmed[7..].trim().to_string());
+        if let Some(path) = trimmed.strip_prefix("module ") {
+            return Some(path.trim().to_string());
         }
     }
     None

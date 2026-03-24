@@ -256,7 +256,7 @@ impl HierarchicalScheduler {
         use tree_sitter::Parser;
 
         thread_local! {
-            static PARSER: RefCell<Option<Parser>> = RefCell::new(None);
+            static PARSER: RefCell<Option<Parser>> = const { RefCell::new(None) };
         }
 
         // Zero-copy file read

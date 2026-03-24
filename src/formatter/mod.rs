@@ -134,11 +134,10 @@ fn collect_go_files<P: AsRef<Path>>(path: P, config: &Config) -> Result<Vec<Path
         let entry = entry?;
         let path = entry.path();
 
-        if path.is_file() && is_go_file(path) {
-            if !should_exclude(path, config) {
+        if path.is_file() && is_go_file(path)
+            && !should_exclude(path, config) {
                 files.push(path.to_path_buf());
             }
-        }
     }
 
     Ok(files)

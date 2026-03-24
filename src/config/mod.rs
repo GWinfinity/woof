@@ -107,6 +107,7 @@ fn default_work_steal() -> String {
 
 /// Configuration for woof
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct Config {
     /// Global settings
     #[serde(default)]
@@ -141,6 +142,7 @@ pub struct GlobalConfig {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct LinterConfig {
     /// Enable all rules by default
     #[serde(default)]
@@ -205,15 +207,6 @@ fn default_line_length() -> usize {
     120
 }
 
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            global: GlobalConfig::default(),
-            linter: LinterConfig::default(),
-            formatter: FormatterConfig::default(),
-        }
-    }
-}
 
 impl Default for GlobalConfig {
     fn default() -> Self {
@@ -230,15 +223,6 @@ impl Default for GlobalConfig {
     }
 }
 
-impl Default for LinterConfig {
-    fn default() -> Self {
-        Self {
-            select: vec![],
-            ignore: vec![],
-            rules: HashMap::new(),
-        }
-    }
-}
 
 impl Default for FormatterConfig {
     fn default() -> Self {
@@ -325,11 +309,10 @@ simplify = false
     /// Check if a rule is enabled
     pub fn is_rule_enabled(&self, rule_code: &str) -> bool {
         // If select is specified, only those rules are enabled
-        if !self.linter.select.is_empty() {
-            if !self.linter.select.iter().any(|s| rule_code.starts_with(s)) {
+        if !self.linter.select.is_empty()
+            && !self.linter.select.iter().any(|s| rule_code.starts_with(s)) {
                 return false;
             }
-        }
 
         // If explicitly ignored, disable
         if self.linter.ignore.iter().any(|s| rule_code.starts_with(s)) {

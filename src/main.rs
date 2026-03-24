@@ -79,7 +79,7 @@ fn run_check(
         .map(|v| v == "1" || v == "true")
         .unwrap_or(true);
 
-    let all_diagnostics = if use_parallel && !use_profiled && files.len() >= 1 {
+    let all_diagnostics = if use_parallel && !use_profiled && !files.is_empty() {
         // Use high-performance parallel linter for all files at once
         use woofmt::linter::parallel::lint_paths_parallel;
 

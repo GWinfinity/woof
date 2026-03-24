@@ -307,13 +307,12 @@ impl<'a> Formatter<'a> {
         let mut cursor = node.walk();
         if cursor.goto_first_child() {
             // Skip '{'
-            if cursor.node().kind() == "{" {
-                if !cursor.goto_next_sibling() {
+            if cursor.node().kind() == "{"
+                && !cursor.goto_next_sibling() {
                     printer.dedent();
                     printer.write_char('}');
                     return Ok(());
                 }
-            }
 
             loop {
                 let child = cursor.node();

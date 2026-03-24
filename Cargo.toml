@@ -11,7 +11,7 @@ homepage = "https://github.com/GWinfinity/woofmt"
 keywords = ["go", "golang", "linter", "formatter", "rust"]
 categories = ["development-tools", "command-line-utilities"]
 exclude = ["benchmark/", "testdata/", "scripts/", "docs/", "benches/", ".github/"]
-rust-version = "1.70"
+rust-version = "1.80"
 
 [[bin]]
 name = "woof"
