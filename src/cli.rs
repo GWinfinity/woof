@@ -3,7 +3,7 @@ use std::path::PathBuf;
 
 #[derive(Parser)]
 #[command(
-    name = "woof",
+    name = "woofmt",
     about = "An extremely fast Go linter and code formatter",
     version,
     author

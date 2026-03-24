@@ -8,9 +8,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-WOOF_BIN="${PROJECT_ROOT}/target/release/woof"
+WOOF_BIN="${PROJECT_ROOT}/target/release/woofmt"
 if [ ! -f "$WOOF_BIN" ]; then
-    WOOF_BIN="${PROJECT_ROOT}/target/debug/woof"
+    WOOF_BIN="${PROJECT_ROOT}/target/debug/woofmt"
 fi
 
 TEST_FILE="${PROJECT_ROOT}/testdata/sample.go"

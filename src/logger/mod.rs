@@ -65,7 +65,7 @@ pub fn is_enabled(level: LogLevel) -> bool {
 macro_rules! log_debug {
     ($($arg:tt)*) => {
         if $crate::logger::is_enabled($crate::logger::LogLevel::Debug) {
-            eprintln!("[woof:debug] {}", format!($($arg)*));
+            eprintln!("[woofmt:debug] {}", format!($($arg)*));
         }
     };
 }
@@ -75,7 +75,7 @@ macro_rules! log_debug {
 macro_rules! log_trace {
     ($($arg:tt)*) => {
         if $crate::logger::is_enabled($crate::logger::LogLevel::Trace) {
-            eprintln!("[woof:trace] {}", format!($($arg)*));
+            eprintln!("[woofmt:trace] {}", format!($($arg)*));
         }
     };
 }
@@ -85,7 +85,7 @@ macro_rules! log_trace {
 macro_rules! log_perf {
     ($($arg:tt)*) => {
         if $crate::logger::is_enabled($crate::logger::LogLevel::Perf) {
-            eprintln!("[woof:perf] {}", format!($($arg)*));
+            eprintln!("[woofmt:perf] {}", format!($($arg)*));
         }
     };
 }
@@ -104,7 +104,7 @@ impl PerfTimer {
         let start = Instant::now();
 
         if is_enabled(LogLevel::Perf) {
-            eprintln!("[woof:perf] Started: {}", name);
+            eprintln!("[woofmt:perf] Started: {}", name);
         }
 
         Self {
@@ -120,7 +120,7 @@ impl PerfTimer {
         let start = Instant::now();
 
         if is_enabled(LogLevel::Debug) {
-            eprintln!("[woof:debug] Started: {}", name);
+            eprintln!("[woofmt:debug] Started: {}", name);
         }
 
         Self {
@@ -142,7 +142,7 @@ impl PerfTimer {
                 LogLevel::Perf => "perf",
                 LogLevel::Off => "off",
             };
-            eprintln!("[woof:{}] Started: {}", level_str, name);
+            eprintln!("[woofmt:{}] Started: {}", level_str, name);
         }
 
         Self { name, start, level }
@@ -168,13 +168,13 @@ impl PerfTimer {
 
             if micros < 1000 {
                 eprintln!(
-                    "[woof:{}] Finished: {} - {}µs",
+                    "[woofmt:{}] Finished: {} - {}µs",
                     level_str, self.name, micros
                 );
             } else {
                 let millis = elapsed.as_millis();
                 eprintln!(
-                    "[woof:{}] Finished: {} - {}ms",
+                    "[woofmt:{}] Finished: {} - {}ms",
                     level_str, self.name, millis
                 );
             }
@@ -206,7 +206,7 @@ impl LinterPerfTracker {
         let start = Instant::now();
 
         if is_enabled(LogLevel::Perf) || is_enabled(LogLevel::Debug) {
-            eprintln!("[woof:perf] Rule started: [{}] {}", rule_code, rule_name);
+            eprintln!("[woofmt:perf] Rule started: [{}] {}", rule_code, rule_name);
         }
 
         Self {
@@ -224,13 +224,13 @@ impl LinterPerfTracker {
         if is_enabled(LogLevel::Perf) || is_enabled(LogLevel::Debug) {
             if micros < 1000 {
                 eprintln!(
-                    "[woof:perf] Rule finished: [{}] {} - {}µs",
+                    "[woofmt:perf] Rule finished: [{}] {} - {}µs",
                     self.rule_code, self.rule_name, micros
                 );
             } else {
                 let millis = elapsed.as_millis();
                 eprintln!(
-                    "[woof:perf] Rule finished: [{}] {} - {}ms",
+                    "[woofmt:perf] Rule finished: [{}] {} - {}ms",
                     self.rule_code, self.rule_name, millis
                 );
             }
@@ -268,11 +268,11 @@ impl PerfStats {
             return;
         }
 
-        eprintln!("\n[woof:perf] === Linter Performance Summary ===");
-        eprintln!("[woof:perf] Total rules: {}", self.total_rules);
-        eprintln!("[woof:perf] Total time: {}ms", self.total_time_ms);
-        eprintln!("[woof:perf]");
-        eprintln!("[woof:perf] Rule breakdown:");
+        eprintln!("\n[woofmt:perf] === Linter Performance Summary ===");
+        eprintln!("[woofmt:perf] Total rules: {}", self.total_rules);
+        eprintln!("[woofmt:perf] Total time: {}ms", self.total_time_ms);
+        eprintln!("[woofmt:perf]");
+        eprintln!("[woofmt:perf] Rule breakdown:");
 
         // Sort by time descending
         let mut sorted = self.rule_times.clone();
@@ -281,16 +281,16 @@ impl PerfStats {
         for stat in sorted.iter().take(10) {
             let time_ms = stat.time_us as f64 / 1000.0;
             eprintln!(
-                "[woof:perf]   [{:<6}] {:<25} {:>8.2}ms ({:>5.1}%)",
+                "[woofmt:perf]   [{:<6}] {:<25} {:>8.2}ms ({:>5.1}%)",
                 stat.code, stat.name, time_ms, stat.percentage
             );
         }
 
         if sorted.len() > 10 {
-            eprintln!("[woof:perf]   ... and {} more rules", sorted.len() - 10);
+            eprintln!("[woofmt:perf]   ... and {} more rules", sorted.len() - 10);
         }
 
-        eprintln!("[woof:perf] === End Performance Summary ===\n");
+        eprintln!("[woofmt:perf] === End Performance Summary ===\n");
     }
 }
 

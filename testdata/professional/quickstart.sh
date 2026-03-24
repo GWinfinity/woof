@@ -88,9 +88,9 @@ echo "============================================"
 echo ""
 
 # Check woof binary
-WOOF_BIN="../../target/release/woof"
+WOOF_BIN="../../target/release/woofmt"
 if [ ! -f "$WOOF_BIN" ]; then
-    WOOF_BIN="../../target/debug/woof"
+    WOOF_BIN="../../target/debug/woofmt"
 fi
 
 if [ ! -f "$WOOF_BIN" ]; then

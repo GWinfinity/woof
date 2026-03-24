@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 PROJECT_DIR="${1:-.}"
 CPU_CORES=(1 2 4 8 16)
 ITERATIONS=3
-WOOF_BIN="${WOOF_BIN:-./target/release/woof}"
+WOOF_BIN="${WOOF_BIN:-./target/release/woofmt}"
 
 # Check available CPUs
 AVAILABLE_CPUS=$(nproc)

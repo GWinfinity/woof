@@ -20,10 +20,10 @@ RESULTS_DIR="$SCRIPT_DIR/results"
 mkdir -p "$RESULTS_DIR"
 
 # Check if woof is available
-WOOF_BIN="${SCRIPT_DIR}/../target/release/woof"
+WOOF_BIN="${SCRIPT_DIR}/../target/release/woofmt"
 if [ ! -f "$WOOF_BIN" ]; then
     echo -e "${YELLOW}Warning: woof release binary not found, using debug build${NC}"
-    WOOF_BIN="${SCRIPT_DIR}/../target/debug/woof"
+    WOOF_BIN="${SCRIPT_DIR}/../target/debug/woofmt"
 fi
 
 # Check if golangci-lint is available

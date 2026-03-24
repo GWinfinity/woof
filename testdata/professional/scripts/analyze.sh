@@ -11,9 +11,9 @@ PROJECTS_DIR="$PROJECT_ROOT/projects"
 RESULTS_DIR="$PROJECT_ROOT/results"
 DATASET_FILE="$PROJECT_ROOT/dataset.yaml"
 
-WOOF_BIN="${PROJECT_ROOT}/../../target/release/woof"
+WOOF_BIN="${PROJECT_ROOT}/../../target/release/woofmt"
 if [ ! -f "$WOOF_BIN" ]; then
-    WOOF_BIN="${PROJECT_ROOT}/../../target/debug/woof"
+    WOOF_BIN="${PROJECT_ROOT}/../../target/debug/woofmt"
 fi
 
 # Colors

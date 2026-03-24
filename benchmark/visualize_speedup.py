@@ -12,7 +12,7 @@ import time
 def run_benchmark(project_dir, threads):
     """Run woof with specified thread count and return time in ms"""
     cmd = [
-        "./target/release/woof",
+        "./target/release/woofmt",
         "check", project_dir,
         "--threads", str(threads),
         "--quiet"

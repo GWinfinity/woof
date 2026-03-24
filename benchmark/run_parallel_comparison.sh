@@ -5,7 +5,7 @@
 set -e
 
 PROJECT="${1:-/tmp/woof_large_project}"
-WOOF="${WOOF:-./target/release/woof}"
+WOOF="${WOOF:-./target/release/woofmt}"
 
 echo "=========================================="
 echo "Parallel Speedup Comparison"

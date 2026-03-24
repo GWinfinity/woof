@@ -10,9 +10,9 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECTS_DIR="$PROJECT_ROOT/projects"
 RESULTS_DIR="$PROJECT_ROOT/results/comparison"
 
-WOOF_BIN="${PROJECT_ROOT}/../../target/release/woof"
+WOOF_BIN="${PROJECT_ROOT}/../../target/release/woofmt"
 if [ ! -f "$WOOF_BIN" ]; then
-    WOOF_BIN="${PROJECT_ROOT}/../../target/debug/woof"
+    WOOF_BIN="${PROJECT_ROOT}/../../target/debug/woofmt"
 fi
 
 # Colors

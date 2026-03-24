@@ -12,9 +12,9 @@ RESULTS_DIR="$SCRIPT_DIR/results"
 
 mkdir -p "$RESULTS_DIR"
 
-WOOF_BIN="${SCRIPT_DIR}/../target/release/woof"
+WOOF_BIN="${SCRIPT_DIR}/../target/release/woofmt"
 if [ ! -f "$WOOF_BIN" ]; then
-    WOOF_BIN="${SCRIPT_DIR}/../target/debug/woof"
+    WOOF_BIN="${SCRIPT_DIR}/../target/debug/woofmt"
 fi
 
 echo -e "${BLUE}============================================${NC}"
