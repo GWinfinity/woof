@@ -10,6 +10,9 @@ use anyhow::Result;
 use std::collections::HashMap;
 use std::fs::File;
 use std::hash::Hash;
+
+#[cfg(windows)]
+use std::hash::Hasher;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicUsize;
 use std::sync::{Arc, RwLock};
